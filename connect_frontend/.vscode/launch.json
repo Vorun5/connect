@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "site (release)",
+      "program": "packages/site/lib/main.dart",
+      "flutterMode": "release",
+      "type": "dart",
+      "request": "launch"
+    },
+    {
+      "name": "site (debug)",
+      "program": "packages/site/lib/main.dart",
+      "flutterMode": "debug",
+      "type": "dart",
+      "request": "launch"
+    },
+    {
+      "name": "site (profile)",
+      "program": "packages/site/lib/main.dart",
+      "flutterMode": "profile",
+      "type": "dart",
+      "request": "launch"
+    }
+  ]
+}

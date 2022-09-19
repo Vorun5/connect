@@ -1,0 +1,41 @@
+{
+  "version": "0.1",
+  "language": "en_US",
+  "dictionaries": [
+    "companies",
+    "misc",
+    "softwareTerms"
+  ],
+  "ignorePaths": [
+    ".reports/**",
+    ".vscode/**",
+    ".fvm/**",
+    ".cspell.json",
+    ".prettierrc",
+    ".prettierignore",
+    ".markdownlint.json",
+    ".markdownlintignore",
+    ".markdown-link-check.json",
+    ".jscpd.json",
+    "analysis_options.yaml",
+    "packages/*/.dart_tool/**",
+    "packages/*/build/**",
+    "packages/*/coverage/**",
+    "packages/*/android/**",
+    "packages/*/web/**",
+    "packages/*/windows/**",
+    "packages/*/.packages",
+    "packages/*/.flutter-plugins",
+    "packages/*/.flutter-plugins-dependencies",
+    "packages/*/lib/generated_plugin_registrant.dart",
+    ".words",
+    ".coverage",
+    "**/*.lock",
+    "**/*.freezed.dart",
+    "**/*.g.dart",
+    "**/*.ttf",
+    "**/*.bat",
+    "packages/*/assets/i18n/**",
+    "packages/*/test/snapshots/**"
+  ]
+}

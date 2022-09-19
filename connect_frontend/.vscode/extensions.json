@@ -1,0 +1,19 @@
+{
+  "recommendations": [
+    "gruntfuggly.todo-tree",
+    "ybaumes.highlight-trailing-white-spaces",
+    "usernamehw.errorlens",
+    "redhat.vscode-yaml",
+    "yzhang.markdown-all-in-one",
+    "shd101wyy.markdown-preview-enhanced",
+    "dart-code.dart-code",
+    "dart-code.flutter",
+    "jeroen-meijer.pubspec-assist",
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "DavidAnson.vscode-markdownlint",
+    "pflannery.vscode-versionlens",
+    "ryanluker.vscode-coverage-gutters",
+    "ms-vscode.powershell"
+  ]
+}
