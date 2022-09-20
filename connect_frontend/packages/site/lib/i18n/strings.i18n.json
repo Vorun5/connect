@@ -1,0 +1,9 @@
+{
+    "title": "Hello, world!",
+    "hello": "Hello $name",
+    "save": "Save",
+    "login": {
+      "success": "Logged in successfully",
+      "fail": "Logged in failed"
+    }
+  }
