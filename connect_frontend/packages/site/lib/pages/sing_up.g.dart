@@ -1,14 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main.dart';
+part of 'sing_up.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class _App extends HookConsumerWidget {
-  const _App({Key? key}) : super(key: key);
+class SingUp extends HookConsumerWidget {
+  const SingUp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) => __app(_context, _ref);
+  Widget build(BuildContext _context, WidgetRef _ref) =>
+      _singUp(_context, _ref);
 }
