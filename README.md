@@ -2,7 +2,7 @@
 ##### 1. Установить MongoDB и  MongoDB Compass, где можно будет посмотреть данные в базе данных. Если будет будет такая ошибка ECONNREFUSED 127.0.0.1:27017 при подключении, то вам скорее всего поможет этот гайд  https://youtu.be/W0tvOEdjQ6Y
 ##### 2. В connect/server ввести команду npm i 
 ##### 3. В connect/server ввести команду npm run start
-##### 4.Сервер запустится на хосте 4040. Изменить можно в файле connect/server/config.js
+##### 4. Сервер запустится на хосте 4040. Изменить можно в файле connect/server/config.js
 
 # connect_frontend start
 ##### 1. Установить актуальную версию flutter
