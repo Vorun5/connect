@@ -1,9 +1,10 @@
 analyzer: 
-  language: 
+  language:
     strict-raw-types: true
     strict-inference: true
     strict-casts: true
-  errors: 
+  errors:
+    invalid_annotation_target: ignore
     always_declare_return_types: 'warning'
     always_put_control_body_on_new_line: 'warning'
     always_put_required_named_parameters_first: 'warning'
