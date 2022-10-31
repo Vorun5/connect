@@ -74,15 +74,15 @@ Widget __homeDrawer() => Drawer(
                         highlightColor: Colors.transparent,
                         // TODO(Vorun5): сделать анимацию при переключении как в tg
                         icon: Icon(
-                          theme == Themes.darkTheme
+                          theme == Themes.dark
                               ? Icons.nightlight_round
                               : Icons.wb_sunny,
                         ),
                         onPressed: () {
                           switcher.changeTheme(
                             theme: theme.brightness == Brightness.light
-                                ? Themes.darkTheme
-                                : Themes.ligthTheme,
+                                ? Themes.dark
+                                : Themes.ligth,
                           );
                         },
                       ),
