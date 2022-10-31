@@ -5,5 +5,5 @@ final tokenProvider = FutureProvider<String?>((_) async {
   final storage = await SharedPreferences.getInstance();
   final token = storage.getString('token');
 
-  return token != null ? token : 'none';
+  return token ?? 'none';
 });

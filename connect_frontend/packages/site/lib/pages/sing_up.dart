@@ -13,13 +13,14 @@ Widget _singUp(BuildContext context, WidgetRef ref) => ThemeSwitchingArea(
         appBar: AppBar(
           actions: [
             IconButton(
-                onPressed: () {
-                  ref.read(authProvider.notifier).login(
-                        "myEmail",
-                        "myPassword",
-                      );
-                },
-                icon: Icon(Icons.login))
+              onPressed: () async {
+                await ref.read(authProvider.notifier).login(
+                      'myEmail',
+                      'myPassword',
+                    );
+              },
+              icon: const Icon(Icons.login),
+            ),
           ],
           title: const Text(
             'Sing up',

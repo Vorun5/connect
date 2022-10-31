@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AuthNotifier extends StateNotifier<bool> {
   AuthNotifier() : super(false);
@@ -17,6 +17,5 @@ class AuthNotifier extends StateNotifier<bool> {
   }
 }
 
-final authProvider = StateNotifierProvider<AuthNotifier, bool>((ref) {
-  return AuthNotifier();
-});
+final authProvider =
+    StateNotifierProvider<AuthNotifier, bool>((ref) => AuthNotifier());

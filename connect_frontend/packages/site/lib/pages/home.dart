@@ -11,43 +11,42 @@ import 'package:site/widgets/username.dart';
 part 'home.g.dart';
 
 @hcwidget
-Widget _home(BuildContext context, WidgetRef ref) {
-  return ThemeSwitchingArea(
-    child: Scaffold(
-      drawer: const _HomeDrawer(),
-      appBar: AppBar(
-        title: const Text(
-          'Home',
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                ref.read(authProvider.notifier).logout();
+Widget _home(BuildContext context, WidgetRef ref) => ThemeSwitchingArea(
+      child: Scaffold(
+        drawer: const _HomeDrawer(),
+        appBar: AppBar(
+          title: const Text(
+            'Home',
+          ),
+          actions: [
+            IconButton(
+              onPressed: () async {
+                await ref.read(authProvider.notifier).logout();
               },
-              icon: Icon(Icons.logout))
-        ],
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            TextButton(
-              onPressed: () => context.goNamed('home'),
-              child: const Text('Home'),
-            ),
-            TextButton(
-              onPressed: () => context.goNamed('login'),
-              child: const Text('Login'),
-            ),
-            TextButton(
-              onPressed: () => context.goNamed('sing-up'),
-              child: const Text('Sing Up'),
+              icon: const Icon(Icons.logout),
             ),
           ],
         ),
+        body: Center(
+          child: Column(
+            children: [
+              TextButton(
+                onPressed: () => context.goNamed('home'),
+                child: const Text('Home'),
+              ),
+              TextButton(
+                onPressed: () => context.goNamed('login'),
+                child: const Text('Login'),
+              ),
+              TextButton(
+                onPressed: () => context.goNamed('sing-up'),
+                child: const Text('Sing Up'),
+              ),
+            ],
+          ),
+        ),
       ),
-    ),
-  );
-}
+    );
 
 @swidget
 Widget __homeDrawer() => Drawer(
