@@ -10,8 +10,8 @@ export const singUp = async (req, res) => {
         const hash = await bcrypt.hash(password, salt);
 
         const doc = new UserModel({
-            username: req.body.displayUsername.toLowerCase(),
-            displayUsername: req.body.displayUsername,
+            username: req.body.username.toLowerCase(),
+            displayUsername: req.body.username,
             name: req.body.name,
             passwordHash: hash,
         });
@@ -44,7 +44,7 @@ export const login = async (req, res) => {
 
         const user = await UserModel.findOne({username: req.body.username.toLowerCase()});
         if (!user) {
-            return res.status(404).json({
+            return res.status(403).json({
                 message: 'wrong username or password',
             });
         }
@@ -52,7 +52,7 @@ export const login = async (req, res) => {
         const isValidPassword = await bcrypt.compare(req.body.password, user._doc.passwordHash);
 
         if (!isValidPassword) {
-            return res.status(404).json({
+            return res.status(403).json({
                 message: 'wrong username or password',
             });
         }
@@ -100,7 +100,7 @@ export const getMe = async (req, res) => {
 
 export const getOneUser = async (req, res) => {
     try {
-        const username = req.params.username;
+        const username = req.params.username.toLowerCase();
         const user = await UserModel.findOne({'username': username});
 
         if (!user) {
@@ -134,29 +134,35 @@ export const update = async (req, res) => {
             });
         }
 
-        if (req.body.username !== req.body.displayUsername.toLowerCase()) {
-            console.log('lowercase display username and username must match', e);
-            res.status(400).json({
-                message: 'lowercase display username and username must match',
-            });
-        }
-        await UserModel.findByIdAndUpdate({
+
+        const user =  await UserModel.findByIdAndUpdate({
             _id: userId,
         }, {
-            username: req.body.username,
+            username: req.body.username.toLowerCase(),
+            displayUsername: req.body.username,
             name: req.body.name,
             profileImageUrl: req.body.profileImageUrl,
             backgroundImageUrl: req.body.backgroundImageUrl,
+            description: req.body.description,
             geotag: {
                 latitude: req.body.geotag.latitude,
                 longitude: req.body.geotag.longitude,
             },
+        }, {
+            returnDocument: "after",
         })
 
-        res.json({
-            success: true,
-        });
+        if (!user) {
+            return res.status(404).json({
+                message: 'user is not found'
+            });
+        }
 
+        const {passwordHash, _id, ...userData} = user._doc;
+        res.json({
+            id: _id,
+            ...userData,
+        });
     } catch (e) {
         console.log('no access', e);
         res.status(500).json({

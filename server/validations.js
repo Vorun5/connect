@@ -1,24 +1,29 @@
 import {body} from 'express-validator';
 
 const minNumChPassword = 6;
+const maxNumChPassword = 30;
+const maxNumChUsername = 20;
+const minNumChUsername = 3;
+
+const maxDescriptionChUsername = 256;
 
 export const login = [
-    body('username', 'username must be alphanumeric and lowercase').isAlphanumeric().isAscii(),
-    body('password', 'password must not be less than 6 characters').isLength({min: minNumChPassword}),
+    body('username', 'username must be alphanumeric and lowercase').isAlphanumeric().isAscii().isLength({min: minNumChUsername, max: maxNumChUsername}),
+    body('password', 'password must not be less than 6 characters').isLength({min: minNumChPassword, max: maxNumChPassword}),
 ]
 
 export const signup = [
-    body('displayUsername', 'username must be alphanumeric').isAlphanumeric().isAscii(),
-    body('password', 'password must not be less than 6 characters').isLength({min: minNumChPassword}),
-    body('name', 'name needed').isLength({min: 3}),
+    body('username', 'username must be alphanumeric').isAlphanumeric().isAscii().isLength({min: minNumChUsername, max: maxNumChUsername}),
+    body('password', 'password must not be less than 6 characters').isLength({min: minNumChPassword, max: maxNumChPassword}),
+    body('name', 'name needed').isLength({min: minNumChUsername, max: maxNumChUsername}),
 ]
 
 export const updateUser = [
     body('id', 'is not id').isMongoId(),
-    body('username', 'username must be alphanumeric and lowercase').isAlphanumeric().isAscii().isLowercase(),
-    body('displayUsername', 'displayUsername must be alphanumeric').isAlphanumeric().isAscii(),
-    body('name', 'name needed').isLength({min: 3}),
+    body('username', 'username must be alphanumeric and lowercase').isAlphanumeric().isAscii().isLength({min: minNumChUsername, max: maxNumChUsername}),
+    body('name', 'name needed').isLength({min: minNumChUsername, max: maxNumChUsername}),
     body('profileImageUrl', 'wrong photo link').optional().isURL(),
+    body('description', 'description must be string').optional().isString().isLength({max: maxDescriptionChUsername}),
     body('backgroundImageUrl', 'wrong photo link').optional().isURL(),
     body('geotag.latitude', 'geotag.latitude must be a number').optional().isFloat(),
     body('geotag.longitude', 'geotag.longitude must be a number').optional().isFloat(),
