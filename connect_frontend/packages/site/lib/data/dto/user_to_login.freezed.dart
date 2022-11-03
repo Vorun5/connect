@@ -21,9 +21,7 @@ UserToLogin _$UserToLoginFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserToLogin {
   String get username => throw _privateConstructorUsedError;
-  String get userDisplayName => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,8 +34,7 @@ abstract class $UserToLoginCopyWith<$Res> {
   factory $UserToLoginCopyWith(
           UserToLogin value, $Res Function(UserToLogin) then) =
       _$UserToLoginCopyWithImpl<$Res>;
-  $Res call(
-      {String username, String userDisplayName, String password, String name});
+  $Res call({String username, String password});
 }
 
 /// @nodoc
@@ -51,26 +48,16 @@ class _$UserToLoginCopyWithImpl<$Res> implements $UserToLoginCopyWith<$Res> {
   @override
   $Res call({
     Object? username = freezed,
-    Object? userDisplayName = freezed,
     Object? password = freezed,
-    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      userDisplayName: userDisplayName == freezed
-          ? _value.userDisplayName
-          : userDisplayName // ignore: cast_nullable_to_non_nullable
-              as String,
       password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -83,8 +70,7 @@ abstract class _$$_UserToLoginCopyWith<$Res>
           _$_UserToLogin value, $Res Function(_$_UserToLogin) then) =
       __$$_UserToLoginCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String username, String userDisplayName, String password, String name});
+  $Res call({String username, String password});
 }
 
 /// @nodoc
@@ -100,26 +86,16 @@ class __$$_UserToLoginCopyWithImpl<$Res> extends _$UserToLoginCopyWithImpl<$Res>
   @override
   $Res call({
     Object? username = freezed,
-    Object? userDisplayName = freezed,
     Object? password = freezed,
-    Object? name = freezed,
   }) {
     return _then(_$_UserToLogin(
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      userDisplayName: userDisplayName == freezed
-          ? _value.userDisplayName
-          : userDisplayName // ignore: cast_nullable_to_non_nullable
-              as String,
       password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -128,11 +104,7 @@ class __$$_UserToLoginCopyWithImpl<$Res> extends _$UserToLoginCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UserToLogin implements _UserToLogin {
-  _$_UserToLogin(
-      {required this.username,
-      required this.userDisplayName,
-      required this.password,
-      required this.name});
+  _$_UserToLogin({required this.username, required this.password});
 
   factory _$_UserToLogin.fromJson(Map<String, dynamic> json) =>
       _$$_UserToLoginFromJson(json);
@@ -140,15 +112,11 @@ class _$_UserToLogin implements _UserToLogin {
   @override
   final String username;
   @override
-  final String userDisplayName;
-  @override
   final String password;
-  @override
-  final String name;
 
   @override
   String toString() {
-    return 'UserToLogin(username: $username, userDisplayName: $userDisplayName, password: $password, name: $name)';
+    return 'UserToLogin(username: $username, password: $password)';
   }
 
   @override
@@ -157,10 +125,7 @@ class _$_UserToLogin implements _UserToLogin {
         (other.runtimeType == runtimeType &&
             other is _$_UserToLogin &&
             const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality()
-                .equals(other.userDisplayName, userDisplayName) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality().equals(other.name, name));
+            const DeepCollectionEquality().equals(other.password, password));
   }
 
   @JsonKey(ignore: true)
@@ -168,9 +133,7 @@ class _$_UserToLogin implements _UserToLogin {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(userDisplayName),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(name));
+      const DeepCollectionEquality().hash(password));
 
   @JsonKey(ignore: true)
   @override
@@ -188,9 +151,7 @@ class _$_UserToLogin implements _UserToLogin {
 abstract class _UserToLogin implements UserToLogin {
   factory _UserToLogin(
       {required final String username,
-      required final String userDisplayName,
-      required final String password,
-      required final String name}) = _$_UserToLogin;
+      required final String password}) = _$_UserToLogin;
 
   factory _UserToLogin.fromJson(Map<String, dynamic> json) =
       _$_UserToLogin.fromJson;
@@ -198,11 +159,7 @@ abstract class _UserToLogin implements UserToLogin {
   @override
   String get username;
   @override
-  String get userDisplayName;
-  @override
   String get password;
-  @override
-  String get name;
   @override
   @JsonKey(ignore: true)
   _$$_UserToLoginCopyWith<_$_UserToLogin> get copyWith =>

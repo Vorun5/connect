@@ -37,5 +37,11 @@
     "**/*.bat",
     "packages/*/assets/i18n/**",
     "packages/*/test/snapshots/**"
+  ],
+  "words": [
+    "geotag",
+    "hcwidget",
+    "riverpod",
+    "swidget"
   ]
 }

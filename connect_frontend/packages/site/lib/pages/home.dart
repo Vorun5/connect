@@ -81,7 +81,7 @@ Widget __homeDrawer() => Drawer(
                           switcher.changeTheme(
                             theme: theme.brightness == Brightness.light
                                 ? Themes.dark
-                                : Themes.ligth,
+                                : Themes.light,
                           );
                         },
                       ),

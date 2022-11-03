@@ -33,6 +33,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const Home(),
         routes: [
           GoRoute(
+            path: 'u',
+            name: 'current-user-profile',
+            builder: (context, state) => const UserProfile(),
+          ),
+          GoRoute(
             path: 'u/:username',
             name: 'user',
             builder: (context, state) => const UserProfile(),

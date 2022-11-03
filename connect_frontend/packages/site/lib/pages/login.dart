@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:site/data/dto/user_to_login.dart';
 import 'package:site/providers/auth_provider.dart';
 
 part 'login.g.dart';
@@ -15,8 +16,7 @@ Widget _login(BuildContext context, WidgetRef ref) => ThemeSwitchingArea(
             IconButton(
               onPressed: () async {
                 await ref.read(authProvider.notifier).login(
-                      'myEmail',
-                      'myPassword',
+                      UserToLogin(username: 'testlogin8', password: '123456'),
                     );
               },
               icon: const Icon(Icons.login),

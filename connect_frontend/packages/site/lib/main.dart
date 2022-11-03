@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:site/i18n/strings.g.dart';
-import 'package:site/utils/app_router.dart';
+import 'package:site/providers/router_provider.dart';
 import 'package:site/utils/themes.dart';
 
 part 'main.g.dart';
@@ -16,7 +16,7 @@ void main() async {
   LocaleSettings.useDeviceLocale();
   final isPlatformDark =
       WidgetsBinding.instance.window.platformBrightness == Brightness.dark;
-  final initTheme = isPlatformDark ? Themes.dark : Themes.ligth;
+  final initTheme = isPlatformDark ? Themes.dark : Themes.light;
   runApp(
     TranslationProvider(
       child: ThemeProvider(
