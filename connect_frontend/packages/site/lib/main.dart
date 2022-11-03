@@ -1,6 +1,7 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:site/i18n/strings.g.dart';
@@ -32,9 +33,16 @@ Widget __app(BuildContext context, WidgetRef ref) {
   final router = ref.watch(routerProvider);
 
   return MaterialApp.router(
-    locale: TranslationProvider.of(context).flutterLocale,
+    localizationsDelegates: const [
+      FormBuilderLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+    ],
     supportedLocales: LocaleSettings.supportedLocales,
-    localizationsDelegates: GlobalMaterialLocalizations.delegates,
+
+    locale: TranslationProvider.of(context).flutterLocale,
+    // supportedLocales: LocaleSettings.supportedLocales,
+    // localizationsDelegates: GlobalMaterialLocalizations.delegates,
     debugShowCheckedModeBanner: false,
     routeInformationParser: router.routeInformationParser,
     routerDelegate: router.routerDelegate,

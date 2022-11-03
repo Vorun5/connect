@@ -1,46 +1,37 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:site/data/dto/user_to_login.dart';
-import 'package:site/providers/auth_provider.dart';
 
 part 'login.g.dart';
 
 @hcwidget
-Widget _login(BuildContext context, WidgetRef ref) => ThemeSwitchingArea(
-      child: Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: () async {
-                await ref.read(authProvider.notifier).login(
-                      UserToLogin(username: 'testlogin8', password: '123456'),
-                    );
-              },
-              icon: const Icon(Icons.login),
-            ),
-          ],
-          title: const Text('Login'),
-        ),
-        body: Center(
+Widget _login(BuildContext context, WidgetRef ref) {
+  final formKey = GlobalKey<FormBuilderState>();
+
+  return ThemeSwitchingArea(
+    child: Scaffold(
+      appBar: AppBar(
+        title: const Text('Login'),
+      ),
+      body: Center(
+        child: FormBuilder(
+          key: formKey,
           child: Column(
             children: [
-              TextButton(
-                onPressed: () => context.goNamed('home'),
-                child: const Text('Home'),
+              FormBuilderTextField(
+                name: 'text',
+                onChanged: print,
               ),
-              TextButton(
-                onPressed: () => context.goNamed('login'),
-                child: const Text('Login'),
-              ),
-              TextButton(
-                onPressed: () => context.goNamed('sing-up'),
-                child: const Text('Sing Up'),
+              FormBuilderTextField(
+                name: 'name',
+                onChanged: print,
               ),
             ],
           ),
         ),
       ),
-    );
+    ),
+  );
+}
