@@ -1,15 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sing_up.dart';
+part of 'username_field.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class SingUp extends HookConsumerWidget {
-  const SingUp({Key? key}) : super(key: key);
+class UsernameField extends HookConsumerWidget {
+  const UsernameField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext _context, WidgetRef _ref) =>
-      _singUp(_context, _ref);
+      _usernameField(_context);
 }

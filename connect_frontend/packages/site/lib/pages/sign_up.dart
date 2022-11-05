@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:site/data/dto/user_to_login.dart';
+import 'package:site/data/dto/user_to_sign_up.dart';
 import 'package:site/i18n/strings.g.dart';
 import 'package:site/providers/auth_provider.dart';
 import 'package:site/utils/capitalize.dart';
@@ -13,18 +13,17 @@ import 'package:site/utils/color_palette.dart';
 import 'package:site/utils/font_size.dart';
 import 'package:site/utils/gaps.dart';
 import 'package:site/utils/style_constants.dart';
+import 'package:site/widgets/forms/name_field.dart';
 import 'package:site/widgets/forms/password_field.dart';
 import 'package:site/widgets/forms/username_field.dart';
 import 'package:site/widgets/icon_button_with_background.dart';
 
-part 'login.g.dart';
+part 'sign_up.g.dart';
 
 final _formKey = GlobalKey<FormBuilderState>();
 
-// TODO(Vorun5): оцентровать по горизонтальной оси и добавить скролл (в sign-up тоже)
-
 @hcwidget
-Widget _login(BuildContext context, WidgetRef ref) {
+Widget _signUp(BuildContext context, WidgetRef ref) {
   final errorStatus = useState<int?>(null);
   final i18n = Translations.of(context);
 
@@ -41,7 +40,7 @@ Widget _login(BuildContext context, WidgetRef ref) {
             child: Column(
               children: [
                 Text(
-                  i18n.auth.loginTitle,
+                  i18n.auth.signUpTitle,
                   style: const TextStyle(fontSize: FontSize.big),
                 ),
                 Gaps.big,
@@ -49,7 +48,7 @@ Widget _login(BuildContext context, WidgetRef ref) {
                   Container(
                     padding: const EdgeInsets.only(bottom: largeGap),
                     child: Text(
-                      i18n.auth.loginErrors[errorStatus.value.toString()] ??
+                      i18n.auth.signUpErrors[errorStatus.value.toString()] ??
                           i18n.unknownError,
                       style: const TextStyle(
                         color: ColorPalette.danger,
@@ -62,13 +61,15 @@ Widget _login(BuildContext context, WidgetRef ref) {
                     children: [
                       const UsernameField(),
                       Gaps.normal,
+                      const NameField(),
+                      Gaps.normal,
                       const PasswordField(),
                       Gaps.normal,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            capitalize(i18n.auth.login),
+                            capitalize(i18n.auth.signUp),
                             style: const TextStyle(fontSize: FontSize.large),
                           ),
                           IconButtonWithBackground(
@@ -82,7 +83,7 @@ Widget _login(BuildContext context, WidgetRef ref) {
                                   debugPrint(value.toString());
                                   errorStatus.value = await ref
                                       .read(authProvider.notifier)
-                                      .login(UserToLogin.fromJson(value));
+                                      .signUp(UserToSignUp.fromJson(value));
                                 }
                               } else {
                                 debugPrint(
@@ -96,14 +97,12 @@ Widget _login(BuildContext context, WidgetRef ref) {
                       ),
                       Gaps.normal,
                       Row(
-                        // TODO(Vorun5): сделать чтоб при маленькой ширине кнопка
-                        // "Sign Up" ужадила вниз, вообщем на RichText переделать
                         children: [
-                          Text(i18n.auth.notHaveAccount),
+                          Text(i18n.auth.haveAccount),
                           Gaps.tiny,
                           TextButton(
-                            onPressed: () => context.goNamed('sing-up'),
-                            child: Text('${capitalize(i18n.auth.signUp)}!'),
+                            onPressed: () => context.goNamed('login'),
+                            child: Text('${capitalize(i18n.auth.login)}!'),
                           ),
                         ],
                       ),

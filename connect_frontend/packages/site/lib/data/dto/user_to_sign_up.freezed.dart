@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'user_to_sing_up.dart';
+part of 'user_to_sign_up.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,44 +14,41 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-UserToSingUp _$UserToSingUpFromJson(Map<String, dynamic> json) {
-  return _UserToSingUp.fromJson(json);
+UserToSignUp _$UserToSignUpFromJson(Map<String, dynamic> json) {
+  return _UserToSignUp.fromJson(json);
 }
 
 /// @nodoc
-mixin _$UserToSingUp {
+mixin _$UserToSignUp {
   String get username => throw _privateConstructorUsedError;
-  String get userDisplayName => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserToSingUpCopyWith<UserToSingUp> get copyWith =>
+  $UserToSignUpCopyWith<UserToSignUp> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserToSingUpCopyWith<$Res> {
-  factory $UserToSingUpCopyWith(
-          UserToSingUp value, $Res Function(UserToSingUp) then) =
-      _$UserToSingUpCopyWithImpl<$Res>;
-  $Res call(
-      {String username, String userDisplayName, String password, String name});
+abstract class $UserToSignUpCopyWith<$Res> {
+  factory $UserToSignUpCopyWith(
+          UserToSignUp value, $Res Function(UserToSignUp) then) =
+      _$UserToSignUpCopyWithImpl<$Res>;
+  $Res call({String username, String password, String name});
 }
 
 /// @nodoc
-class _$UserToSingUpCopyWithImpl<$Res> implements $UserToSingUpCopyWith<$Res> {
-  _$UserToSingUpCopyWithImpl(this._value, this._then);
+class _$UserToSignUpCopyWithImpl<$Res> implements $UserToSignUpCopyWith<$Res> {
+  _$UserToSignUpCopyWithImpl(this._value, this._then);
 
-  final UserToSingUp _value;
+  final UserToSignUp _value;
   // ignore: unused_field
-  final $Res Function(UserToSingUp) _then;
+  final $Res Function(UserToSignUp) _then;
 
   @override
   $Res call({
     Object? username = freezed,
-    Object? userDisplayName = freezed,
     Object? password = freezed,
     Object? name = freezed,
   }) {
@@ -59,10 +56,6 @@ class _$UserToSingUpCopyWithImpl<$Res> implements $UserToSingUpCopyWith<$Res> {
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      userDisplayName: userDisplayName == freezed
-          ? _value.userDisplayName
-          : userDisplayName // ignore: cast_nullable_to_non_nullable
               as String,
       password: password == freezed
           ? _value.password
@@ -77,42 +70,36 @@ class _$UserToSingUpCopyWithImpl<$Res> implements $UserToSingUpCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_UserToSingUpCopyWith<$Res>
-    implements $UserToSingUpCopyWith<$Res> {
-  factory _$$_UserToSingUpCopyWith(
-          _$_UserToSingUp value, $Res Function(_$_UserToSingUp) then) =
-      __$$_UserToSingUpCopyWithImpl<$Res>;
+abstract class _$$_UserToSignUpCopyWith<$Res>
+    implements $UserToSignUpCopyWith<$Res> {
+  factory _$$_UserToSignUpCopyWith(
+          _$_UserToSignUp value, $Res Function(_$_UserToSignUp) then) =
+      __$$_UserToSignUpCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String username, String userDisplayName, String password, String name});
+  $Res call({String username, String password, String name});
 }
 
 /// @nodoc
-class __$$_UserToSingUpCopyWithImpl<$Res>
-    extends _$UserToSingUpCopyWithImpl<$Res>
-    implements _$$_UserToSingUpCopyWith<$Res> {
-  __$$_UserToSingUpCopyWithImpl(
-      _$_UserToSingUp _value, $Res Function(_$_UserToSingUp) _then)
-      : super(_value, (v) => _then(v as _$_UserToSingUp));
+class __$$_UserToSignUpCopyWithImpl<$Res>
+    extends _$UserToSignUpCopyWithImpl<$Res>
+    implements _$$_UserToSignUpCopyWith<$Res> {
+  __$$_UserToSignUpCopyWithImpl(
+      _$_UserToSignUp _value, $Res Function(_$_UserToSignUp) _then)
+      : super(_value, (v) => _then(v as _$_UserToSignUp));
 
   @override
-  _$_UserToSingUp get _value => super._value as _$_UserToSingUp;
+  _$_UserToSignUp get _value => super._value as _$_UserToSignUp;
 
   @override
   $Res call({
     Object? username = freezed,
-    Object? userDisplayName = freezed,
     Object? password = freezed,
     Object? name = freezed,
   }) {
-    return _then(_$_UserToSingUp(
+    return _then(_$_UserToSignUp(
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      userDisplayName: userDisplayName == freezed
-          ? _value.userDisplayName
-          : userDisplayName // ignore: cast_nullable_to_non_nullable
               as String,
       password: password == freezed
           ? _value.password
@@ -128,20 +115,15 @@ class __$$_UserToSingUpCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserToSingUp implements _UserToSingUp {
-  _$_UserToSingUp(
-      {required this.username,
-      required this.userDisplayName,
-      required this.password,
-      required this.name});
+class _$_UserToSignUp implements _UserToSignUp {
+  _$_UserToSignUp(
+      {required this.username, required this.password, required this.name});
 
-  factory _$_UserToSingUp.fromJson(Map<String, dynamic> json) =>
-      _$$_UserToSingUpFromJson(json);
+  factory _$_UserToSignUp.fromJson(Map<String, dynamic> json) =>
+      _$$_UserToSignUpFromJson(json);
 
   @override
   final String username;
-  @override
-  final String userDisplayName;
   @override
   final String password;
   @override
@@ -149,17 +131,15 @@ class _$_UserToSingUp implements _UserToSingUp {
 
   @override
   String toString() {
-    return 'UserToSingUp(username: $username, userDisplayName: $userDisplayName, password: $password, name: $name)';
+    return 'UserToSignUp(username: $username, password: $password, name: $name)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserToSingUp &&
+            other is _$_UserToSignUp &&
             const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality()
-                .equals(other.userDisplayName, userDisplayName) &&
             const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality().equals(other.name, name));
   }
@@ -169,43 +149,39 @@ class _$_UserToSingUp implements _UserToSingUp {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(userDisplayName),
       const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(name));
 
   @JsonKey(ignore: true)
   @override
-  _$$_UserToSingUpCopyWith<_$_UserToSingUp> get copyWith =>
-      __$$_UserToSingUpCopyWithImpl<_$_UserToSingUp>(this, _$identity);
+  _$$_UserToSignUpCopyWith<_$_UserToSignUp> get copyWith =>
+      __$$_UserToSignUpCopyWithImpl<_$_UserToSignUp>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserToSingUpToJson(
+    return _$$_UserToSignUpToJson(
       this,
     );
   }
 }
 
-abstract class _UserToSingUp implements UserToSingUp {
-  factory _UserToSingUp(
+abstract class _UserToSignUp implements UserToSignUp {
+  factory _UserToSignUp(
       {required final String username,
-      required final String userDisplayName,
       required final String password,
-      required final String name}) = _$_UserToSingUp;
+      required final String name}) = _$_UserToSignUp;
 
-  factory _UserToSingUp.fromJson(Map<String, dynamic> json) =
-      _$_UserToSingUp.fromJson;
+  factory _UserToSignUp.fromJson(Map<String, dynamic> json) =
+      _$_UserToSignUp.fromJson;
 
   @override
   String get username;
-  @override
-  String get userDisplayName;
   @override
   String get password;
   @override
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_UserToSingUpCopyWith<_$_UserToSingUp> get copyWith =>
+  _$$_UserToSignUpCopyWith<_$_UserToSignUp> get copyWith =>
       throw _privateConstructorUsedError;
 }

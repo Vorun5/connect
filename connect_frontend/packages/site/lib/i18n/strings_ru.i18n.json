@@ -1,9 +1,35 @@
 {
-    "title": "Привет, мир!",
-    "hello": "Hallo $name",
-    "save": "Speichern",
-    "login": {
-      "success": "Login erfolgreich",
-      "fail": "Login fehlgeschlagen"
+  "form": {
+    "labels": {
+      "username": "имя пользователя",
+      "name": "имя",
+      "password": "пароль"
+    },
+    "errorTexts": {
+      "alphanumeric": "$label может состоять только из латинских букв и цифр"
     }
+  },
+  "unknownError": "Неизвестная ошибка!",
+  "auth": {
+    "login": "войти",
+    "signUp": "зарегистрироваться",
+    "notHaveAccount": "Нет учётной записи?",
+    "haveAccount": "Уже есть учётная запись?",
+    "loginTitle": "С возвращением!",
+    "signUpTitle": "Давай начнём!",
+    "loginErrors(map)": {
+      "403": "Неверное имя пользователя или пароль🤔",
+      "500": "Ошибка сервера. Извините💀"
+    },
+    "signUpErrors(map)": {
+      "403": "Это имя пользователя уже занято🤔",
+      "500": "Ошибка сервера. Извините💀"
+    }
+  },
+  "statusCode(map)": {
+    "400": "Request data failed server validation  (status code: 400)",
+    "403": "No access (status code: 403)",
+    "404": "Nothing found (status code: 404)",
+    "500": "Server error. Sorry >_< (status code: 500)"
   }
+}

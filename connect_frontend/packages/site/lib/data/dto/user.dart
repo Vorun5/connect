@@ -8,7 +8,7 @@ part 'user.g.dart';
 class User with _$User {
   factory User({
     required String username,
-    required String userDisplayName,
+    required String displayUsername,
     required String name,
     required String id,
     required String? profileImageUrl,

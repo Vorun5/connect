@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:site/pages/home.dart';
 import 'package:site/pages/login.dart';
-import 'package:site/pages/sing_up.dart';
+import 'package:site/pages/sign_up.dart';
 import 'package:site/pages/user_profile.dart';
 import 'package:site/providers/auth_provider.dart';
 
@@ -25,7 +25,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/sing-up',
         name: 'sing-up',
-        builder: (context, state) => const SingUp(),
+        builder: (context, state) => const SignUp(),
       ),
       GoRoute(
         path: '/',
