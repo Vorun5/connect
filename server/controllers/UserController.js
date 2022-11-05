@@ -9,10 +9,18 @@ export const singUp = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
 
+        const checkUsername = await UserModel.findOne({"username": req.body.username.toLowerCase()});
+
+        if (checkUsername) {
+            return res.status(403).json({
+                message: 'a user with the same name already exists',
+            });
+        }
+
         const doc = new UserModel({
             username: req.body.username.toLowerCase(),
             displayUsername: req.body.username,
-            name: req.body.name,
+            name: req.body.name.replace(/\s+/g, ' ').trim(),
             passwordHash: hash,
         });
 
@@ -24,12 +32,15 @@ export const singUp = async (req, res) => {
             {expiresIn: '30d'}
         );
 
-        const {passwordHash, ...userData} = user._doc;
-
-        res.json({
-            user: userData,
-            token,
-        });
+        const {passwordHash, _id, ...userData} = user._doc;
+        res.json(token);
+        // res.json({
+        //     user: {
+        //         id: _id,
+        //         ...userData
+        //     },
+        //     token,
+        // });
 
     } catch (e) {
         console.log('failed to sign up', e);
@@ -135,15 +146,15 @@ export const update = async (req, res) => {
         }
 
 
-        const user =  await UserModel.findByIdAndUpdate({
+        const user = await UserModel.findByIdAndUpdate({
             _id: userId,
         }, {
             username: req.body.username.toLowerCase(),
             displayUsername: req.body.username,
-            name: req.body.name,
+            name: req.body.name.replace(/\s+/g, ' ').trim(),
             profileImageUrl: req.body.profileImageUrl,
             backgroundImageUrl: req.body.backgroundImageUrl,
-            description: req.body.description,
+            description: req.body.description.replace(/\s+/g, ' ').trim(),
             geotag: {
                 latitude: req.body.geotag.latitude,
                 longitude: req.body.geotag.longitude,

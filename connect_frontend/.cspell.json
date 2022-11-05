@@ -39,9 +39,12 @@
     "packages/*/test/snapshots/**"
   ],
   "words": [
+    "autocorrect",
+    "Autovalidate",
     "geotag",
     "hcwidget",
     "riverpod",
-    "swidget"
+    "swidget",
+    "unawaited"
   ]
 }
