@@ -1,4 +1,3 @@
-import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -12,6 +11,7 @@ import 'package:site/utils/capitalize.dart';
 import 'package:site/utils/color_palette.dart';
 import 'package:site/utils/font_size.dart';
 import 'package:site/utils/gaps.dart';
+import 'package:site/utils/screen_layout.dart';
 import 'package:site/utils/style_constants.dart';
 import 'package:site/widgets/forms/password_field.dart';
 import 'package:site/widgets/forms/username_field.dart';
@@ -28,10 +28,10 @@ Widget _login(BuildContext context, WidgetRef ref) {
   final errorStatus = useState<int?>(null);
   final i18n = Translations.of(context);
 
-  return ThemeSwitchingArea(
-    child: SafeArea(
-      child: Scaffold(
-        body: Center(
+  return ScreenLayout(
+    child: Scaffold(
+      body: Center(
+        child: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(normalGap),
             constraints: const BoxConstraints(

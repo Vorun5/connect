@@ -90,7 +90,7 @@ export const getMe = async (req, res) => {
 
         if (!user) {
             return res.status(403).json({
-                message: 'user is not found'
+                message: 'not access'
             });
         }
 

@@ -6,9 +6,12 @@ part of 'user_profile.dart';
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class UserProfile extends StatelessWidget {
-  const UserProfile({Key? key}) : super(key: key);
+class UserProfile extends HookConsumerWidget {
+  const UserProfile(this.username, {Key? key}) : super(key: key);
+
+  final String username;
 
   @override
-  Widget build(BuildContext _context) => _userProfile();
+  Widget build(BuildContext _context, WidgetRef _ref) =>
+      _userProfile(_context, _ref, username);
 }

@@ -10,6 +10,30 @@ import 'package:tuple/tuple.dart';
 class ApiServices {
   static final _dio = Dio();
 
+  // 200, 404, 500
+  static Future<Tuple2<User?, int?>> getUser(String username) async {
+    final storage = await SharedPreferences.getInstance();
+    final token = storage.getString('token');
+    _dio.options.headers['authorization'] = token;
+
+    final url = ApiConstants.baseUrl + ApiConstants.userByUsername(username);
+    try {
+      final res = await _dio.get(url);
+      final user = User.fromJson(res.data as Map<String, dynamic>);
+
+      return Tuple2(user, null);
+    } on DioError catch (e) {
+      final res = e.response;
+      if (res != null) {
+        if (kDebugMode) {
+          return Tuple2(null, res.statusCode);
+        }
+      }
+
+      return const Tuple2(null, 500);
+    }
+  }
+
   static Future<User?> getMe() async {
     final storage = await SharedPreferences.getInstance();
     final token = storage.getString('token');
@@ -32,6 +56,7 @@ class ApiServices {
     }
   }
 
+  // 200, 403, 500
   static Future<Tuple2<String?, int?>> login(UserToLogin user) async {
     const url = ApiConstants.baseUrl + ApiConstants.login;
     try {
@@ -50,6 +75,7 @@ class ApiServices {
     }
   }
 
+  // 200, 403, 500
   static Future<Tuple2<String?, int?>> signUp(UserToSignUp user) async {
     const url = ApiConstants.baseUrl + ApiConstants.singUp;
     try {

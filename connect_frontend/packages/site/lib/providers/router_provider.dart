@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:site/pages/edit_profile.dart';
 import 'package:site/pages/home.dart';
 import 'package:site/pages/login.dart';
 import 'package:site/pages/sign_up.dart';
@@ -35,12 +36,12 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: 'u',
             name: 'current-user-profile',
-            builder: (context, state) => const UserProfile(),
+            builder: (context, state) => const EditProfile(),
           ),
           GoRoute(
             path: 'u/:username',
             name: 'user',
-            builder: (context, state) => const UserProfile(),
+            builder: (context, state) => UserProfile(state.params['username']!),
           ),
         ],
       ),

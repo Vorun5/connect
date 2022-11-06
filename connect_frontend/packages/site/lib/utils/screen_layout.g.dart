@@ -1,14 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home.dart';
+part of 'screen_layout.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class Home extends HookConsumerWidget {
-  const Home({Key? key}) : super(key: key);
+class ScreenLayout extends StatelessWidget {
+  const ScreenLayout({Key? key, required this.child}) : super(key: key);
+
+  final Widget child;
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) => _home(_context, _ref);
+  Widget build(BuildContext _context) => _screenLayout(child: child);
 }

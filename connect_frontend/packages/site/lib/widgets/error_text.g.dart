@@ -1,14 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home.dart';
+part of 'error_text.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class Home extends HookConsumerWidget {
-  const Home({Key? key}) : super(key: key);
+class ErrorText extends StatelessWidget {
+  const ErrorText(this.text, {Key? key}) : super(key: key);
+
+  final String text;
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) => _home(_context, _ref);
+  Widget build(BuildContext _context) => _errorText(text);
 }
