@@ -2,6 +2,7 @@ import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:site/data/dto/user.dart';
 import 'package:site/i18n/strings.g.dart';
 import 'package:site/providers/my_profile_provider.dart';
@@ -76,12 +77,16 @@ Widget __userPreviewProfile(User user) => DrawerHeader(
                         ? Icons.nightlight_round
                         : Icons.wb_sunny,
                   ),
-                  onPressed: () {
-                    switcher.changeTheme(
-                      theme: theme.brightness == Brightness.light
-                          ? Themes.dark
-                          : Themes.light,
-                    );
+                  onPressed: () async {
+                    final storage = await SharedPreferences.getInstance();
+                    final res =
+                        await storage.setBool('theme', theme != Themes.dark);
+                    if (res) {
+                      switcher.changeTheme(
+                        theme:
+                            theme == Themes.dark ? Themes.light : Themes.dark,
+                      );
+                    }
                   },
                 ),
               ),

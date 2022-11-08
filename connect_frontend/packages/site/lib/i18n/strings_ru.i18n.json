@@ -6,7 +6,7 @@
       "password": "пароль"
     },
     "errorTexts": {
-      "alphanumeric": "$label может состоять только из латинских букв и цифр"
+      "alphanumeric": "$field может состоять только из латинских букв и цифр"
     }
   },
   "unknownError": "Неизвестная ошибка!",

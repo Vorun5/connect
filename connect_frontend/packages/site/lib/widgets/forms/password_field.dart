@@ -17,6 +17,7 @@ part 'password_field.g.dart';
 Widget _passwordField(BuildContext context) {
   final i18n = Translations.of(context);
   final isPasswordVisible = useState(false);
+  final password = capitalize(i18n.form.labels.password);
 
   return FormBuilderTextField(
     name: 'password',
@@ -25,14 +26,16 @@ Widget _passwordField(BuildContext context) {
     obscureText: !isPasswordVisible.value,
     validator: FormBuilderValidators.compose([
       FormBuilderValidators.required(),
-      FormValidators.alphanumeric(i18n.form.errorTexts.alphanumeric),
+      FormValidators.alphanumeric(
+        i18n.form.errorTexts.alphanumeric(field: password),
+      ),
       FormBuilderValidators.maxLength(maxNumChPassword),
       FormBuilderValidators.minLength(minNumChPassword),
     ]),
     decoration: InputDecoration(
       isDense: true,
       border: const OutlineInputBorder(),
-      labelText: capitalize(i18n.form.labels.password),
+      labelText: password,
       suffixIcon: Padding(
         padding: const EdgeInsets.only(right: tinyGap),
         child: IconButton(

@@ -13,19 +13,22 @@ part 'username_field.g.dart';
 @hcwidget
 Widget _usernameField(BuildContext context) {
   final i18n = Translations.of(context);
+  final username = capitalize(i18n.form.labels.username);
 
   return FormBuilderTextField(
     name: 'username',
     autovalidateMode: AutovalidateMode.onUserInteraction,
     autocorrect: false,
     decoration: InputDecoration(
-      labelText: capitalize(i18n.form.labels.username),
+      labelText: username,
       isDense: true,
       border: const OutlineInputBorder(),
     ),
     validator: FormBuilderValidators.compose([
       FormBuilderValidators.required(),
-      FormValidators.alphanumeric(i18n.form.errorTexts.alphanumeric),
+      FormValidators.alphanumeric(
+        i18n.form.errorTexts.alphanumeric(field: username),
+      ),
       FormBuilderValidators.maxLength(maxNumChUsername),
       FormBuilderValidators.minLength(minNumChUsername),
     ]),

@@ -7,6 +7,14 @@ import 'package:site/data/dto/user_to_login.dart';
 import 'package:site/data/dto/user_to_sign_up.dart';
 import 'package:tuple/tuple.dart';
 
+// final tokenProvider = FutureProvider(() {
+
+// });
+
+// final apiProvider = Provider(() {
+//   // TODO: тут вотчить токен провайдер
+// })
+
 class ApiServices {
   static final _dio = Dio();
 
