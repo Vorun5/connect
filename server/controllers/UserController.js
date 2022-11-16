@@ -32,7 +32,7 @@ export const singUp = async (req, res) => {
             {expiresIn: '30d'}
         );
 
-        const {passwordHash, _id, ...userData} = user._doc;
+        const {passwordHash, ...userData} = user._doc;
         res.json(token);
         // res.json({
         //     user: {
@@ -95,11 +95,8 @@ export const getMe = async (req, res) => {
         }
 
 
-        const {passwordHash, _id, ...userData} = user._doc;
-        res.json({
-            id: _id,
-            ...userData,
-        });
+        const {passwordHash, ...userData} = user._doc;
+        res.json(...userData);
 
     } catch (e) {
         console.log('error getting personal information', e);
@@ -120,11 +117,8 @@ export const getOneUser = async (req, res) => {
             });
         }
 
-        const {passwordHash, _id, ...userData} = user._doc;
-        res.json({
-            id: _id,
-            ...userData,
-        });
+        const {passwordHash, ...userData} = user._doc;
+        res.json(userData);
 
     } catch (e) {
         console.log('error getting user data', e);
@@ -138,8 +132,8 @@ export const update = async (req, res) => {
     try {
         const userId = req.userId;
 
-        if (userId !== req.body.id) {
-            console.log('no access', e);
+        if (userId !== req.body._id) {
+            console.log('no access');
             res.status(403).json({
                 message: 'no access',
             });
@@ -169,11 +163,8 @@ export const update = async (req, res) => {
             });
         }
 
-        const {passwordHash, _id, ...userData} = user._doc;
-        res.json({
-            id: _id,
-            ...userData,
-        });
+        const {passwordHash,  ...userData} = user._doc;
+        res.json(userData);
     } catch (e) {
         console.log('no access', e);
         res.status(500).json({

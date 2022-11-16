@@ -21,9 +21,9 @@ export const signup = [
 ]
 
 export const updateUser = [
-    body('id', 'is not id').isMongoId(),
+    body('_id', 'is not id').isMongoId(),
     body('username', 'username must be alphanumeric and lowercase').isAlphanumeric().isAscii().isLength({min: minNumChUsername, max: maxNumChUsername}),
-    body('name', 'name needed').isAlphanumeric().isLength({min: minNumChName, max: maxNumChName}),
+    body('name', 'name needed').isString().isLength({min: minNumChName, max: maxNumChName}),
     body('profileImageUrl', 'wrong photo link').optional().isURL(),
     body('description', 'description must be string').optional().isString().replace(/\s+/g, ' ').trim().isLength({max: maxDescriptionChUsername}),
     body('backgroundImageUrl', 'wrong photo link').optional().isURL(),
@@ -31,3 +31,6 @@ export const updateUser = [
     body('geotag.longitude', 'geotag.longitude must be a number').optional().isFloat(),
 ]
 
+export  const createTag = [
+    body('name', 'should be a line').isString(),
+]

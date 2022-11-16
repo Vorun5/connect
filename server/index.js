@@ -3,7 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose'
 import {port} from './config.js';
 import * as Validations from './validations.js';
-import * as UserController from "./controllers/UserController.js";
+import {TagController, UserController} from "./controllers/index.js";
 import {checkAuth, handleValidationErrors} from "./utils/index.js";
 
 mongoose.connect('mongodb://localhost/connect')
@@ -18,9 +18,16 @@ app.use('/uploads', express.static('uploads'));
 
 app.post('/auth/login', Validations.login, handleValidationErrors, UserController.login)
 app.post('/auth/sing-up', Validations.signup, handleValidationErrors, UserController.singUp);
-app.get('/user/:username', UserController.getOneUser);
-app.get('/user', checkAuth, UserController.getMe);
-app.patch('/user', checkAuth, Validations.updateUser, handleValidationErrors, UserController.update);
+
+
+app.get('/users/:username', UserController.getOneUser);
+app.get('/users', checkAuth, UserController.getMe);
+app.patch('/users', checkAuth, Validations.updateUser, handleValidationErrors, UserController.update);
+
+
+app.post('/tags', checkAuth, Validations.createTag, handleValidationErrors, TagController.create);
+app.post('/tags/:string', TagController.find);
+
 
 app.listen(port, (err) => {
     if (err) {
