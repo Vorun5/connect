@@ -10,6 +10,9 @@ class PasswordField extends HookConsumerWidget {
   const PasswordField({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) =>
+  Widget build(
+    BuildContext _context,
+    WidgetRef _ref,
+  ) =>
       _passwordField(_context);
 }

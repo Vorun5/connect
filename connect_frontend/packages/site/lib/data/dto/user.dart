@@ -7,10 +7,10 @@ part 'user.g.dart';
 @freezed
 class User with _$User {
   factory User({
+    @JsonKey(name: '_id') required String id,
     required String username,
     required String displayUsername,
     required String name,
-    required String id,
     required String? profileImageUrl,
     required String? backgroundImageUrl,
     required Geotag? geotag,

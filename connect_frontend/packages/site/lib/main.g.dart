@@ -10,5 +10,12 @@ class _App extends HookConsumerWidget {
   const _App({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) => __app(_context, _ref);
+  Widget build(
+    BuildContext _context,
+    WidgetRef _ref,
+  ) =>
+      __app(
+        _context,
+        _ref,
+      );
 }

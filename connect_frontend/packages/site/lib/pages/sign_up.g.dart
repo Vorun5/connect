@@ -10,6 +10,12 @@ class SignUp extends HookConsumerWidget {
   const SignUp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) =>
-      _signUp(_context, _ref);
+  Widget build(
+    BuildContext _context,
+    WidgetRef _ref,
+  ) =>
+      _signUp(
+        _context,
+        _ref,
+      );
 }

@@ -7,7 +7,10 @@ part of 'error_text.dart';
 // **************************************************************************
 
 class ErrorText extends StatelessWidget {
-  const ErrorText(this.text, {Key? key}) : super(key: key);
+  const ErrorText(
+    this.text, {
+    Key? key,
+  }) : super(key: key);
 
   final String text;
 

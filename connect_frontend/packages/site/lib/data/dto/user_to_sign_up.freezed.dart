@@ -34,38 +34,42 @@ mixin _$UserToSignUp {
 abstract class $UserToSignUpCopyWith<$Res> {
   factory $UserToSignUpCopyWith(
           UserToSignUp value, $Res Function(UserToSignUp) then) =
-      _$UserToSignUpCopyWithImpl<$Res>;
+      _$UserToSignUpCopyWithImpl<$Res, UserToSignUp>;
+  @useResult
   $Res call({String username, String password, String name});
 }
 
 /// @nodoc
-class _$UserToSignUpCopyWithImpl<$Res> implements $UserToSignUpCopyWith<$Res> {
+class _$UserToSignUpCopyWithImpl<$Res, $Val extends UserToSignUp>
+    implements $UserToSignUpCopyWith<$Res> {
   _$UserToSignUpCopyWithImpl(this._value, this._then);
 
-  final UserToSignUp _value;
   // ignore: unused_field
-  final $Res Function(UserToSignUp) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
-    Object? password = freezed,
-    Object? name = freezed,
+    Object? username = null,
+    Object? password = null,
+    Object? name = null,
   }) {
     return _then(_value.copyWith(
-      username: username == freezed
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -76,36 +80,35 @@ abstract class _$$_UserToSignUpCopyWith<$Res>
           _$_UserToSignUp value, $Res Function(_$_UserToSignUp) then) =
       __$$_UserToSignUpCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String username, String password, String name});
 }
 
 /// @nodoc
 class __$$_UserToSignUpCopyWithImpl<$Res>
-    extends _$UserToSignUpCopyWithImpl<$Res>
+    extends _$UserToSignUpCopyWithImpl<$Res, _$_UserToSignUp>
     implements _$$_UserToSignUpCopyWith<$Res> {
   __$$_UserToSignUpCopyWithImpl(
       _$_UserToSignUp _value, $Res Function(_$_UserToSignUp) _then)
-      : super(_value, (v) => _then(v as _$_UserToSignUp));
+      : super(_value, _then);
 
-  @override
-  _$_UserToSignUp get _value => super._value as _$_UserToSignUp;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
-    Object? password = freezed,
-    Object? name = freezed,
+    Object? username = null,
+    Object? password = null,
+    Object? name = null,
   }) {
     return _then(_$_UserToSignUp(
-      username: username == freezed
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
@@ -139,21 +142,20 @@ class _$_UserToSignUp implements _UserToSignUp {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserToSignUp &&
-            const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality().equals(other.name, name));
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(runtimeType, username, password, name);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserToSignUpCopyWith<_$_UserToSignUp> get copyWith =>
       __$$_UserToSignUpCopyWithImpl<_$_UserToSignUp>(this, _$identity);
 

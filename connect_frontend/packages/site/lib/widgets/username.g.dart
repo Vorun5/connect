@@ -7,7 +7,10 @@ part of 'username.dart';
 // **************************************************************************
 
 class Username extends StatelessWidget {
-  const Username(this.username, {Key? key}) : super(key: key);
+  const Username(
+    this.username, {
+    Key? key,
+  }) : super(key: key);
 
   final String username;
 

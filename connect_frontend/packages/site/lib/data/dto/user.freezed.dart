@@ -20,10 +20,11 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
+  @JsonKey(name: '_id')
+  String get id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get displayUsername => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get id => throw _privateConstructorUsedError;
   String? get profileImageUrl => throw _privateConstructorUsedError;
   String? get backgroundImageUrl => throw _privateConstructorUsedError;
   Geotag? get geotag => throw _privateConstructorUsedError;
@@ -36,12 +37,13 @@ mixin _$User {
 /// @nodoc
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res>;
+      _$UserCopyWithImpl<$Res, User>;
+  @useResult
   $Res call(
-      {String username,
+      {@JsonKey(name: '_id') String id,
+      String username,
       String displayUsername,
       String name,
-      String id,
       String? profileImageUrl,
       String? backgroundImageUrl,
       Geotag? geotag});
@@ -50,63 +52,67 @@ abstract class $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
+class _$UserCopyWithImpl<$Res, $Val extends User>
+    implements $UserCopyWith<$Res> {
   _$UserCopyWithImpl(this._value, this._then);
 
-  final User _value;
   // ignore: unused_field
-  final $Res Function(User) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
-    Object? displayUsername = freezed,
-    Object? name = freezed,
-    Object? id = freezed,
+    Object? id = null,
+    Object? username = null,
+    Object? displayUsername = null,
+    Object? name = null,
     Object? profileImageUrl = freezed,
     Object? backgroundImageUrl = freezed,
     Object? geotag = freezed,
   }) {
     return _then(_value.copyWith(
-      username: username == freezed
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      displayUsername: displayUsername == freezed
-          ? _value.displayUsername
-          : displayUsername // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      profileImageUrl: profileImageUrl == freezed
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      displayUsername: null == displayUsername
+          ? _value.displayUsername
+          : displayUsername // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      profileImageUrl: freezed == profileImageUrl
           ? _value.profileImageUrl
           : profileImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      backgroundImageUrl: backgroundImageUrl == freezed
+      backgroundImageUrl: freezed == backgroundImageUrl
           ? _value.backgroundImageUrl
           : backgroundImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      geotag: geotag == freezed
+      geotag: freezed == geotag
           ? _value.geotag
           : geotag // ignore: cast_nullable_to_non_nullable
               as Geotag?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $GeotagCopyWith<$Res>? get geotag {
     if (_value.geotag == null) {
       return null;
     }
 
     return $GeotagCopyWith<$Res>(_value.geotag!, (value) {
-      return _then(_value.copyWith(geotag: value));
+      return _then(_value.copyWith(geotag: value) as $Val);
     });
   }
 }
@@ -116,11 +122,12 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
       __$$_UserCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
-      {String username,
+      {@JsonKey(name: '_id') String id,
+      String username,
       String displayUsername,
       String name,
-      String id,
       String? profileImageUrl,
       String? backgroundImageUrl,
       Geotag? geotag});
@@ -130,50 +137,48 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
+class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     implements _$$_UserCopyWith<$Res> {
   __$$_UserCopyWithImpl(_$_User _value, $Res Function(_$_User) _then)
-      : super(_value, (v) => _then(v as _$_User));
+      : super(_value, _then);
 
-  @override
-  _$_User get _value => super._value as _$_User;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
-    Object? displayUsername = freezed,
-    Object? name = freezed,
-    Object? id = freezed,
+    Object? id = null,
+    Object? username = null,
+    Object? displayUsername = null,
+    Object? name = null,
     Object? profileImageUrl = freezed,
     Object? backgroundImageUrl = freezed,
     Object? geotag = freezed,
   }) {
     return _then(_$_User(
-      username: username == freezed
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      displayUsername: displayUsername == freezed
-          ? _value.displayUsername
-          : displayUsername // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      profileImageUrl: profileImageUrl == freezed
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      displayUsername: null == displayUsername
+          ? _value.displayUsername
+          : displayUsername // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      profileImageUrl: freezed == profileImageUrl
           ? _value.profileImageUrl
           : profileImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      backgroundImageUrl: backgroundImageUrl == freezed
+      backgroundImageUrl: freezed == backgroundImageUrl
           ? _value.backgroundImageUrl
           : backgroundImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      geotag: geotag == freezed
+      geotag: freezed == geotag
           ? _value.geotag
           : geotag // ignore: cast_nullable_to_non_nullable
               as Geotag?,
@@ -185,10 +190,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_User implements _User {
   _$_User(
-      {required this.username,
+      {@JsonKey(name: '_id') required this.id,
+      required this.username,
       required this.displayUsername,
       required this.name,
-      required this.id,
       required this.profileImageUrl,
       required this.backgroundImageUrl,
       required this.geotag});
@@ -196,13 +201,14 @@ class _$_User implements _User {
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
+  final String id;
+  @override
   final String username;
   @override
   final String displayUsername;
   @override
   final String name;
-  @override
-  final String id;
   @override
   final String? profileImageUrl;
   @override
@@ -212,7 +218,7 @@ class _$_User implements _User {
 
   @override
   String toString() {
-    return 'User(username: $username, displayUsername: $displayUsername, name: $name, id: $id, profileImageUrl: $profileImageUrl, backgroundImageUrl: $backgroundImageUrl, geotag: $geotag)';
+    return 'User(id: $id, username: $username, displayUsername: $displayUsername, name: $name, profileImageUrl: $profileImageUrl, backgroundImageUrl: $backgroundImageUrl, geotag: $geotag)';
   }
 
   @override
@@ -220,32 +226,27 @@ class _$_User implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_User &&
-            const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality()
-                .equals(other.displayUsername, displayUsername) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.profileImageUrl, profileImageUrl) &&
-            const DeepCollectionEquality()
-                .equals(other.backgroundImageUrl, backgroundImageUrl) &&
-            const DeepCollectionEquality().equals(other.geotag, geotag));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.displayUsername, displayUsername) ||
+                other.displayUsername == displayUsername) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.profileImageUrl, profileImageUrl) ||
+                other.profileImageUrl == profileImageUrl) &&
+            (identical(other.backgroundImageUrl, backgroundImageUrl) ||
+                other.backgroundImageUrl == backgroundImageUrl) &&
+            (identical(other.geotag, geotag) || other.geotag == geotag));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(displayUsername),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(profileImageUrl),
-      const DeepCollectionEquality().hash(backgroundImageUrl),
-      const DeepCollectionEquality().hash(geotag));
+  int get hashCode => Object.hash(runtimeType, id, username, displayUsername,
+      name, profileImageUrl, backgroundImageUrl, geotag);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserCopyWith<_$_User> get copyWith =>
       __$$_UserCopyWithImpl<_$_User>(this, _$identity);
 
@@ -259,10 +260,10 @@ class _$_User implements _User {
 
 abstract class _User implements User {
   factory _User(
-      {required final String username,
+      {@JsonKey(name: '_id') required final String id,
+      required final String username,
       required final String displayUsername,
       required final String name,
-      required final String id,
       required final String? profileImageUrl,
       required final String? backgroundImageUrl,
       required final Geotag? geotag}) = _$_User;
@@ -270,13 +271,14 @@ abstract class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
+  @JsonKey(name: '_id')
+  String get id;
+  @override
   String get username;
   @override
   String get displayUsername;
   @override
   String get name;
-  @override
-  String get id;
   @override
   String? get profileImageUrl;
   @override

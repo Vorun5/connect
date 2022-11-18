@@ -7,7 +7,10 @@ part of 'screen_layout.dart';
 // **************************************************************************
 
 class ScreenLayout extends StatelessWidget {
-  const ScreenLayout({Key? key, required this.child}) : super(key: key);
+  const ScreenLayout({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
 
   final Widget child;
 

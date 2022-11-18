@@ -33,33 +33,37 @@ mixin _$UserToLogin {
 abstract class $UserToLoginCopyWith<$Res> {
   factory $UserToLoginCopyWith(
           UserToLogin value, $Res Function(UserToLogin) then) =
-      _$UserToLoginCopyWithImpl<$Res>;
+      _$UserToLoginCopyWithImpl<$Res, UserToLogin>;
+  @useResult
   $Res call({String username, String password});
 }
 
 /// @nodoc
-class _$UserToLoginCopyWithImpl<$Res> implements $UserToLoginCopyWith<$Res> {
+class _$UserToLoginCopyWithImpl<$Res, $Val extends UserToLogin>
+    implements $UserToLoginCopyWith<$Res> {
   _$UserToLoginCopyWithImpl(this._value, this._then);
 
-  final UserToLogin _value;
   // ignore: unused_field
-  final $Res Function(UserToLogin) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
-    Object? password = freezed,
+    Object? username = null,
+    Object? password = null,
   }) {
     return _then(_value.copyWith(
-      username: username == freezed
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -70,30 +74,30 @@ abstract class _$$_UserToLoginCopyWith<$Res>
           _$_UserToLogin value, $Res Function(_$_UserToLogin) then) =
       __$$_UserToLoginCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String username, String password});
 }
 
 /// @nodoc
-class __$$_UserToLoginCopyWithImpl<$Res> extends _$UserToLoginCopyWithImpl<$Res>
+class __$$_UserToLoginCopyWithImpl<$Res>
+    extends _$UserToLoginCopyWithImpl<$Res, _$_UserToLogin>
     implements _$$_UserToLoginCopyWith<$Res> {
   __$$_UserToLoginCopyWithImpl(
       _$_UserToLogin _value, $Res Function(_$_UserToLogin) _then)
-      : super(_value, (v) => _then(v as _$_UserToLogin));
+      : super(_value, _then);
 
-  @override
-  _$_UserToLogin get _value => super._value as _$_UserToLogin;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
-    Object? password = freezed,
+    Object? username = null,
+    Object? password = null,
   }) {
     return _then(_$_UserToLogin(
-      username: username == freezed
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
@@ -124,19 +128,19 @@ class _$_UserToLogin implements _UserToLogin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserToLogin &&
-            const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality().equals(other.password, password));
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.password, password) ||
+                other.password == password));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(password));
+  int get hashCode => Object.hash(runtimeType, username, password);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserToLoginCopyWith<_$_UserToLogin> get copyWith =>
       __$$_UserToLoginCopyWithImpl<_$_UserToLogin>(this, _$identity);
 

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:site/i18n/strings.g.dart';
-import 'package:site/providers/selected_user_profile_provider.dart';
 import 'package:site/providers/user_profile_provider.dart';
 import 'package:site/utils/screen_layout.dart';
 import 'package:site/widgets/error_text.dart';
-import 'package:site/widgets/username.dart';
 
 part 'user_profile.g.dart';
 
@@ -15,17 +12,7 @@ part 'user_profile.g.dart';
 Widget _userProfile(
   BuildContext context,
   WidgetRef ref,
-  String username,
 ) {
-  useEffect(
-    () {
-      ref.read(selectedUserProfileProvider.notifier).state = username;
-
-      return null;
-    },
-    [],
-  );
-
   final res = ref.watch(userProfileProvider);
   final i18n = Translations.of(context);
 
@@ -47,12 +34,42 @@ Widget _userProfile(
                 return Center(child: ErrorText(i18n.unknownError));
               }
 
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(user.name),
-                  Username(user.username),
-                ],
+              return Container(
+                constraints: const BoxConstraints(maxWidth: 600),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Stack(
+                      children: [
+                        Image(
+                          image: NetworkImage(
+                            user.backgroundImageUrl ??
+                                'https://pbs.twimg.com/profile_banners/1389835424865165312/1657992799/1080x360',
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 52,
+                              backgroundColor: Colors.amber,
+                              child: Stack(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 50,
+                                    backgroundImage: NetworkImage(
+                                      user.profileImageUrl ??
+                                          'https://learn.microsoft.com/en-us/answers/questions/881800/error-updating-profile-image-from-the-portal-of-az.html',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               );
             },
             error: (error, _) => Center(child: ErrorText(error.toString())),

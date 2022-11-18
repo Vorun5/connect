@@ -31,33 +31,37 @@ mixin _$Geotag {
 /// @nodoc
 abstract class $GeotagCopyWith<$Res> {
   factory $GeotagCopyWith(Geotag value, $Res Function(Geotag) then) =
-      _$GeotagCopyWithImpl<$Res>;
+      _$GeotagCopyWithImpl<$Res, Geotag>;
+  @useResult
   $Res call({double? latitude, double? longitude});
 }
 
 /// @nodoc
-class _$GeotagCopyWithImpl<$Res> implements $GeotagCopyWith<$Res> {
+class _$GeotagCopyWithImpl<$Res, $Val extends Geotag>
+    implements $GeotagCopyWith<$Res> {
   _$GeotagCopyWithImpl(this._value, this._then);
 
-  final Geotag _value;
   // ignore: unused_field
-  final $Res Function(Geotag) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? latitude = freezed,
     Object? longitude = freezed,
   }) {
     return _then(_value.copyWith(
-      latitude: latitude == freezed
+      latitude: freezed == latitude
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
               as double?,
-      longitude: longitude == freezed
+      longitude: freezed == longitude
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -66,29 +70,29 @@ abstract class _$$_GeotagCopyWith<$Res> implements $GeotagCopyWith<$Res> {
   factory _$$_GeotagCopyWith(_$_Geotag value, $Res Function(_$_Geotag) then) =
       __$$_GeotagCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({double? latitude, double? longitude});
 }
 
 /// @nodoc
-class __$$_GeotagCopyWithImpl<$Res> extends _$GeotagCopyWithImpl<$Res>
+class __$$_GeotagCopyWithImpl<$Res>
+    extends _$GeotagCopyWithImpl<$Res, _$_Geotag>
     implements _$$_GeotagCopyWith<$Res> {
   __$$_GeotagCopyWithImpl(_$_Geotag _value, $Res Function(_$_Geotag) _then)
-      : super(_value, (v) => _then(v as _$_Geotag));
+      : super(_value, _then);
 
-  @override
-  _$_Geotag get _value => super._value as _$_Geotag;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? latitude = freezed,
     Object? longitude = freezed,
   }) {
     return _then(_$_Geotag(
-      latitude: latitude == freezed
+      latitude: freezed == latitude
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
               as double?,
-      longitude: longitude == freezed
+      longitude: freezed == longitude
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double?,
@@ -119,19 +123,19 @@ class _$_Geotag implements _Geotag {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Geotag &&
-            const DeepCollectionEquality().equals(other.latitude, latitude) &&
-            const DeepCollectionEquality().equals(other.longitude, longitude));
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(latitude),
-      const DeepCollectionEquality().hash(longitude));
+  int get hashCode => Object.hash(runtimeType, latitude, longitude);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_GeotagCopyWith<_$_Geotag> get copyWith =>
       __$$_GeotagCopyWithImpl<_$_Geotag>(this, _$identity);
 

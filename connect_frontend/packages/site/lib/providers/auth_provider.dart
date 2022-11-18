@@ -6,7 +6,7 @@ import 'package:site/data/dto/user_to_sign_up.dart';
 
 // ignore: prefer-match-file-name
 class AuthNotifier extends StateNotifier<bool> {
-  AuthNotifier() : super(false);
+  AuthNotifier() : super(true);
 
   Future<void> checkLocalToken() async {
     final user = await ApiServices.getMe();

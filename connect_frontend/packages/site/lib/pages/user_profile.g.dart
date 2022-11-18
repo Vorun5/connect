@@ -7,11 +7,15 @@ part of 'user_profile.dart';
 // **************************************************************************
 
 class UserProfile extends HookConsumerWidget {
-  const UserProfile(this.username, {Key? key}) : super(key: key);
-
-  final String username;
+  const UserProfile({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) =>
-      _userProfile(_context, _ref, username);
+  Widget build(
+    BuildContext _context,
+    WidgetRef _ref,
+  ) =>
+      _userProfile(
+        _context,
+        _ref,
+      );
 }

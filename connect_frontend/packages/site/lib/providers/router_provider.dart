@@ -7,6 +7,7 @@ import 'package:site/pages/login.dart';
 import 'package:site/pages/sign_up.dart';
 import 'package:site/pages/user_profile.dart';
 import 'package:site/providers/auth_provider.dart';
+import 'package:site/providers/selected_user_profile_provider.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -21,27 +22,32 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/login',
         name: 'login',
-        builder: (context, state) => const Login(),
+        builder: (_, state) => const Login(),
       ),
       GoRoute(
         path: '/sing-up',
         name: 'sing-up',
-        builder: (context, state) => const SignUp(),
+        builder: (_, state) => const SignUp(),
       ),
       GoRoute(
         path: '/',
         name: 'home',
-        builder: (context, state) => const Home(),
+        builder: (_, state) => const Home(),
         routes: [
           GoRoute(
             path: 'u',
             name: 'current-user-profile',
-            builder: (context, state) => const EditProfile(),
+            builder: (_, state) => const EditProfile(),
           ),
           GoRoute(
             path: 'u/:username',
             name: 'user',
-            builder: (context, state) => UserProfile(state.params['username']!),
+            builder: (_, state) {
+              ref.read(selectedUserProfileProvider.notifier).state =
+                  state.params['username'];
+
+              return const UserProfile();
+            },
           ),
         ],
       ),
