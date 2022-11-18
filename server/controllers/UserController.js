@@ -32,15 +32,8 @@ export const singUp = async (req, res) => {
             {expiresIn: '30d'}
         );
 
-        const {passwordHash, ...userData} = user._doc;
-        res.json(token);
-        // res.json({
-        //     user: {
-        //         id: _id,
-        //         ...userData
-        //     },
-        //     token,
-        // });
+        // const {passwordHash, ...userData} = user._doc;
+        return  res.json(token);
 
     } catch (e) {
         console.log('failed to sign up', e);
@@ -74,11 +67,11 @@ export const login = async (req, res) => {
             {expiresIn: '30d'}
         );
 
-        res.json(token);
+        return  res.json(token);
 
     } catch (e) {
         console.log('failed to username', e);
-        res.status(500).json({
+        return res.status(500).json({
             message: 'failed to username',
         });
     }
@@ -94,12 +87,12 @@ export const getMe = async (req, res) => {
             });
         }
 
-        // const {passwordHash, ...userData} = user;
-        res.json(user);
+        const {passwordHash, ...userData} = user._doc;
+        return res.json(userData);
 
     } catch (e) {
         console.log('error getting personal information', e);
-        res.status(500).json({
+        return res.status(500).json({
             message: 'error getting personal information',
         });
     }
@@ -121,7 +114,7 @@ export const getOneUser = async (req, res) => {
 
     } catch (e) {
         console.log('error getting user data', e);
-        res.status(500).json({
+        return res.status(500).json({
             message: 'error getting user data',
         });
     }
@@ -130,18 +123,15 @@ export const getOneUser = async (req, res) => {
 export const update = async (req, res) => {
     try {
         const userId = req.userId;
-
         if (userId !== req.body._id) {
             console.log('no access');
-            res.status(403).json({
+            return  res.status(403).json({
                 message: 'no access',
             });
         }
 
 
-        const user = await UserModel.findByIdAndUpdate({
-            _id: userId,
-        }, {
+        const user = await UserModel.findByIdAndUpdate(userId, {
             username: req.body.username.toLowerCase(),
             displayUsername: req.body.username,
             name: req.body.name.replace(/\s+/g, ' ').trim(),
@@ -166,7 +156,7 @@ export const update = async (req, res) => {
         res.json(userData);
     } catch (e) {
         console.log('no access', e);
-        res.status(500).json({
+        return  res.status(500).json({
             message: 'no access',
         });
     }

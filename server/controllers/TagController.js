@@ -11,10 +11,10 @@ export const create = async (req, res) => {
 
             return res.json(newTag._doc)
         }
-        res.json(tag._doc)
+        return res.json(tag._doc)
     } catch (e) {
         console.log('failed to create tag', e);
-        res.status(500).json({
+        return res.status(500).json({
             message: 'failed to create tag',
         });
     }
@@ -24,21 +24,20 @@ export const create = async (req, res) => {
 export const find = async (req, res) => {
     try {
         const s = req.params.string;
-        console.log(s);
         const tags = await TagModel.find({
-             name: new RegExp(s, 'i')
+            name: new RegExp(s, 'i')
         });
 
         if (!tags) {
-            res.status(404).json({
+            return res.status(404).json({
                 message: 'tags not found',
             });
         }
 
-        res.json(tags)
+        return res.json(tags)
     } catch (e) {
         console.log('failed to find tags', e);
-        res.status(500).json({
+        return res.status(500).json({
             message: 'failed to find tags',
         });
     }
