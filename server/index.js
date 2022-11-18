@@ -21,7 +21,7 @@ app.post('/auth/sing-up', Validations.signup, handleValidationErrors, UserContro
 
 
 app.get('/users/:username', UserController.getOneUser);
-app.get('/users', checkAuth, UserController.getMe);
+app.get('/users', checkAuth,  UserController.getMe);
 app.patch('/users', checkAuth, Validations.updateUser, handleValidationErrors, UserController.update);
 
 

@@ -94,9 +94,8 @@ export const getMe = async (req, res) => {
             });
         }
 
-
-        const {passwordHash, ...userData} = user._doc;
-        res.json(...userData);
+        // const {passwordHash, ...userData} = user;
+        res.json(user);
 
     } catch (e) {
         console.log('error getting personal information', e);

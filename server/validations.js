@@ -21,7 +21,7 @@ export const signup = [
 ]
 
 export const updateUser = [
-    body('_id', 'is not id').isMongoId(),
+    body('_id', 'is not _id').isMongoId(),
     body('username', 'username must be alphanumeric and lowercase').isAlphanumeric().isAscii().isLength({min: minNumChUsername, max: maxNumChUsername}),
     body('name', 'name needed').isString().isLength({min: minNumChName, max: maxNumChName}),
     body('profileImageUrl', 'wrong photo link').optional().isURL(),

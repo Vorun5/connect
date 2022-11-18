@@ -45,6 +45,7 @@ class ApiServices {
   static Future<User?> getMe() async {
     final storage = await SharedPreferences.getInstance();
     final token = storage.getString('token');
+    print(token);
     _dio.options.headers['authorization'] = token;
 
     const url = ApiConstants.baseUrl + ApiConstants.userEndpoint;
