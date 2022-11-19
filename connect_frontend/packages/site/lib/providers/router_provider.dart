@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:site/pages/edit_profile.dart';
-import 'package:site/pages/home.dart';
-import 'package:site/pages/login.dart';
-import 'package:site/pages/sign_up.dart';
-import 'package:site/pages/user_profile.dart';
 import 'package:site/providers/auth_provider.dart';
 import 'package:site/providers/selected_user_profile_provider.dart';
+import 'package:site/widgets/edit_profile_page/edit_profile.dart';
+import 'package:site/widgets/home_page/home.dart';
+import 'package:site/widgets/login_page/login.dart';
+import 'package:site/widgets/sign_up_page/sign_up.dart';
+import 'package:site/widgets/user_profile_page/user_profile.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
