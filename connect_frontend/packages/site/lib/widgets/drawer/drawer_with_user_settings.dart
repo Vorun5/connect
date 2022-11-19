@@ -1,6 +1,7 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:site/data/dto/user.dart';
@@ -9,6 +10,7 @@ import 'package:site/providers/my_profile_provider.dart';
 import 'package:site/utils/font_size.dart';
 import 'package:site/utils/themes.dart';
 import 'package:site/widgets/basic_widgets/error_text.dart';
+import 'package:site/widgets/basic_widgets/hoverable.dart';
 import 'package:site/widgets/basic_widgets/username.dart';
 
 part 'drawer_with_user_settings.g.dart';
@@ -106,20 +108,84 @@ Widget __userPreviewProfile(User user) => DrawerHeader(
       ),
     );
 
+// TODO(Vorun5):
+// поля (порядок не правльный):
+// 1. Изменить язык
+// 2. Выйти из приложения
+// 3. Изменить профиль (перенапралять на route '/u')
+// 4. Посмотреть свой профиль
+// 5. Возможно, изменить свой пароль и добавить почту для
+// восстановления доступа, но это в самый конец если будет время
 @swidget
-Widget __userSettings(User user) => Column(
-      children: const [
-        // TODO(Vorun5):
-        // поля (порядок не правльный):
-        // 1. Изменить язык
-        // 2. Выйти из приложения
-        // 3. Изменить профиль (перенапралять на route '/u')
-        // 4. Посмотреть свой профиль
-        // 5. Возможно, изменить свой пароль и добавить почту для
-        // восстановления доступа, но это в самый конец если будет время
-        Text('Setting 1'),
-        Text('Setting 2'),
-        Text('Setting 3'),
-        Text('Setting 4'),
-      ],
+Widget __userSettings(User user) => Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 17) +
+          const EdgeInsets.only(right: 10),
+      child: Column(
+        children: [
+          _DrawerButton(
+            text: 'Мой профиль',
+            icon: const Icon(
+              Icons.account_circle,
+              color: Colors.amber,
+            ),
+            onTap: () {},
+          ),
+          const Gap(20),
+          _DrawerButton(
+            text: 'Язык',
+            icon: const Icon(
+              Icons.language_outlined,
+              color: Color.fromARGB(255, 195, 88, 245),
+            ),
+            onTap: () {},
+          ),
+          const Gap(20),
+          _DrawerButton(
+            text: 'Конфиденциальность',
+            icon: const Icon(
+              Icons.security,
+              color: Color.fromARGB(255, 7, 226, 255),
+            ),
+            onTap: () {},
+          ),
+          const Gap(20),
+          _DrawerButton(
+            text: 'Выйти из приложения',
+            icon: const Icon(
+              Icons.sentiment_very_dissatisfied_sharp,
+              color: Color.fromARGB(255, 238, 52, 114),
+            ),
+            onTap: () {},
+          ),
+        ],
+      ),
+    );
+
+@swidget
+Widget __drawerButton({
+  required String text,
+  required Icon icon,
+  required void Function()? onTap,
+}) =>
+    Hoverable(
+      child: (isHovered) => GestureDetector(
+        onTap: onTap,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                icon,
+                const Gap(10),
+                Text(text),
+              ],
+            ),
+            const Icon(
+              Icons.double_arrow,
+              size: 15,
+              color: Colors.grey,
+            ),
+          ],
+        ),
+      ),
     );

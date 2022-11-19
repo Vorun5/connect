@@ -31,3 +31,19 @@ class _UserSettings extends StatelessWidget {
   @override
   Widget build(BuildContext _context) => __userSettings(user);
 }
+
+class _DrawerButton extends StatelessWidget {
+  const _DrawerButton(
+      {Key? key, required this.text, required this.icon, required this.onTap})
+      : super(key: key);
+
+  final String text;
+
+  final Icon icon;
+
+  final void Function()? onTap;
+
+  @override
+  Widget build(BuildContext _context) =>
+      __drawerButton(text: text, icon: icon, onTap: onTap);
+}
