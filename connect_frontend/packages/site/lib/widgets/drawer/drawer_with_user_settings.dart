@@ -130,7 +130,6 @@ Widget __userSettings(User user) => Padding(
             ),
             onTap: () {},
           ),
-          const Gap(20),
           _DrawerButton(
             text: 'Язык',
             icon: const Icon(
@@ -139,7 +138,6 @@ Widget __userSettings(User user) => Padding(
             ),
             onTap: () {},
           ),
-          const Gap(20),
           _DrawerButton(
             text: 'Конфиденциальность',
             icon: const Icon(
@@ -148,7 +146,6 @@ Widget __userSettings(User user) => Padding(
             ),
             onTap: () {},
           ),
-          const Gap(20),
           _DrawerButton(
             text: 'Выйти из приложения',
             icon: const Icon(
@@ -170,22 +167,33 @@ Widget __drawerButton({
     Hoverable(
       child: (isHovered) => GestureDetector(
         onTap: onTap,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                icon,
-                const Gap(10),
-                Text(text),
-              ],
+        child: Container(
+          decoration: BoxDecoration(
+            color: isHovered
+                ? const Color.fromARGB(71, 168, 65, 154)
+                : Colors.transparent,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
             ),
-            const Icon(
-              Icons.double_arrow,
-              size: 15,
-              color: Colors.grey,
-            ),
-          ],
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  icon,
+                  const Gap(10),
+                  Text(text),
+                ],
+              ),
+              const Icon(
+                Icons.double_arrow,
+                size: 15,
+                color: Colors.grey,
+              ),
+            ],
+          ),
         ),
       ),
     );
