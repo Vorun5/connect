@@ -1,18 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'password_field.dart';
+part of 'hoverable.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class PasswordField extends HookConsumerWidget {
-  const PasswordField({Key? key}) : super(key: key);
+class Hoverable extends HookWidget {
+  const Hoverable({Key? key, required this.child}) : super(key: key);
+
+  final Widget Function(bool) child;
 
   @override
-  Widget build(
-    BuildContext _context,
-    WidgetRef _ref,
-  ) =>
-      _passwordField(_context);
+  Widget build(BuildContext _context) => _hoverable(child: child);
 }

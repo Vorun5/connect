@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:site/providers/auth_provider.dart';
 import 'package:site/utils/screen_layout.dart';
-import 'package:site/widgets/drawer_with_user_settings.dart';
+import 'package:site/widgets/drawer/drawer_with_user_settings.dart';
 
 part 'home.g.dart';
 

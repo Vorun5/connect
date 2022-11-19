@@ -8,8 +8,8 @@ import 'package:site/i18n/strings.g.dart';
 import 'package:site/providers/my_profile_provider.dart';
 import 'package:site/utils/font_size.dart';
 import 'package:site/utils/themes.dart';
-import 'package:site/widgets/error_text.dart';
-import 'package:site/widgets/username.dart';
+import 'package:site/widgets/basic_widgets/error_text.dart';
+import 'package:site/widgets/basic_widgets/username.dart';
 
 part 'drawer_with_user_settings.g.dart';
 

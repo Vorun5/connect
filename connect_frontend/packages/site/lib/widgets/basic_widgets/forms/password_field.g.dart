@@ -1,21 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login.dart';
+part of 'password_field.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class Login extends HookConsumerWidget {
-  const Login({Key? key}) : super(key: key);
+class PasswordField extends HookConsumerWidget {
+  const PasswordField({Key? key}) : super(key: key);
 
   @override
-  Widget build(
-    BuildContext _context,
-    WidgetRef _ref,
-  ) =>
-      _login(
-        _context,
-        _ref,
-      );
+  Widget build(BuildContext _context, WidgetRef _ref) =>
+      _passwordField(_context);
 }

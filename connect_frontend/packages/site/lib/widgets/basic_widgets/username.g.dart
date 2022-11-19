@@ -1,14 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main.dart';
+part of 'username.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class _App extends HookConsumerWidget {
-  const _App({Key? key}) : super(key: key);
+class Username extends StatelessWidget {
+  const Username(this.username, {Key? key}) : super(key: key);
+
+  final String username;
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) => __app(_context, _ref);
+  Widget build(BuildContext _context) => _username(username);
 }

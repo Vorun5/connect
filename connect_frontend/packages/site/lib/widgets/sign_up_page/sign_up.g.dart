@@ -1,18 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'username_field.dart';
+part of 'sign_up.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class UsernameField extends HookConsumerWidget {
-  const UsernameField({Key? key}) : super(key: key);
+class SignUp extends HookConsumerWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  Widget build(
-    BuildContext _context,
-    WidgetRef _ref,
-  ) =>
-      _usernameField(_context);
+  Widget build(BuildContext _context, WidgetRef _ref) =>
+      _signUp(_context, _ref);
 }

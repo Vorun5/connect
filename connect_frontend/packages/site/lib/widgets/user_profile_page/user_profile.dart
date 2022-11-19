@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:site/i18n/strings.g.dart';
 import 'package:site/providers/user_profile_provider.dart';
 import 'package:site/utils/screen_layout.dart';
-import 'package:site/widgets/error_text.dart';
+import 'package:site/widgets/basic_widgets/error_text.dart';
 
 part 'user_profile.g.dart';
 
