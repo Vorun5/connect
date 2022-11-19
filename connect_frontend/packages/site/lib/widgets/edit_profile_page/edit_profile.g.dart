@@ -10,6 +10,12 @@ class EditProfile extends HookConsumerWidget {
   const EditProfile({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) =>
-      _editProfile(_context, _ref);
+  Widget build(
+    BuildContext _context,
+    WidgetRef _ref,
+  ) =>
+      _editProfile(
+        _context,
+        _ref,
+      );
 }

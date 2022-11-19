@@ -33,7 +33,7 @@ Widget _login(BuildContext context, WidgetRef ref) {
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.all(normalGap),
+            padding: const EdgeInsets.all(Gaps.normal),
             constraints: const BoxConstraints(
               minWidth: minFormWidth,
               maxWidth: maxFormWidth,
@@ -44,10 +44,10 @@ Widget _login(BuildContext context, WidgetRef ref) {
                   i18n.auth.loginTitle,
                   style: const TextStyle(fontSize: FontSize.big),
                 ),
-                Gaps.big,
+                Gaps.bigGap,
                 if (errorStatus.value != null)
                   Container(
-                    padding: const EdgeInsets.only(bottom: largeGap),
+                    padding: const EdgeInsets.only(bottom: Gaps.large),
                     child: Text(
                       i18n.auth.loginErrors[errorStatus.value.toString()] ??
                           i18n.unknownError,
@@ -61,9 +61,9 @@ Widget _login(BuildContext context, WidgetRef ref) {
                   child: Column(
                     children: [
                       const UsernameField(),
-                      Gaps.normal,
+                      Gaps.normalGap,
                       const PasswordField(),
-                      Gaps.normal,
+                      Gaps.normalGap,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -94,13 +94,13 @@ Widget _login(BuildContext context, WidgetRef ref) {
                           ),
                         ],
                       ),
-                      Gaps.normal,
+                      Gaps.normalGap,
                       Row(
                         // TODO(Vorun5): сделать чтоб при маленькой ширине кнопка
                         // "Sign Up" ужадила вниз, вообщем на RichText переделать
                         children: [
                           Text(i18n.auth.notHaveAccount),
-                          Gaps.tiny,
+                          Gaps.tinyGap,
                           TextButton(
                             onPressed: () => context.goNamed('sing-up'),
                             child: Text('${capitalize(i18n.auth.signUp)}!'),

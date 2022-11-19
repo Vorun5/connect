@@ -37,7 +37,7 @@ Widget _passwordField(BuildContext context) {
       border: const OutlineInputBorder(),
       labelText: password,
       suffixIcon: Padding(
-        padding: const EdgeInsets.only(right: tinyGap),
+        padding: const EdgeInsets.only(right: Gaps.tiny),
         child: IconButton(
           splashRadius: defaultIconSplashRadius,
           icon: Icon(

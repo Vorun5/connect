@@ -35,13 +35,13 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, state) => const Home(),
         routes: [
           GoRoute(
-            path: 'u',
-            name: 'current-user-profile',
+            path: 'edit',
+            name: 'edit',
             builder: (_, state) => const EditProfile(),
           ),
           GoRoute(
             path: 'u/:username',
-            name: 'user',
+            name: 'user-profile',
             builder: (_, state) {
               ref.read(selectedUserProfileProvider.notifier).state =
                   state.params['username'];

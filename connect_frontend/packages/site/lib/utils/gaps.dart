@@ -1,15 +1,15 @@
 import 'package:gap/gap.dart';
 
 class Gaps {
-  static const normal = Gap(normalGap);
-  static const large = Gap(largeGap);
-  static const big = Gap(bigGap);
-  static const small = Gap(smallGap);
-  static const tiny = Gap(tinyGap);
-}
+  static const normalGap = Gap(normal);
+  static const largeGap = Gap(large);
+  static const bigGap = Gap(big);
+  static const smallGap = Gap(small);
+  static const tinyGap = Gap(tiny);
 
-const normalGap = 20.0;
-const largeGap = 40.0;
-const bigGap = 30.0;
-const smallGap = 10.0;
-const tinyGap = 5.0;
+  static const normal = 20.0;
+  static const large = 40.0;
+  static const big = 30.0;
+  static const small = 10.0;
+  static const tiny = 5.0;
+}

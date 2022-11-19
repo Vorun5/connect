@@ -32,7 +32,7 @@ Widget _signUp(BuildContext context, WidgetRef ref) {
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.all(normalGap),
+            padding: const EdgeInsets.all(Gaps.normal),
             constraints: const BoxConstraints(
               minWidth: minFormWidth,
               maxWidth: maxFormWidth,
@@ -43,10 +43,10 @@ Widget _signUp(BuildContext context, WidgetRef ref) {
                   i18n.auth.signUpTitle,
                   style: const TextStyle(fontSize: FontSize.big),
                 ),
-                Gaps.big,
+                Gaps.bigGap,
                 if (errorStatus.value != null)
                   Container(
-                    padding: const EdgeInsets.only(bottom: largeGap),
+                    padding: const EdgeInsets.only(bottom: Gaps.large),
                     child: Text(
                       i18n.auth.signUpErrors[errorStatus.value.toString()] ??
                           i18n.unknownError,
@@ -60,11 +60,11 @@ Widget _signUp(BuildContext context, WidgetRef ref) {
                   child: Column(
                     children: [
                       const UsernameField(),
-                      Gaps.normal,
+                      Gaps.normalGap,
                       const NameField(),
-                      Gaps.normal,
+                      Gaps.normalGap,
                       const PasswordField(),
-                      Gaps.normal,
+                      Gaps.normalGap,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -95,11 +95,11 @@ Widget _signUp(BuildContext context, WidgetRef ref) {
                           ),
                         ],
                       ),
-                      Gaps.normal,
+                      Gaps.normalGap,
                       Row(
                         children: [
                           Text(i18n.auth.haveAccount),
-                          Gaps.tiny,
+                          Gaps.tinyGap,
                           TextButton(
                             onPressed: () => context.goNamed('login'),
                             child: Text('${capitalize(i18n.auth.login)}!'),

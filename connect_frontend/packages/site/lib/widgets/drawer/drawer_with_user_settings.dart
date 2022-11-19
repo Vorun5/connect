@@ -1,13 +1,15 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:site/data/dto/user.dart';
 import 'package:site/i18n/strings.g.dart';
+import 'package:site/providers/auth_provider.dart';
 import 'package:site/providers/my_profile_provider.dart';
 import 'package:site/utils/font_size.dart';
+import 'package:site/utils/gaps.dart';
 import 'package:site/utils/themes.dart';
 import 'package:site/widgets/basic_widgets/error_text.dart';
 import 'package:site/widgets/basic_widgets/hoverable.dart';
@@ -24,30 +26,27 @@ Widget _drawerWithUserSettings(BuildContext context, WidgetRef ref) {
   final i18n = Translations.of(context);
 
   return Drawer(
-    child: Center(
-      child: ListView(
-        shrinkWrap: true,
-        children: [
-          myProfile.when(
-            data: (user) {
-              if (user == null) {
-                return Center(child: ErrorText(i18n.unknownError));
-              }
+    child: ListView(
+      shrinkWrap: true,
+      children: [
+        myProfile.when(
+          data: (user) {
+            if (user == null) {
+              return Center(child: ErrorText(i18n.unknownError));
+            }
 
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                // crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _UserPreviewProfile(user),
-                  _UserSettings(user),
-                ],
-              );
-            },
-            error: (error, _) => Center(child: ErrorText(error.toString())),
-            loading: () => const Center(child: CircularProgressIndicator()),
-          ),
-        ],
-      ),
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                _UserPreviewProfile(user),
+                _UserSettings(user),
+              ],
+            );
+          },
+          error: (error, _) => Center(child: ErrorText(error.toString())),
+          loading: () => const Center(child: CircularProgressIndicator()),
+        ),
+      ],
     ),
   );
 }
@@ -85,6 +84,7 @@ Widget __userPreviewProfile(User user) => DrawerHeader(
                         await storage.setBool('theme', theme != Themes.dark);
                     if (res) {
                       switcher.changeTheme(
+                        isReversed: theme == Themes.dark,
                         theme:
                             theme == Themes.dark ? Themes.light : Themes.dark,
                       );
@@ -116,10 +116,10 @@ Widget __userPreviewProfile(User user) => DrawerHeader(
 // 4. Посмотреть свой профиль
 // 5. Возможно, изменить свой пароль и добавить почту для
 // восстановления доступа, но это в самый конец если будет время
-@swidget
-Widget __userSettings(User user) => Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 17) +
-          const EdgeInsets.only(right: 10),
+@hcwidget
+Widget __userSettings(BuildContext context, WidgetRef ref, User user) =>
+    Padding(
+      padding: const EdgeInsets.all(Gaps.small),
       child: Column(
         children: [
           _DrawerButton(
@@ -128,7 +128,16 @@ Widget __userSettings(User user) => Padding(
               Icons.account_circle,
               color: Colors.amber,
             ),
-            onTap: () {},
+            onTap: () => context
+                .goNamed('user-profile', params: {'username': user.username}),
+          ),
+          _DrawerButton(
+            text: 'Изменить',
+            icon: const Icon(
+              Icons.account_circle,
+              color: Colors.amber,
+            ),
+            onTap: () => context.goNamed('edit'),
           ),
           _DrawerButton(
             text: 'Язык',
@@ -152,7 +161,9 @@ Widget __userSettings(User user) => Padding(
               Icons.sentiment_very_dissatisfied_sharp,
               color: Color.fromARGB(255, 238, 52, 114),
             ),
-            onTap: () {},
+            onTap: () async {
+              await ref.read(authProvider.notifier).logout();
+            },
           ),
         ],
       ),
@@ -173,17 +184,17 @@ Widget __drawerButton({
                 ? const Color.fromARGB(71, 168, 65, 154)
                 : Colors.transparent,
             borderRadius: const BorderRadius.all(
-              Radius.circular(10),
+              Radius.circular(Gaps.small),
             ),
           ),
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+          padding: const EdgeInsets.all(Gaps.small),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
                   icon,
-                  const Gap(10),
+                  Gaps.smallGap,
                   Text(text),
                 ],
               ),

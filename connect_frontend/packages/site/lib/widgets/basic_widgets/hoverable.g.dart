@@ -7,7 +7,10 @@ part of 'hoverable.dart';
 // **************************************************************************
 
 class Hoverable extends HookWidget {
-  const Hoverable({Key? key, required this.child}) : super(key: key);
+  const Hoverable({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
 
   final Widget Function(bool) child;
 

@@ -10,5 +10,12 @@ class Home extends HookConsumerWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) => _home(_context, _ref);
+  Widget build(
+    BuildContext _context,
+    WidgetRef _ref,
+  ) =>
+      _home(
+        _context,
+        _ref,
+      );
 }
