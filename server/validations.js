@@ -10,27 +10,70 @@ const minNumChName = 3;
 const maxDescriptionChUsername = 256;
 
 export const login = [
-    body('username', 'username must be alphanumeric and lowercase').isAlphanumeric().isAscii().isLength({min: minNumChUsername, max: maxNumChUsername}),
-    body('password', 'password must not be less than 6 characters').isAlphanumeric().isLength({min: minNumChPassword, max: maxNumChPassword}),
+    body('username', 'username must be alphanumeric and lowercase').isAlphanumeric().isAscii().isLength({
+        min: minNumChUsername,
+        max: maxNumChUsername
+    }),
+    body('password', 'password must not be less than 6 characters').isAlphanumeric().isLength({
+        min: minNumChPassword,
+        max: maxNumChPassword
+    }),
 ]
 
 export const signup = [
-    body('username', 'username must be alphanumeric').isAlphanumeric().isAscii().isLength({min: minNumChUsername, max: maxNumChUsername}),
-    body('password', 'password must not be less than 6 characters').isAlphanumeric().isLength({min: minNumChPassword, max: maxNumChPassword}),
-    body('name', 'name needed').replace(/\s+/g, ' ').trim().isLength({min: minNumChName, max: maxNumChName}),
+    body('username', 'username must be alphanumeric').isAlphanumeric().isAscii().isLength({
+        min: minNumChUsername,
+        max: maxNumChUsername
+    }),
+    body('password', 'password must not be less than 6 characters').isAlphanumeric().isLength({
+        min: minNumChPassword,
+        max: maxNumChPassword
+    }),
+    body('name', 'name needed').isLength({min: minNumChName, max: maxNumChName}),
 ]
 
 export const updateUser = [
     body('_id', 'is not _id').isMongoId(),
-    body('username', 'username must be alphanumeric and lowercase').isAlphanumeric().isAscii().isLength({min: minNumChUsername, max: maxNumChUsername}),
+    body('username', 'username must be alphanumeric and lowercase').isAlphanumeric().isAscii().isLength({
+        min: minNumChUsername,
+        max: maxNumChUsername
+    }),
     body('name', 'name needed').isString().isLength({min: minNumChName, max: maxNumChName}),
     body('profileImageUrl', 'wrong photo link').optional().isURL(),
-    body('description', 'description must be string').optional().isString().replace(/\s+/g, ' ').trim().isLength({max: maxDescriptionChUsername}),
+    body('description', 'description must be string').optional().isString().isLength({max: maxDescriptionChUsername}),
     body('backgroundImageUrl', 'wrong photo link').optional().isURL(),
     body('geotag.latitude', 'geotag.latitude must be a number').optional().isFloat(),
     body('geotag.longitude', 'geotag.longitude must be a number').optional().isFloat(),
 ]
 
-export  const createTag = [
+export const createTag = [
     body('name', 'should be a line').isString(),
 ]
+
+export const createEvent = [
+    // body('name', 'name needed').isString().replace(/\s+/g, ' ').trim().isLength({min: minNumChName, max: maxNumChName}),
+    body('name', 'name needed').isString().isLength({min: minNumChName, max: maxNumChName}),
+    body('description', 'description must be string').optional().isString().isLength({max: maxDescriptionChUsername}),
+    body('date', 'date must be date string').optional().isDate(),
+    body('appearInSearch', 'appearInSearch must be bool').optional().isBoolean(),
+    body('showAllMessage', 'appearInSearch must be bool').optional().isBoolean(),
+    body('entryAfterAdminApproval', 'entryAfterAdminApproval must be bool').optional().isBoolean(),
+    body('tags', 'tags must be array tags id').optional().isArray(),
+    body('geotag.latitude', 'geotag.latitude must be a number').optional().isFloat(),
+    body('geotag.longitude', 'geotag.longitude must be a number').optional().isFloat(),
+]
+
+// мы не можешь добавлять в мероприятие любых людей, а только тех кто был в списке желающих
+// может лучше отдельные endpoint-ы для добавления/удаления пользователей и команд?
+export const updateEvent = [
+    // body('name', 'name needed').isString().replace(/\s+/g, ' ').trim().isLength({min: minNumChName, max: maxNumChName}),
+    ...createEvent,
+    body('_id', '_id must be id').isMongoId(),
+    body('idPinnedMessages', 'idPinnedMessage must be id').optional().isArray(),
+]
+
+export const addOrRemoveUsersToEvent = [
+    body('id', 'id must be id').isMongoId(),
+    body('users', 'users must be id').optional().isArray(),
+]
+

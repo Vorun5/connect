@@ -20,7 +20,7 @@ const Event = new mongoose.Schema({
             type: Boolean,
             default: true,
         },
-        idPinnedMessage: {
+        idPinnedMessages: {
             type: Array,
             of: mongoose.Schema.Types.ObjectId,
             ref: 'EventMessage',
@@ -37,6 +37,7 @@ const Event = new mongoose.Schema({
         users: {
             type: Array,
             of: {
+                _id: false,
                 id: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: 'User',
@@ -44,12 +45,12 @@ const Event = new mongoose.Schema({
                 },
                 date: {
                     type: Date,
-                    required: true,
+                    default: Date.now,
                 },
                 lastTimeInChat: {
                     type: Date,
                     default: Date.now,
-                }
+                },
             },
             required: true,
         },

@@ -20,7 +20,7 @@ export const singUp = async (req, res) => {
         const doc = new UserModel({
             username: req.body.username.toLowerCase(),
             displayUsername: req.body.username,
-            name: req.body.name.replace(/\s+/g, ' ').trim(),
+            name: req.body.name,
             passwordHash: hash,
         });
 
@@ -134,10 +134,10 @@ export const update = async (req, res) => {
         const user = await UserModel.findByIdAndUpdate(userId, {
             username: req.body.username.toLowerCase(),
             displayUsername: req.body.username,
-            name: req.body.name.replace(/\s+/g, ' ').trim(),
+            name: req.body.name,
             profileImageUrl: req.body.profileImageUrl,
             backgroundImageUrl: req.body.backgroundImageUrl,
-            description: req.body.description.replace(/\s+/g, ' ').trim(),
+            description: req.body.description,
             geotag: {
                 latitude: req.body.geotag.latitude,
                 longitude: req.body.geotag.longitude,
