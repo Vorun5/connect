@@ -55,9 +55,6 @@ export const createEvent = [
     body('name', 'name needed').isString().isLength({min: minNumChName, max: maxNumChName}),
     body('description', 'description must be string').optional().isString().isLength({max: maxDescriptionChUsername}),
     body('date', 'date must be date string').optional().isDate(),
-    body('appearInSearch', 'appearInSearch must be bool').optional().isBoolean(),
-    body('showAllMessage', 'appearInSearch must be bool').optional().isBoolean(),
-    body('entryAfterAdminApproval', 'entryAfterAdminApproval must be bool').optional().isBoolean(),
     body('tags', 'tags must be array tags id').optional().isArray(),
     body('geotag.latitude', 'geotag.latitude must be a number').optional().isFloat(),
     body('geotag.longitude', 'geotag.longitude must be a number').optional().isFloat(),
@@ -70,10 +67,12 @@ export const updateEvent = [
     ...createEvent,
     body('_id', '_id must be id').isMongoId(),
     body('idPinnedMessages', 'idPinnedMessage must be id').optional().isArray(),
+    body('appearInSearch', 'appearInSearch must be bool').isBoolean(),
+    body('showAllMessage', 'appearInSearch must be bool').isBoolean(),
+    body('entryAfterAdminApproval', 'entryAfterAdminApproval must be bool').isBoolean(),
 ]
 
 export const addOrRemoveUsersToEvent = [
     body('id', 'id must be id').isMongoId(),
-    body('users', 'users must be id').optional().isArray(),
+    body('users', 'users must be id').isArray(),
 ]
-

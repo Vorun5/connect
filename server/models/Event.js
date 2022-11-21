@@ -38,6 +38,7 @@ const Event = new mongoose.Schema({
             type: Array,
             of: {
                 _id: false,
+                // TODO: переименовать поле id в user
                 id: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: 'User',
@@ -62,9 +63,7 @@ const Event = new mongoose.Schema({
         },
         tags: {
             type: Array,
-            of:  mongoose.Schema.Types.ObjectId,
-            ref: 'Tag',
-            required: false,
+            of: {type: mongoose.Schema.Types.ObjectId, ref: 'Tag'},
         },
         geotag: {
             latitude: Number,
