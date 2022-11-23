@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:site/data/dto/user_to_login.dart';
 import 'package:site/i18n/strings.g.dart';
 import 'package:site/providers/auth_provider.dart';
+import 'package:site/providers/my_profile_provider.dart';
 import 'package:site/utils/capitalize.dart';
 import 'package:site/utils/color_palette.dart';
 import 'package:site/utils/font_size.dart';
@@ -83,6 +84,9 @@ Widget _login(BuildContext context, WidgetRef ref) {
                                   errorStatus.value = await ref
                                       .read(authProvider.notifier)
                                       .login(UserToLogin.fromJson(value));
+                                  if (errorStatus.value == null) {
+                                    ref.refresh(myProfileProvider);
+                                  }
                                 }
                               } else {
                                 debugPrint(

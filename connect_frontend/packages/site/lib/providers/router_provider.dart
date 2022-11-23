@@ -43,8 +43,10 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: 'u/:username',
             name: 'user-profile',
             builder: (_, state) {
-              ref.read(selectedUserProfileProvider.notifier).state =
-                  state.params['username'];
+              Future(() {
+                ref.read(selectedUserProfileProvider.notifier).state =
+                    state.params['username'];
+              });
 
               return const UserProfile();
             },
