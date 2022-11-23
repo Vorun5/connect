@@ -122,4 +122,15 @@ class ApiServices {
       return const Tuple2(null, 500);
     }
   }
+
+  static Future<bool> saveBackgroundImage(String imageUrl) async {
+    const url = ApiConstants.baseUrl + ApiConstants.saveBackgroundImage;
+    try {
+      final res = await _dio.post(url, data: imageUrl);
+
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
 }

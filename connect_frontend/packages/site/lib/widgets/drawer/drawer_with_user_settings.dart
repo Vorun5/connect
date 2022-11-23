@@ -116,6 +116,7 @@ Widget __userPreviewProfile(User user) => DrawerHeader(
 // 4. Посмотреть свой профиль
 // 5. Возможно, изменить свой пароль и добавить почту для
 // восстановления доступа, но это в самый конец если будет время
+// конфиденциальность + язык
 @hcwidget
 Widget __userSettings(BuildContext context, WidgetRef ref, User user) =>
     Padding(
@@ -132,29 +133,29 @@ Widget __userSettings(BuildContext context, WidgetRef ref, User user) =>
                 .goNamed('user-profile', params: {'username': user.username}),
           ),
           _DrawerButton(
-            text: 'Изменить',
+            text: 'Настройки',
             icon: const Icon(
-              Icons.account_circle,
-              color: Colors.amber,
+              Icons.settings,
+              color: Colors.lime,
             ),
             onTap: () => context.goNamed('edit'),
           ),
-          _DrawerButton(
-            text: 'Язык',
-            icon: const Icon(
-              Icons.language_outlined,
-              color: Color.fromARGB(255, 195, 88, 245),
-            ),
-            onTap: () {},
-          ),
-          _DrawerButton(
-            text: 'Конфиденциальность',
-            icon: const Icon(
-              Icons.security,
-              color: Color.fromARGB(255, 7, 226, 255),
-            ),
-            onTap: () {},
-          ),
+          // _DrawerButton(
+          //   text: 'Язык',
+          //   icon: const Icon(
+          //     Icons.language_outlined,
+          //     color: Color.fromARGB(255, 195, 88, 245),
+          //   ),
+          //   onTap: () {},
+          // ),
+          // _DrawerButton(
+          //   text: 'Конфиденциальность',
+          //   icon: const Icon(
+          //     Icons.security,
+          //     color: Color.fromARGB(255, 7, 226, 255),
+          //   ),
+          //   onTap: () {},
+          // ),
           _DrawerButton(
             text: 'Выйти из приложения',
             icon: const Icon(
