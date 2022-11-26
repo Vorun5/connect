@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:site/data/api/api_constants.dart';
@@ -123,14 +124,59 @@ class ApiServices {
     }
   }
 
-  static Future<bool> saveBackgroundImage(String imageUrl) async {
-    const url = ApiConstants.baseUrl + ApiConstants.saveBackgroundImage;
-    try {
-      final res = await _dio.post(url, data: imageUrl);
+  //падает
+  static Future<bool> saveBackgroundImage(FilePickerResult? result) async {
+    final file = result?.files.first;
+    const url = ApiConstants.baseUrl + ApiConstants.saveBackgroundImageEndpoint;
 
-      return true;
-    } catch (_) {
-      return false;
+    if (file != null) {
+      try {
+        final formData = FormData.fromMap({
+          'background': MultipartFile.fromBytes(
+            file.bytes ?? [],
+            filename: file.name,
+            //contentType,: MediaType(),
+          ),
+        });
+        final res = await _dio.post(
+          url,
+          data: formData,
+        );
+
+        return true;
+      } catch (_) {
+        return false;
+      }
     }
+
+    return false;
+  }
+
+  //падает
+  static Future<bool> saveAvatarImage(FilePickerResult? result) async {
+    final file = result?.files.first;
+    const url = ApiConstants.baseUrl + ApiConstants.saveAvatarImageEndpoint;
+
+    if (file != null) {
+      try {
+        final formData = FormData.fromMap({
+          'avatar': MultipartFile.fromBytes(
+            file.bytes ?? [],
+            filename: file.name,
+            //contentType,: MediaType(),
+          ),
+        });
+        final res = await _dio.post(
+          url,
+          data: formData,
+        );
+
+        return true;
+      } catch (_) {
+        return false;
+      }
+    }
+
+    return false;
   }
 }

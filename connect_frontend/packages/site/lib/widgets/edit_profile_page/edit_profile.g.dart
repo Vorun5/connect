@@ -29,10 +29,7 @@ class _BackgroundWithUserPreview extends StatelessWidget {
   final User user;
 
   @override
-  Widget build(BuildContext _context) => __backgroundWithUserPreview(
-        _context,
-        user,
-      );
+  Widget build(BuildContext _context) => __backgroundWithUserPreview(user);
 }
 
 class _UploadBackgroundButton extends HookConsumerWidget {
@@ -43,7 +40,18 @@ class _UploadBackgroundButton extends HookConsumerWidget {
     BuildContext _context,
     WidgetRef _ref,
   ) =>
-      __uploadBackgroundButton(_context);
+      __uploadBackgroundButton();
+}
+
+class _UploadAvatarButton extends HookConsumerWidget {
+  const _UploadAvatarButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(
+    BuildContext _context,
+    WidgetRef _ref,
+  ) =>
+      __uploadAvatarButton();
 }
 
 class _UserPreview extends StatelessWidget {

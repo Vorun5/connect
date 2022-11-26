@@ -1,6 +1,8 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:site/data/api/api_services.dart';
 import 'package:site/data/dto/user.dart';
@@ -43,7 +45,7 @@ Widget _editProfile(BuildContext context, WidgetRef ref) {
           return Column(
             children: [
               _BackgroundWithUserPreview(user),
-              Gaps.normalGap,
+              const Gap(50),
               _ProfileSettings(user),
             ],
           );
@@ -56,19 +58,19 @@ Widget _editProfile(BuildContext context, WidgetRef ref) {
 }
 
 @swidget
-Widget __backgroundWithUserPreview(BuildContext context, User user) => Stack(
+Widget __backgroundWithUserPreview(User user) => Stack(
       clipBehavior: Clip.none,
       children: [
         Image.network(
           user.profileImageUrl ?? _noBackgroundUrl1,
-          height: 160,
+          height: 130,
           width: double.infinity,
           fit: BoxFit.fill,
         ),
         Container(
           decoration:
               const BoxDecoration(color: Color.fromARGB(139, 158, 158, 158)),
-          height: 160,
+          height: 130,
         ),
         const Positioned(
           right: 5,
@@ -76,51 +78,77 @@ Widget __backgroundWithUserPreview(BuildContext context, User user) => Stack(
           child: _UploadBackgroundButton(),
         ),
         Positioned(
-          top: 95,
+          top: 123,
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 80, 78, 79),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            height: 50,
+            width: 300,
+          ),
+        ),
+        Positioned(
+          top: 88,
           left: 10,
           child: _UserPreview(user),
         ),
         const Positioned(
-          top: 95,
+          top: 88,
           left: 10,
           child: CircleAvatar(
             backgroundColor: Color.fromARGB(139, 158, 158, 158),
             radius: 40,
           ),
         ),
-        Positioned(
-          top: 118,
-          left: 28,
-          child: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.add_a_photo),
-            color: Colors.deepPurple,
-          ),
+        const Positioned(
+          top: 112,
+          left: 29,
+          child: _UploadAvatarButton(),
         ),
       ],
     );
 
 @hcwidget
-Widget __uploadBackgroundButton(BuildContext context) {
+Widget __uploadBackgroundButton() {
   final url = useState('');
 
   return IconButton(
-    onPressed: () => showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Изменить фон'),
-        content: TextField(onChanged: (str) => url.value = str),
-        actions: [
-          TextButton(
-            onPressed: () async {
-              await ApiServices.saveBackgroundImage(url.value);
-              Navigator.pop(context, 'OK');
-            },
-            child: const Text('OK'),
-          ),
+    onPressed: () async {
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: [
+          'png',
+          'jpeg',
+          'jpg',
+          'gif',
+          'raw',
+          'tiff',
+          'bmp',
+          'psd',
         ],
-      ),
-    ),
+        withData: true,
+      );
+      await ApiServices.saveBackgroundImage(result);
+    }
+    // showDialog(
+    //   context: context,
+    //   builder: (context) => AlertDialog(
+    //     title: const Text('Изменить фон'),
+    //     content: TextField(onChanged: (str) => url.value = str),
+    //     actions: [
+    //       TextButton(
+    //         onPressed: () async {
+    //           final result = await FilePicker.platform.pickFiles();
+    //           await ApiServices.saveBackgroundImage(result);
+    //           Navigator.pop(context, 'OK');
+    //         },
+    //         child: const Text('OK'),
+    //       ),
+    //     ],
+    //   ),
+    // ),
+    ,
     icon: const Icon(
       Icons.add_photo_alternate_rounded,
       color: Colors.purple,
@@ -129,13 +157,47 @@ Widget __uploadBackgroundButton(BuildContext context) {
   );
 }
 
+@hcwidget
+Widget __uploadAvatarButton() {
+  final url = useState('');
+
+  return IconButton(
+    onPressed: () async {
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: [
+          'png',
+          'jpeg',
+          'jpg',
+          'gif',
+          'raw',
+          'tiff',
+          'bmp',
+          'psd',
+        ],
+        withData: true,
+      );
+      await ApiServices.saveAvatarImage(result);
+    },
+    icon: const Icon(
+      Icons.add_a_photo,
+      color: Colors.deepPurple,
+    ),
+  );
+}
+
 @swidget
 Widget __userPreview(User user) => Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         CircleAvatar(
           radius: 40,
-          backgroundImage: NetworkImage(
-            user.profileImageUrl ?? _noAvatarUrl,
+          backgroundColor: Colors.black,
+          child: CircleAvatar(
+            radius: 37,
+            backgroundImage: NetworkImage(
+              user.profileImageUrl ?? _noAvatarUrl,
+            ),
           ),
         ),
         Gaps.smallGap,
