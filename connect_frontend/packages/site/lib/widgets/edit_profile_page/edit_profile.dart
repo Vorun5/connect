@@ -51,17 +51,6 @@ Widget _editProfile(BuildContext context, WidgetRef ref) {
               _BackgroundWithUserPreview(user),
               const Gap(70),
               _ProfileSettings(user),
-              TextButton(
-                onPressed: () async {
-                  print(user);
-                  final a = await ApiServices.updateUserInformation(
-                    user.copyWith(name: 'Фирдавси Нуров 2'),
-                  );
-                  print(a.item1);
-                  print(a.item2);
-                },
-                child: const Text('Patch'),
-              )
             ],
           );
         },
