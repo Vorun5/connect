@@ -19,3 +19,27 @@ class UserProfile extends HookConsumerWidget {
         _ref,
       );
 }
+
+class _BackgroundWithUserPreview extends StatelessWidget {
+  const _BackgroundWithUserPreview(
+    this.user, {
+    Key? key,
+  }) : super(key: key);
+
+  final User user;
+
+  @override
+  Widget build(BuildContext _context) => __backgroundWithUserPreview(user);
+}
+
+class _UserPreview extends StatelessWidget {
+  const _UserPreview(
+    this.user, {
+    Key? key,
+  }) : super(key: key);
+
+  final User user;
+
+  @override
+  Widget build(BuildContext _context) => __userPreview(user);
+}
