@@ -81,6 +81,46 @@ class _ProfileSettings extends StatelessWidget {
       );
 }
 
+class _NameButton extends HookConsumerWidget {
+  const _NameButton(
+    this.user, {
+    Key? key,
+  }) : super(key: key);
+
+  final User user;
+
+  @override
+  Widget build(
+    BuildContext _context,
+    WidgetRef _ref,
+  ) =>
+      __nameButton(
+        _context,
+        _ref,
+        user,
+      );
+}
+
+class _UserNameButton extends HookConsumerWidget {
+  const _UserNameButton(
+    this.user, {
+    Key? key,
+  }) : super(key: key);
+
+  final User user;
+
+  @override
+  Widget build(
+    BuildContext _context,
+    WidgetRef _ref,
+  ) =>
+      __userNameButton(
+        _context,
+        _ref,
+        user,
+      );
+}
+
 class _SettingButton extends StatelessWidget {
   const _SettingButton({
     Key? key,

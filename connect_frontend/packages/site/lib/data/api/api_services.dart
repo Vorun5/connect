@@ -104,26 +104,32 @@ class ApiServices {
   }
 
   // 200, 403, 404, 500
-  static Future<Tuple2<User?, int?>> updateUserInformation(
+  static Future<int?> updateUserInformation(
     User user,
   ) async {
     final storage = await SharedPreferences.getInstance();
     final token = storage.getString('token');
     _dio.options.headers['authorization'] = token;
     const url = ApiConstants.baseUrl + ApiConstants.usersEndpoint;
-    try {
-      final res = await _dio.patch(url, data: user.toJson());
 
-      return Tuple2(User.fromJson(res.data as Map<String, dynamic>), null);
+    final data = user.toJson()..removeWhere((key, value) => value == null);
+
+    try {
+      final res = await _dio.patch(url, data: data);
+
+      //return Tuple2(User.fromJson(res.data as Map<String, dynamic>), null);
+      return null;
     } on DioError catch (e) {
       final res = e.response;
       if (res != null) {
         if (kDebugMode) {
-          return Tuple2(null, res.statusCode);
+          //return Tuple2(null, res.statusCode);
+          return res.statusCode;
         }
       }
 
-      return const Tuple2(null, 500);
+      //return const Tuple2(null, 500);
+      return 500;
     }
   }
 

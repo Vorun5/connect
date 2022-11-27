@@ -1,5 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:gap/gap.dart';
@@ -12,6 +13,8 @@ import 'package:site/utils/font_size.dart';
 import 'package:site/utils/gaps.dart';
 import 'package:site/utils/screen_layout.dart';
 import 'package:site/widgets/basic_widgets/error_text.dart';
+import 'package:site/widgets/basic_widgets/forms/name_field.dart';
+import 'package:site/widgets/basic_widgets/forms/username_field.dart';
 import 'package:site/widgets/basic_widgets/hoverable.dart';
 import 'package:site/widgets/basic_widgets/username.dart';
 
@@ -23,6 +26,7 @@ const _noBackgroundUrl1 =
     'https://phonoteka.org/uploads/posts/2021-04/1618400578_38-phonoteka_org-p-tsvetnie-foni-odnogo-tsveta-44.jpg';
 const _noBackgroundUrl =
     'https://catherineasquithgallery.com/uploads/posts/2021-03/1614783195_12-p-serie-foni-dlya-saita-12.jpg';
+final _formKey = GlobalKey<FormBuilderState>();
 
 @hcwidget
 Widget _editProfile(BuildContext context, WidgetRef ref) {
@@ -89,7 +93,6 @@ Widget __backgroundWithUserPreview(User user) => Stack(
                   color: Color.fromARGB(255, 18, 44, 44),
                 ),
               ],
-              //borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
             height: 50,
             width: 335,
@@ -137,25 +140,7 @@ Widget __uploadBackgroundButton() {
         withData: true,
       );
       await ApiServices.saveBackgroundImage(result);
-    }
-    // showDialog(
-    //   context: context,
-    //   builder: (context) => AlertDialog(
-    //     title: const Text('Изменить фон'),
-    //     content: TextField(onChanged: (str) => url.value = str),
-    //     actions: [
-    //       TextButton(
-    //         onPressed: () async {
-    //           final result = await FilePicker.platform.pickFiles();
-    //           await ApiServices.saveBackgroundImage(result);
-    //           Navigator.pop(context, 'OK');
-    //         },
-    //         child: const Text('OK'),
-    //       ),
-    //     ],
-    //   ),
-    // ),
-    ,
+    },
     icon: const Icon(
       Icons.add_photo_alternate_rounded,
       color: Colors.purple,
@@ -227,19 +212,130 @@ Widget __profileSettings(BuildContext context, User user) => DecoratedBox(
       ),
       child: Column(
         children: [
-          _SettingButton(
-            title: 'Имя',
-            label: user.name.isEmpty ? 'Не задано' : user.name,
-            onTap: () {},
-          ),
-          _SettingButton(
-            title: 'Имя пользователя',
-            label: user.username.isEmpty ? 'Не задано' : user.username,
-            onTap: () {},
-          ),
+          _NameButton(user),
+          _UserNameButton(user),
         ],
       ),
     );
+
+@hcwidget
+Widget __nameButton(BuildContext context, WidgetRef ref, User user) {
+  final errorStatus = useState<int?>(0);
+
+  return _SettingButton(
+    title: 'Имя',
+    label: user.name.isEmpty ? 'Не задано' : user.name,
+    onTap: () async => showDialog(
+      context: context,
+      builder: (context) => FormBuilder(
+        key: _formKey,
+        child: AlertDialog(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Введите имя'),
+              Icon(
+                Icons.badge_outlined,
+                color: Colors.green,
+                size: 30,
+              ),
+            ],
+          ),
+          content: const NameField(),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                final currentState = _formKey.currentState;
+
+                if (currentState?.saveAndValidate() ?? false) {
+                  final value = currentState?.value;
+                  if (value != null) {
+                    debugPrint(value.toString());
+                    errorStatus.value = await ApiServices.updateUserInformation(
+                      user.copyWith(name: value['name'] as String),
+                    );
+                    print(errorStatus.value);
+
+                    if (errorStatus.value == null) {
+                      ref.refresh(myProfileProvider);
+                    }
+                  }
+                } else {
+                  debugPrint(
+                    _formKey.currentState?.value.toString(),
+                  );
+                  debugPrint('validation failed');
+                }
+                Navigator.pop(context, 'OK');
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+@hcwidget
+Widget __userNameButton(BuildContext context, WidgetRef ref, User user) {
+  final errorStatus = useState<int?>(0);
+
+  return _SettingButton(
+    title: 'Имя пользователя',
+    label: user.username.isEmpty ? 'Не задано' : user.username,
+    onTap: () async => showDialog(
+      context: context,
+      builder: (context) => FormBuilder(
+        key: _formKey,
+        child: AlertDialog(
+          title: Row(
+            children: const [
+              Expanded(flex: 3, child: Text('Введите имя пользователя')),
+              Expanded(
+                child: Icon(
+                  Icons.alternate_email,
+                  color: Colors.blueAccent,
+                  size: 30,
+                ),
+              ),
+            ],
+          ),
+          content: const UsernameField(),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                final currentState = _formKey.currentState;
+
+                if (currentState?.saveAndValidate() ?? false) {
+                  final value = currentState?.value;
+                  if (value != null) {
+                    debugPrint(value.toString());
+                    errorStatus.value = await ApiServices.updateUserInformation(
+                      user.copyWith(username: value['username'] as String),
+                    );
+                    print(errorStatus.value);
+
+                    if (errorStatus.value == null) {
+                      ref.refresh(myProfileProvider);
+                    }
+                  }
+                } else {
+                  debugPrint(
+                    _formKey.currentState?.value.toString(),
+                  );
+                  debugPrint('validation failed');
+                }
+                Navigator.pop(context, 'OK');
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
 
 @swidget
 Widget __settingButton({
