@@ -47,6 +47,17 @@ Widget _editProfile(BuildContext context, WidgetRef ref) {
               _BackgroundWithUserPreview(user),
               const Gap(70),
               _ProfileSettings(user),
+              TextButton(
+                onPressed: () async {
+                  print(user);
+                  final a = await ApiServices.updateUserInformation(
+                    user.copyWith(name: 'Фирдавси Нуров 2'),
+                  );
+                  print(a.item1);
+                  print(a.item2);
+                },
+                child: const Text('Patch'),
+              )
             ],
           );
         },
@@ -122,6 +133,7 @@ Widget __uploadBackgroundButton() {
 
   return IconButton(
     onPressed: () async {
+      print('ckick');
       final result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
         allowedExtensions: [
@@ -129,12 +141,8 @@ Widget __uploadBackgroundButton() {
           'jpeg',
           'jpg',
           'gif',
-          'raw',
-          'tiff',
-          'bmp',
-          'psd',
         ],
-        withData: true,
+        // withData: true,
       );
       await ApiServices.saveBackgroundImage(result);
     }

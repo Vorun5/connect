@@ -111,8 +111,14 @@ class ApiServices {
     final token = storage.getString('token');
     _dio.options.headers['authorization'] = token;
     const url = ApiConstants.baseUrl + ApiConstants.usersEndpoint;
+
+    final data = user.toJson();
+    print(data);
+    data.removeWhere((key, value) => value == null);
+    print(data);
+
     try {
-      final res = await _dio.patch(url, data: user.toJson());
+      final res = await _dio.patch(url, data: data);
 
       return Tuple2(User.fromJson(res.data as Map<String, dynamic>), null);
     } on DioError catch (e) {

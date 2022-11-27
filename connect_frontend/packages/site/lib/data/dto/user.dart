@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:site/data/dto/geotag.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
@@ -13,7 +12,7 @@ class User with _$User {
     required String name,
     required String? profileImageUrl,
     required String? backgroundImageUrl,
-    required Geotag? geotag,
+    required String? description,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

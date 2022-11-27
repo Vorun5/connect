@@ -19,10 +19,6 @@ const UserSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
-        geotag: {
-            latitude: Number,
-            longitude: Number,
-        },
         description: String,
         profileImageUrl: String,
         backgroundImageUrl: String,
