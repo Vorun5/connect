@@ -105,8 +105,11 @@ class ApiServices {
 
   // 200, 403, 404, 500
   static Future<Tuple2<User?, int?>> updateUserInformation(
-    UserToSignUp user,
+    User user,
   ) async {
+    final storage = await SharedPreferences.getInstance();
+    final token = storage.getString('token');
+    _dio.options.headers['authorization'] = token;
     const url = ApiConstants.baseUrl + ApiConstants.usersEndpoint;
     try {
       final res = await _dio.patch(url, data: user.toJson());
