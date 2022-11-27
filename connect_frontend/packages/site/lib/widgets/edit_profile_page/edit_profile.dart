@@ -45,7 +45,7 @@ Widget _editProfile(BuildContext context, WidgetRef ref) {
           return Column(
             children: [
               _BackgroundWithUserPreview(user),
-              const Gap(50),
+              const Gap(70),
               _ProfileSettings(user),
             ],
           );
@@ -81,11 +81,18 @@ Widget __backgroundWithUserPreview(User user) => Stack(
           top: 123,
           child: Container(
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 80, 78, 79),
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+              color: Color.fromARGB(255, 32, 80, 80),
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(1, 4),
+                  blurRadius: 10,
+                  color: Color.fromARGB(255, 18, 44, 44),
+                ),
+              ],
+              //borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
             height: 50,
-            width: 300,
+            width: 335,
           ),
         ),
         Positioned(
@@ -192,7 +199,7 @@ Widget __userPreview(User user) => Row(
       children: [
         CircleAvatar(
           radius: 40,
-          backgroundColor: Colors.black,
+          backgroundColor: const Color.fromARGB(255, 32, 80, 80),
           child: CircleAvatar(
             radius: 37,
             backgroundImage: NetworkImage(
@@ -215,22 +222,19 @@ Widget __userPreview(User user) => Row(
 
 @swidget
 Widget __profileSettings(BuildContext context, User user) => DecoratedBox(
-      decoration: BoxDecoration(
-        color: Colors.grey[700],
-        borderRadius: const BorderRadius.all(
-          Radius.circular(15),
-        ),
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 32, 80, 80),
       ),
       child: Column(
         children: [
           _SettingButton(
-            title: user.name.isEmpty ? 'Не задано' : user.name,
-            label: 'Нажмите, чтобы изменить имя',
+            title: 'Имя',
+            label: user.name.isEmpty ? 'Не задано' : user.name,
             onTap: () {},
           ),
           _SettingButton(
-            title: user.username.isEmpty ? 'Не задано' : user.username,
-            label: 'Нажмите, чтобы изменить имя',
+            title: 'Имя пользователя',
+            label: user.username.isEmpty ? 'Не задано' : user.username,
             onTap: () {},
           ),
         ],
@@ -251,25 +255,21 @@ Widget __settingButton({
             color: isHovered
                 ? const Color.fromARGB(71, 168, 65, 154)
                 : Colors.transparent,
-            // borderRadius: const BorderRadius.all(
-            //   Radius.circular(Gaps.small),
-            // ),
           ),
           padding: const EdgeInsets.all(Gaps.small),
-          child: RichText(
-            text: TextSpan(
-              text: title,
-              style: const TextStyle(fontSize: FontSize.normal),
-              children: [
-                TextSpan(
-                  text: '\n$label',
-                  style: TextStyle(
-                    color: Colors.blueGrey[400],
-                    fontSize: FontSize.small,
-                  ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: FontSize.normal,
+                  color: Colors.amberAccent,
+                  shadows: [Shadow(offset: Offset(1, 4), blurRadius: 3)],
                 ),
-              ],
-            ),
+              ),
+              Text(label, style: const TextStyle(fontSize: FontSize.normal)),
+            ],
           ),
         ),
       ),
