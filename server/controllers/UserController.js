@@ -138,10 +138,6 @@ export const update = async (req, res) => {
             profileImageUrl: req.body.profileImageUrl,
             backgroundImageUrl: req.body.backgroundImageUrl,
             description: req.body.description,
-            geotag: {
-                latitude: req.body.geotag.latitude,
-                longitude: req.body.geotag.longitude,
-            },
         }, {
             returnDocument: "after",
         })

@@ -27,7 +27,7 @@ mixin _$User {
   String get name => throw _privateConstructorUsedError;
   String? get profileImageUrl => throw _privateConstructorUsedError;
   String? get backgroundImageUrl => throw _privateConstructorUsedError;
-  Geotag? get geotag => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,9 +46,7 @@ abstract class $UserCopyWith<$Res> {
       String name,
       String? profileImageUrl,
       String? backgroundImageUrl,
-      Geotag? geotag});
-
-  $GeotagCopyWith<$Res>? get geotag;
+      String? description});
 }
 
 /// @nodoc
@@ -70,7 +68,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? name = null,
     Object? profileImageUrl = freezed,
     Object? backgroundImageUrl = freezed,
-    Object? geotag = freezed,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -97,23 +95,11 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.backgroundImageUrl
           : backgroundImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      geotag: freezed == geotag
-          ? _value.geotag
-          : geotag // ignore: cast_nullable_to_non_nullable
-              as Geotag?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $GeotagCopyWith<$Res>? get geotag {
-    if (_value.geotag == null) {
-      return null;
-    }
-
-    return $GeotagCopyWith<$Res>(_value.geotag!, (value) {
-      return _then(_value.copyWith(geotag: value) as $Val);
-    });
   }
 }
 
@@ -130,10 +116,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String name,
       String? profileImageUrl,
       String? backgroundImageUrl,
-      Geotag? geotag});
-
-  @override
-  $GeotagCopyWith<$Res>? get geotag;
+      String? description});
 }
 
 /// @nodoc
@@ -151,7 +134,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? name = null,
     Object? profileImageUrl = freezed,
     Object? backgroundImageUrl = freezed,
-    Object? geotag = freezed,
+    Object? description = freezed,
   }) {
     return _then(_$_User(
       id: null == id
@@ -178,10 +161,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.backgroundImageUrl
           : backgroundImageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      geotag: freezed == geotag
-          ? _value.geotag
-          : geotag // ignore: cast_nullable_to_non_nullable
-              as Geotag?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -196,7 +179,7 @@ class _$_User implements _User {
       required this.name,
       required this.profileImageUrl,
       required this.backgroundImageUrl,
-      required this.geotag});
+      required this.description});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -214,11 +197,11 @@ class _$_User implements _User {
   @override
   final String? backgroundImageUrl;
   @override
-  final Geotag? geotag;
+  final String? description;
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, displayUsername: $displayUsername, name: $name, profileImageUrl: $profileImageUrl, backgroundImageUrl: $backgroundImageUrl, geotag: $geotag)';
+    return 'User(id: $id, username: $username, displayUsername: $displayUsername, name: $name, profileImageUrl: $profileImageUrl, backgroundImageUrl: $backgroundImageUrl, description: $description)';
   }
 
   @override
@@ -236,13 +219,14 @@ class _$_User implements _User {
                 other.profileImageUrl == profileImageUrl) &&
             (identical(other.backgroundImageUrl, backgroundImageUrl) ||
                 other.backgroundImageUrl == backgroundImageUrl) &&
-            (identical(other.geotag, geotag) || other.geotag == geotag));
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, username, displayUsername,
-      name, profileImageUrl, backgroundImageUrl, geotag);
+      name, profileImageUrl, backgroundImageUrl, description);
 
   @JsonKey(ignore: true)
   @override
@@ -266,7 +250,7 @@ abstract class _User implements User {
       required final String name,
       required final String? profileImageUrl,
       required final String? backgroundImageUrl,
-      required final Geotag? geotag}) = _$_User;
+      required final String? description}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -284,7 +268,7 @@ abstract class _User implements User {
   @override
   String? get backgroundImageUrl;
   @override
-  Geotag? get geotag;
+  String? get description;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

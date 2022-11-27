@@ -42,8 +42,6 @@ export const updateUser = [
     body('profileImageUrl', 'wrong photo link').optional().isURL(),
     body('description', 'description must be string').optional().isString().isLength({max: maxDescriptionChUsername}),
     body('backgroundImageUrl', 'wrong photo link').optional().isURL(),
-    body('geotag.latitude', 'geotag.latitude must be a number').optional().isFloat(),
-    body('geotag.longitude', 'geotag.longitude must be a number').optional().isFloat(),
 ]
 
 export const createTag = [

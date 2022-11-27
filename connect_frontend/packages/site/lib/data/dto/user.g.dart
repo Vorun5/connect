@@ -13,9 +13,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       name: json['name'] as String,
       profileImageUrl: json['profileImageUrl'] as String?,
       backgroundImageUrl: json['backgroundImageUrl'] as String?,
-      geotag: json['geotag'] == null
-          ? null
-          : Geotag.fromJson(json['geotag'] as Map<String, dynamic>),
+      description: json['description'] as String?,
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -25,5 +23,5 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'name': instance.name,
       'profileImageUrl': instance.profileImageUrl,
       'backgroundImageUrl': instance.backgroundImageUrl,
-      'geotag': instance.geotag,
+      'description': instance.description,
     };
