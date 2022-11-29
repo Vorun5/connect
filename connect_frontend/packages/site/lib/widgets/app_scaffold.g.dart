@@ -6,7 +6,7 @@ part of 'app_scaffold.dart';
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class AppScaffold extends StatelessWidget {
+class AppScaffold extends HookConsumerWidget {
   const AppScaffold({
     Key? key,
     required this.body,
@@ -21,7 +21,13 @@ class AppScaffold extends StatelessWidget {
   final Widget? drawer;
 
   @override
-  Widget build(BuildContext _context) => _appScaffold(
+  Widget build(
+    BuildContext _context,
+    WidgetRef _ref,
+  ) =>
+      _appScaffold(
+        _context,
+        _ref,
         body: body,
         appBar: appBar,
         drawer: drawer,

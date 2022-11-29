@@ -58,16 +58,18 @@ final routerProvider = Provider<GoRouter>((ref) {
       final areWeLoggingIn = state.location == '/login';
       final areWeSingUp = state.location == '/sing-up';
 
-      if (!isAuth && areWeSingUp) {
-        return null;
-      }
+      if (isAuth != null) {
+        if (!isAuth && areWeSingUp) {
+          return null;
+        }
 
-      if (!isAuth) {
-        return areWeLoggingIn ? null : '/login';
-      }
+        if (!isAuth) {
+          return areWeLoggingIn ? null : '/login';
+        }
 
-      if (areWeLoggingIn || areWeSingUp) {
-        return '/';
+        if (areWeLoggingIn || areWeSingUp) {
+          return '/';
+        }
       }
 
       return null;

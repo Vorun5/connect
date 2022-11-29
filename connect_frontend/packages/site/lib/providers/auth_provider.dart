@@ -5,8 +5,8 @@ import 'package:site/data/dto/user_to_login.dart';
 import 'package:site/data/dto/user_to_sign_up.dart';
 
 // ignore: prefer-match-file-name
-class AuthNotifier extends StateNotifier<bool> {
-  AuthNotifier() : super(true);
+class AuthNotifier extends StateNotifier<bool?> {
+  AuthNotifier() : super(null);
 
   Future<void> checkLocalToken() async {
     final user = await ApiServices.getMe();
@@ -43,4 +43,4 @@ class AuthNotifier extends StateNotifier<bool> {
 }
 
 final authProvider =
-    StateNotifierProvider<AuthNotifier, bool>((ref) => AuthNotifier());
+    StateNotifierProvider<AuthNotifier, bool?>((ref) => AuthNotifier());
