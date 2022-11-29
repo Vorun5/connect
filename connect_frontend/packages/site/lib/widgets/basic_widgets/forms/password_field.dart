@@ -8,7 +8,7 @@ import 'package:site/i18n/strings.g.dart';
 import 'package:site/utils/capitalize.dart';
 import 'package:site/utils/dto_constants.dart';
 import 'package:site/utils/form_validators.dart';
-import 'package:site/utils/gaps.dart';
+import 'package:site/utils/paddings.dart';
 import 'package:site/utils/style_constants.dart';
 
 part 'password_field.g.dart';
@@ -29,17 +29,17 @@ Widget _passwordField(BuildContext context) {
       FormValidators.alphanumeric(
         i18n.form.errorTexts.alphanumeric(field: password),
       ),
-      FormBuilderValidators.maxLength(maxNumChPassword),
-      FormBuilderValidators.minLength(minNumChPassword),
+      FormBuilderValidators.maxLength(DtoConstants.maxNumChPassword),
+      FormBuilderValidators.minLength(DtoConstants.minNumChPassword),
     ]),
     decoration: InputDecoration(
       isDense: true,
       border: const OutlineInputBorder(),
       labelText: password,
       suffixIcon: Padding(
-        padding: const EdgeInsets.only(right: Gaps.tiny),
+        padding: const EdgeInsets.only(right: Paddings.tiny),
         child: IconButton(
-          splashRadius: defaultIconSplashRadius,
+          splashRadius: StyleConstants.defaultIconSplashRadius,
           icon: Icon(
             isPasswordVisible.value ? Icons.visibility : Icons.visibility_off,
           ),

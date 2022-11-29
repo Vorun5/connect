@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'drawer_with_user_settings.dart';
+part of 'user_drawer.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class DrawerWithUserSettings extends HookConsumerWidget {
-  const DrawerWithUserSettings({Key? key}) : super(key: key);
+class UserDrawer extends HookConsumerWidget {
+  const UserDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(
     BuildContext _context,
     WidgetRef _ref,
   ) =>
-      _drawerWithUserSettings(
+      _userDrawer(
         _context,
         _ref,
       );
 }
 
-class _UserPreviewProfile extends StatelessWidget {
-  const _UserPreviewProfile(
+class _DrawerHeader extends StatelessWidget {
+  const _DrawerHeader(
     this.user, {
     Key? key,
   }) : super(key: key);
@@ -29,7 +29,7 @@ class _UserPreviewProfile extends StatelessWidget {
   final User user;
 
   @override
-  Widget build(BuildContext _context) => __userPreviewProfile(user);
+  Widget build(BuildContext _context) => __drawerHeader(user);
 }
 
 class _UserSettings extends HookConsumerWidget {

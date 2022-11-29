@@ -29,8 +29,8 @@ Widget _usernameField(BuildContext context) {
       FormValidators.alphanumeric(
         i18n.form.errorTexts.alphanumeric(field: username),
       ),
-      FormBuilderValidators.maxLength(maxNumChUsername),
-      FormBuilderValidators.minLength(minNumChUsername),
+      FormBuilderValidators.maxLength(DtoConstants.maxNumChUsername),
+      FormBuilderValidators.minLength(DtoConstants.minNumChUsername),
     ]),
     onChanged: print,
   );

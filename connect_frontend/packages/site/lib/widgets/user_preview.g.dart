@@ -1,19 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'screen_layout.dart';
+part of 'user_preview.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class ScreenLayout extends StatelessWidget {
-  const ScreenLayout({
+class UserPreview extends StatelessWidget {
+  const UserPreview(
+    this.user, {
     Key? key,
-    required this.child,
   }) : super(key: key);
 
-  final Widget child;
+  final User user;
 
   @override
-  Widget build(BuildContext _context) => _screenLayout(child: child);
+  Widget build(BuildContext _context) => _userPreview(
+        _context,
+        user,
+      );
 }

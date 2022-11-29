@@ -15,8 +15,6 @@ import 'package:site/utils/themes.dart';
 
 part 'main.g.dart';
 
-// TODO(Vorun5): slang опять не хочет билдиться, поэтому попробовать с билдить потом
-
 void main() async {
   // ignore: avoid-ignoring-return-values
   WidgetsFlutterBinding.ensureInitialized();

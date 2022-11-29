@@ -26,9 +26,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 // работатет
-app.post('/upload/avatar', checkAuth, FileController.uploadAvatar);
-// работатет
-app.post('/upload/background', checkAuth, FileController.uploadBackground);
+app.post('/upload', checkAuth, FileController.uploadImage);
 
 
 // работает

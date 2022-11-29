@@ -1,20 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sign_up.dart';
+part of 'login_page.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class SignUp extends HookConsumerWidget {
-  const SignUp({Key? key}) : super(key: key);
+class LoginPage extends HookConsumerWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(
     BuildContext _context,
     WidgetRef _ref,
   ) =>
-      _signUp(
+      _loginPage(
         _context,
         _ref,
       );

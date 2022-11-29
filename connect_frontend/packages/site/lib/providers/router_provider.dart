@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:site/pages/edit_profile_page/edit_profile_page.dart';
+import 'package:site/pages/home_page/home_page.dart';
+import 'package:site/pages/login_page/login_page.dart';
+import 'package:site/pages/sign_up_page/sign_up_page.dart';
+import 'package:site/pages/user_profile_page/user_profile_page.dart';
 import 'package:site/providers/auth_provider.dart';
 import 'package:site/providers/selected_user_profile_provider.dart';
-import 'package:site/widgets/edit_profile_page/edit_profile.dart';
-import 'package:site/widgets/home_page/home.dart';
-import 'package:site/widgets/login_page/login.dart';
-import 'package:site/widgets/sign_up_page/sign_up.dart';
-import 'package:site/widgets/user_profile_page/user_profile.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -22,22 +22,22 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/login',
         name: 'login',
-        builder: (_, state) => const Login(),
+        builder: (_, state) => const LoginPage(),
       ),
       GoRoute(
         path: '/sing-up',
         name: 'sing-up',
-        builder: (_, state) => const SignUp(),
+        builder: (_, state) => const SignUpPage(),
       ),
       GoRoute(
         path: '/',
         name: 'home',
-        builder: (_, state) => const Home(),
+        builder: (_, state) => const HomePage(),
         routes: [
           GoRoute(
             path: 'edit',
             name: 'edit',
-            builder: (_, state) => const EditProfile(),
+            builder: (_, state) => const EditProfilePage(),
           ),
           GoRoute(
             path: 'u/:username',
@@ -48,7 +48,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                     state.params['username'];
               });
 
-              return const UserProfile();
+              return const UserProfilePage();
             },
           ),
         ],

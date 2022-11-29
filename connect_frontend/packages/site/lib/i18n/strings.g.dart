@@ -3,7 +3,7 @@
 /// Locales: 2
 /// Strings: 38 (19 per locale)
 ///
-/// Built on 2022-11-27 at 16:03 UTC
+/// Built on 2022-11-27 at 17:36 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -89,7 +89,7 @@ extension BuildContextTranslationsExtension on BuildContext {
 
 /// Manages all translation instances and the current locale
 class LocaleSettings extends BaseFlutterLocaleSettings<AppLocale, _StringsEn> {
-	LocaleSettings._() : super(utils: AppLocaleUtils.instance);
+	LocaleSettings._() : super(locales: AppLocale.values, baseLocale: _baseLocale, utils: AppLocaleUtils.instance);
 
 	static final instance = LocaleSettings._();
 

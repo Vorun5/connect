@@ -1,8 +1,9 @@
-const minNumChPassword = 6;
-const maxNumChPassword = 30;
-const maxNumChUsername = 20;
-const minNumChUsername = 3;
-const maxNumChName = 30;
-const minNumChName = 3;
-
-const maxDescriptionChUsername = 256;
+class DtoConstants {
+  static const maxNumChPassword = 30;
+  static const maxNumChUsername = 20;
+  static const minNumChUsername = 3;
+  static const maxNumChName = 30;
+  static const minNumChName = 3;
+  static const maxDescriptionChUsername = 256;
+  static const minNumChPassword = 6;
+}

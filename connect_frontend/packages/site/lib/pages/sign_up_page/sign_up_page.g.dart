@@ -1,22 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'username.dart';
+part of 'sign_up_page.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class Username extends StatelessWidget {
-  const Username(
-    this.username, {
-    Key? key,
-  }) : super(key: key);
-
-  final String username;
+class SignUpPage extends HookConsumerWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context) => _username(
+  Widget build(
+    BuildContext _context,
+    WidgetRef _ref,
+  ) =>
+      _signUpPage(
         _context,
-        username,
+        _ref,
       );
 }

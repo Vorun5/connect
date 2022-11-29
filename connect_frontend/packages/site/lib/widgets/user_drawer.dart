@@ -8,20 +8,17 @@ import 'package:site/data/dto/user.dart';
 import 'package:site/i18n/strings.g.dart';
 import 'package:site/providers/auth_provider.dart';
 import 'package:site/providers/my_profile_provider.dart';
-import 'package:site/utils/font_size.dart';
 import 'package:site/utils/gaps.dart';
+import 'package:site/utils/paddings.dart';
 import 'package:site/utils/themes.dart';
 import 'package:site/widgets/basic_widgets/error_text.dart';
 import 'package:site/widgets/basic_widgets/hoverable.dart';
-import 'package:site/widgets/basic_widgets/username.dart';
+import 'package:site/widgets/user_preview.dart';
 
-part 'drawer_with_user_settings.g.dart';
-
-const noAvatarUrl =
-    'https://t3.ftcdn.net/jpg/01/09/00/64/360_F_109006426_388PagqielgjFTAMgW59jRaDmPJvSBUL.jpg';
+part 'user_drawer.g.dart';
 
 @hcwidget
-Widget _drawerWithUserSettings(BuildContext context, WidgetRef ref) {
+Widget _userDrawer(BuildContext context, WidgetRef ref) {
   final myProfile = ref.watch(myProfileProvider);
   final i18n = Translations.of(context);
 
@@ -38,7 +35,7 @@ Widget _drawerWithUserSettings(BuildContext context, WidgetRef ref) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                _UserPreviewProfile(user),
+                _DrawerHeader(user),
                 _UserSettings(user),
               ],
             );
@@ -52,59 +49,41 @@ Widget _drawerWithUserSettings(BuildContext context, WidgetRef ref) {
 }
 
 @swidget
-Widget __userPreviewProfile(User user) => DrawerHeader(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CircleAvatar(
-                radius: 40,
-                backgroundImage: NetworkImage(
-                  // TODO(Vorun5): кнопка на установку аватарки или перенапраления на изменения профиля
-                  user.profileImageUrl ?? noAvatarUrl,
+Widget __drawerHeader(User user) => SizedBox(
+      height: 180,
+      child: DrawerHeader(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            UserPreview(user),
+            ThemeSwitcher.withTheme(
+              builder: (context, switcher, theme) => IconButton(
+                hoverColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                icon: Icon(
+                  theme == Themes.dark
+                      ? Icons.nightlight_round
+                      : Icons.wb_sunny,
                 ),
+                onPressed: () async {
+                  final storage = await SharedPreferences.getInstance();
+
+                  final res =
+                      await storage.setBool('theme', theme != Themes.dark);
+
+                  if (res) {
+                    switcher.changeTheme(
+                      isReversed: theme == Themes.dark,
+                      theme: theme == Themes.dark ? Themes.light : Themes.dark,
+                    );
+                  }
+                },
               ),
-              ThemeSwitcher.withTheme(
-                builder: (context, switcher, theme) => IconButton(
-                  hoverColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  // TODO(Vorun5): сделать анимацию при переключении как в tg
-                  icon: Icon(
-                    theme == Themes.dark
-                        ? Icons.nightlight_round
-                        : Icons.wb_sunny,
-                  ),
-                  onPressed: () async {
-                    final storage = await SharedPreferences.getInstance();
-                    final res =
-                        await storage.setBool('theme', theme != Themes.dark);
-                    if (res) {
-                      switcher.changeTheme(
-                        isReversed: theme == Themes.dark,
-                        theme:
-                            theme == Themes.dark ? Themes.light : Themes.dark,
-                      );
-                    }
-                  },
-                ),
-              ),
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                style: const TextStyle(fontSize: FontSize.normal),
-                user.name,
-              ),
-              Username(user.username),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
 
@@ -120,7 +99,7 @@ Widget __userPreviewProfile(User user) => DrawerHeader(
 @hcwidget
 Widget __userSettings(BuildContext context, WidgetRef ref, User user) =>
     Padding(
-      padding: const EdgeInsets.all(Gaps.small),
+      padding: const EdgeInsets.all(Paddings.small),
       child: Column(
         children: [
           _DrawerButton(
@@ -185,17 +164,17 @@ Widget __drawerButton({
                 ? const Color.fromARGB(71, 168, 65, 154)
                 : Colors.transparent,
             borderRadius: const BorderRadius.all(
-              Radius.circular(Gaps.small),
+              Radius.circular(Paddings.small),
             ),
           ),
-          padding: const EdgeInsets.all(Gaps.small),
+          padding: const EdgeInsets.all(Paddings.small),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
                   icon,
-                  Gaps.smallGap,
+                  Gaps.small,
                   Text(text),
                 ],
               ),

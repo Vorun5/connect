@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:go_router/go_router.dart';
 import 'package:site/utils/color_palette.dart';
 import 'package:site/utils/font_size.dart';
+import 'package:site/widgets/basic_widgets/hoverable.dart';
 
 part 'username.g.dart';
 
 @swidget
-Widget _username(String username) => Text(
-      style: const TextStyle(
-        fontSize: FontSize.small,
-        color: ColorPalette.link,
+Widget _username(BuildContext contex, String username) => GestureDetector(
+      child: Hoverable(
+        child: (isHovered) => Text(
+          style: TextStyle(
+            fontSize: FontSize.small,
+            color: ColorPalette.link,
+            decoration:
+                isHovered ? TextDecoration.underline : TextDecoration.none,
+          ),
+          '@$username',
+        ),
       ),
-      '@$username',
+      onTap: () => contex.goNamed(
+        'user-profile',
+        params: {'username': username},
+      ),
     );

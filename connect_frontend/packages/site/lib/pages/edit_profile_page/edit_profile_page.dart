@@ -11,14 +11,15 @@ import 'package:site/i18n/strings.g.dart';
 import 'package:site/providers/my_profile_provider.dart';
 import 'package:site/utils/font_size.dart';
 import 'package:site/utils/gaps.dart';
-import 'package:site/utils/screen_layout.dart';
+import 'package:site/utils/paddings.dart';
+import 'package:site/widgets/app_scaffold.dart';
 import 'package:site/widgets/basic_widgets/error_text.dart';
 import 'package:site/widgets/basic_widgets/forms/name_field.dart';
 import 'package:site/widgets/basic_widgets/forms/username_field.dart';
 import 'package:site/widgets/basic_widgets/hoverable.dart';
 import 'package:site/widgets/basic_widgets/username.dart';
 
-part 'edit_profile.g.dart';
+part 'edit_profile_page.g.dart';
 
 const _noAvatarUrl =
     'https://t3.ftcdn.net/jpg/01/09/00/64/360_F_109006426_388PagqielgjFTAMgW59jRaDmPJvSBUL.jpg';
@@ -29,34 +30,32 @@ const _noBackgroundUrl =
 final _formKey = GlobalKey<FormBuilderState>();
 
 @hcwidget
-Widget _editProfile(BuildContext context, WidgetRef ref) {
+Widget _editProfilePage(BuildContext context, WidgetRef ref) {
   final user = ref.watch(myProfileProvider);
   final i18n = Translations.of(context);
 
-  return ScreenLayout(
-    child: Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Edit Profile',
-        ),
+  return AppScaffold(
+    appBar: AppBar(
+      title: const Text(
+        'Edit Profile',
       ),
-      body: user.when(
-        data: (user) {
-          if (user == null) {
-            return Center(child: ErrorText(i18n.unknownError));
-          }
+    ),
+    body: user.when(
+      data: (user) {
+        if (user == null) {
+          return Center(child: ErrorText(i18n.unknownError));
+        }
 
-          return Column(
-            children: [
-              _BackgroundWithUserPreview(user),
-              const Gap(70),
-              _ProfileSettings(user),
-            ],
-          );
-        },
-        error: (error, _) => Center(child: ErrorText(error.toString())),
-        loading: () => const Center(child: CircularProgressIndicator()),
-      ),
+        return Column(
+          children: [
+            _BackgroundWithUserPreview(user),
+            const Gap(70),
+            _ProfileSettings(user),
+          ],
+        );
+      },
+      error: (error, _) => Center(child: ErrorText(error.toString())),
+      loading: () => const Center(child: CircularProgressIndicator()),
     ),
   );
 }
@@ -189,7 +188,7 @@ Widget __userPreview(User user) => Row(
             ),
           ),
         ),
-        Gaps.smallGap,
+        Gaps.small,
         Column(
           children: [
             Text(
@@ -349,7 +348,7 @@ Widget __settingButton({
                 ? const Color.fromARGB(71, 168, 65, 154)
                 : Colors.transparent,
           ),
-          padding: const EdgeInsets.all(Gaps.small),
+          padding: const EdgeInsets.all(Paddings.small),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

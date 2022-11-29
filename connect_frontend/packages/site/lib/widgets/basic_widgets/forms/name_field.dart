@@ -23,8 +23,8 @@ Widget _nameField(BuildContext context) {
     ),
     validator: FormBuilderValidators.compose([
       FormBuilderValidators.required(),
-      FormBuilderValidators.maxLength(maxNumChName),
-      FormBuilderValidators.minLength(minNumChName),
+      FormBuilderValidators.maxLength(DtoConstants.maxNumChName),
+      FormBuilderValidators.minLength(DtoConstants.minNumChName),
     ]),
     onChanged: print,
   );
