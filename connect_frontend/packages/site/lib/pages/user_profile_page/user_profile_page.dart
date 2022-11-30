@@ -32,7 +32,7 @@ Widget _userProfilePage(BuildContext context, WidgetRef ref) {
         return ListView(
           children: [
             _Header(user),
-            if (description != null)
+            if (description != null && description.isNotEmpty)
               Card(
                 elevation: 0,
                 color: Theme.of(context).colorScheme.onInverseSurface,
