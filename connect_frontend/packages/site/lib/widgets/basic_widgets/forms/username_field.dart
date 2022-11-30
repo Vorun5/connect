@@ -11,12 +11,13 @@ import 'package:site/utils/form_validators.dart';
 part 'username_field.g.dart';
 
 @hcwidget
-Widget _usernameField(BuildContext context) {
+Widget _usernameField(BuildContext context, {String? initialValue}) {
   final i18n = Translations.of(context);
   final username = capitalize(i18n.form.labels.username);
 
   return FormBuilderTextField(
     name: 'username',
+    initialValue: initialValue,
     autovalidateMode: AutovalidateMode.onUserInteraction,
     autocorrect: false,
     decoration: InputDecoration(

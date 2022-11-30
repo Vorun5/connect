@@ -18,30 +18,16 @@ Widget _appScaffold(
 
   return ThemeSwitchingArea(
     child: SafeArea(
-      child: isAuth == null
-          ? Scaffold(
-              body: Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    maxWidth: 800,
-                  ),
-                  child:
-                      isAuth == null ? const CircularProgressIndicator() : body,
-                ),
-              ),
-            )
-          : Scaffold(
-              appBar: appBar,
-              drawer: drawer,
-              body: Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    maxWidth: 800,
-                  ),
-                  child: body,
-                ),
-              ),
-            ),
+      child: Scaffold(
+        appBar: isAuth != null ? appBar : null,
+        drawer: isAuth != null ? drawer : null,
+        body: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 800),
+            child: isAuth == null ? const CircularProgressIndicator() : body,
+          ),
+        ),
+      ),
     ),
   );
 }

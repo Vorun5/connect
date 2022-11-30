@@ -7,12 +7,20 @@ part of 'username_field.dart';
 // **************************************************************************
 
 class UsernameField extends HookConsumerWidget {
-  const UsernameField({Key? key}) : super(key: key);
+  const UsernameField({
+    Key? key,
+    this.initialValue,
+  }) : super(key: key);
+
+  final String? initialValue;
 
   @override
   Widget build(
     BuildContext _context,
     WidgetRef _ref,
   ) =>
-      _usernameField(_context);
+      _usernameField(
+        _context,
+        initialValue: initialValue,
+      );
 }

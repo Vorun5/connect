@@ -1,22 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'name_field.dart';
+part of 'avatar.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class NameField extends StatelessWidget {
-  const NameField({
+class Avatar extends StatelessWidget {
+  const Avatar(
+    this.url, {
     Key? key,
-    this.initialValue,
+    this.radius = Constants.avatarRadius,
   }) : super(key: key);
 
-  final String? initialValue;
+  final String? url;
+
+  final double radius;
 
   @override
-  Widget build(BuildContext _context) => _nameField(
+  Widget build(BuildContext _context) => _avatar(
         _context,
-        initialValue: initialValue,
+        url,
+        radius: radius,
       );
 }

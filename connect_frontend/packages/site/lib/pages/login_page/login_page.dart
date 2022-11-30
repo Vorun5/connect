@@ -23,8 +23,6 @@ part 'login_page.g.dart';
 
 final _formKey = GlobalKey<FormBuilderState>();
 
-// TODO(Vorun5): оцентровать по горизонтальной оси и добавить скролл (в sign-up тоже)
-
 @hcwidget
 Widget _loginPage(BuildContext context, WidgetRef ref) {
   final errorStatus = useState<int?>(null);
@@ -100,8 +98,6 @@ Widget _loginPage(BuildContext context, WidgetRef ref) {
                     ),
                     Gaps.normal,
                     Row(
-                      // TODO(Vorun5): сделать чтоб при маленькой ширине кнопка
-                      // "Sign Up" ужадила вниз, вообщем на RichText переделать
                       children: [
                         Text(i18n.auth.notHaveAccount),
                         Gaps.tiny,

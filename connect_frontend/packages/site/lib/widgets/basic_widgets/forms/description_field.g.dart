@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'name_field.dart';
+part of 'description_field.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class NameField extends StatelessWidget {
-  const NameField({
+class DescriptionField extends StatelessWidget {
+  const DescriptionField({
     Key? key,
     this.initialValue,
   }) : super(key: key);
@@ -15,7 +15,7 @@ class NameField extends StatelessWidget {
   final String? initialValue;
 
   @override
-  Widget build(BuildContext _context) => _nameField(
+  Widget build(BuildContext _context) => _descriptionField(
         _context,
         initialValue: initialValue,
       );

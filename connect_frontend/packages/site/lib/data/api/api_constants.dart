@@ -4,6 +4,5 @@ class ApiConstants {
   static String userByUsername(String username) => '/users/$username';
   static const String login = '/auth/login';
   static const String singUp = '/auth/sing-up';
-  static const String saveBackgroundImageEndpoint = '/upload/background';
-  static const String saveAvatarImageEndpoint = '/upload/avatar';
+  static const String uploadImageEndpoint = '/upload/';
 }

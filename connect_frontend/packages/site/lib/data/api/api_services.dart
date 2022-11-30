@@ -6,6 +6,7 @@ import 'package:site/data/api/api_constants.dart';
 import 'package:site/data/dto/user.dart';
 import 'package:site/data/dto/user_to_login.dart';
 import 'package:site/data/dto/user_to_sign_up.dart';
+import 'package:site/data/dto/user_to_update.dart';
 import 'package:tuple/tuple.dart';
 
 // final tokenProvider = FutureProvider(() {
@@ -18,6 +19,7 @@ import 'package:tuple/tuple.dart';
 
 class ApiServices {
   static final _dio = Dio();
+  static const serverErrorStatus = 500;
 
   // 200, 404, 500
   static Future<Tuple2<User?, int?>> getUser(String username) async {
@@ -39,7 +41,7 @@ class ApiServices {
         }
       }
 
-      return const Tuple2(null, 500);
+      return const Tuple2(null, serverErrorStatus);
     }
   }
 
@@ -80,7 +82,7 @@ class ApiServices {
         }
       }
 
-      return const Tuple2(null, 500);
+      return const Tuple2(null, serverErrorStatus);
     }
   }
 
@@ -99,14 +101,12 @@ class ApiServices {
         }
       }
 
-      return const Tuple2(null, 500);
+      return const Tuple2(null, serverErrorStatus);
     }
   }
 
   // 200, 403, 404, 500
-  static Future<int?> updateUserInformation(
-    User user,
-  ) async {
+  static Future<int?> updateUserInformation(UserToUpdate user) async {
     final storage = await SharedPreferences.getInstance();
     final token = storage.getString('token');
     _dio.options.headers['authorization'] = token;
@@ -129,19 +129,19 @@ class ApiServices {
       }
 
       //return const Tuple2(null, 500);
-      return 500;
+      return serverErrorStatus;
     }
   }
 
   //падает
-  static Future<bool> saveBackgroundImage(FilePickerResult? result) async {
+  static Future<String?> uploadImage(FilePickerResult? result) async {
     final file = result?.files.first;
-    const url = ApiConstants.baseUrl + ApiConstants.saveBackgroundImageEndpoint;
+    const url = ApiConstants.baseUrl + ApiConstants.uploadImageEndpoint;
 
     if (file != null) {
       try {
         final formData = FormData.fromMap({
-          'background': MultipartFile.fromBytes(
+          'image': MultipartFile.fromBytes(
             file.bytes ?? [],
             filename: file.name,
             //contentType,: MediaType(),
@@ -150,42 +150,14 @@ class ApiServices {
         final res = await _dio.post(
           url,
           data: formData,
-        );
+        ) as Map<String, dynamic>;
 
-        return true;
+        return res['url'] as String;
       } catch (_) {
-        return false;
+        return null;
       }
     }
 
-    return false;
-  }
-
-  //падает
-  static Future<bool> saveAvatarImage(FilePickerResult? result) async {
-    final file = result?.files.first;
-    const url = ApiConstants.baseUrl + ApiConstants.saveAvatarImageEndpoint;
-
-    if (file != null) {
-      try {
-        final formData = FormData.fromMap({
-          'avatar': MultipartFile.fromBytes(
-            file.bytes ?? [],
-            filename: file.name,
-            //contentType,: MediaType(),
-          ),
-        });
-        final res = await _dio.post(
-          url,
-          data: formData,
-        );
-
-        return true;
-      } catch (_) {
-        return false;
-      }
-    }
-
-    return false;
+    return null;
   }
 }

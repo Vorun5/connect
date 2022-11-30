@@ -64,7 +64,7 @@ Widget __header(User user) => Stack(
           padding: const EdgeInsets.only(
             left: Paddings.small,
             right: Paddings.small,
-            top: Constants.backgroundheight - Constants.avatarRadius - 2,
+            top: Constants.backgroundheight - Constants.avatarRadius,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
