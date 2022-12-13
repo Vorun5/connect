@@ -1,0 +1,17 @@
+include: package:lints/recommended.yaml
+
+analyzer:
+  exclude: 
+    - 'build/**'
+    - '**/*.freezed.dart'
+    - '**/*.g.dart'
+  language:
+    strict-raw-types: true
+    strict-inference: true
+    strict-casts: true
+
+linter:
+  rules:
+    - cancel_subscriptions
+    - 'package_names'
+    - 'flutter_style_todos'
