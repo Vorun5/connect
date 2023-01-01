@@ -1,22 +1,34 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'name_field.dart';
+part of 'form_text_field.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class NameField extends StatelessWidget {
-  const NameField({
+class FormTextField extends StatelessWidget {
+  const FormTextField({
     Key? key,
+    required this.name,
+    required this.label,
     this.initialValue,
+    this.validator,
   }) : super(key: key);
+
+  final String name;
+
+  final String label;
 
   final String? initialValue;
 
+  final String? Function(String?)? validator;
+
   @override
-  Widget build(BuildContext _context) => _nameField(
+  Widget build(BuildContext _context) => _formTextField(
         _context,
+        name: name,
+        label: label,
         initialValue: initialValue,
+        validator: validator,
       );
 }

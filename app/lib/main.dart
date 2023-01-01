@@ -1,6 +1,10 @@
 import 'dart:async';
 
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
+import 'package:app/i18n/strings.g.dart';
+import 'package:app/providers/auth_provider.dart';
+import 'package:app/providers/router_provider.dart';
+import 'package:app/utils/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,10 +12,6 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:app/i18n/strings.g.dart';
-import 'package:app/providers/auth_provider.dart';
-import 'package:app/providers/router_provider.dart';
-import 'package:app/utils/themes.dart';
 
 part 'main.g.dart';
 
@@ -51,6 +51,8 @@ Widget __app(BuildContext context, WidgetRef ref) {
 
   return MaterialApp.router(
     debugShowCheckedModeBanner: false,
+    theme: ThemeData(useMaterial3: true),
+    darkTheme: ThemeData(useMaterial3: true),
     localizationsDelegates: const [
       FormBuilderLocalizations.delegate,
       ...GlobalMaterialLocalizations.delegates,

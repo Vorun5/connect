@@ -1,14 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:app/data/dto/user.dart';
 import 'package:app/i18n/strings.g.dart';
-import 'package:app/providers/my_profile_provider.dart';
+import 'package:app/providers/my_profile.dart';
 import 'package:app/utils/constants.dart';
 import 'package:app/utils/paddings.dart';
 import 'package:app/widgets/app_scaffold.dart';
 import 'package:app/widgets/basic_widgets/error_text.dart';
 import 'package:app/widgets/user_preview.dart';
+import 'package:flutter/material.dart';
+import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 part 'user_profile_page.g.dart';
 

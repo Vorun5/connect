@@ -1,23 +1,24 @@
+import 'package:app/data/dto/user_to_login.dart';
+import 'package:app/i18n/strings.g.dart';
+import 'package:app/providers/auth_provider.dart';
+import 'package:app/providers/my_profile.dart';
+import 'package:app/utils/capitalize.dart';
+import 'package:app/utils/color_palette.dart';
+import 'package:app/utils/font_size.dart';
+import 'package:app/utils/form_validators.dart';
+import 'package:app/utils/gaps.dart';
+import 'package:app/utils/paddings.dart';
+import 'package:app/utils/style_constants.dart';
+import 'package:app/widgets/app_scaffold.dart';
+import 'package:app/widgets/basic_widgets/forms/form_text_field.dart';
+import 'package:app/widgets/basic_widgets/forms/password_field.dart';
+import 'package:app/widgets/basic_widgets/icon_button_with_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:app/data/dto/user_to_login.dart';
-import 'package:app/i18n/strings.g.dart';
-import 'package:app/providers/auth_provider.dart';
-import 'package:app/providers/my_profile_provider.dart';
-import 'package:app/utils/capitalize.dart';
-import 'package:app/utils/color_palette.dart';
-import 'package:app/utils/font_size.dart';
-import 'package:app/utils/gaps.dart';
-import 'package:app/utils/paddings.dart';
-import 'package:app/utils/style_constants.dart';
-import 'package:app/widgets/app_scaffold.dart';
-import 'package:app/widgets/basic_widgets/forms/password_field.dart';
-import 'package:app/widgets/basic_widgets/forms/username_field.dart';
-import 'package:app/widgets/basic_widgets/icon_button_with_background.dart';
 
 part 'login_page.g.dart';
 
@@ -27,6 +28,7 @@ final _formKey = GlobalKey<FormBuilderState>();
 Widget _loginPage(BuildContext context, WidgetRef ref) {
   final errorStatus = useState<int?>(null);
   final i18n = Translations.of(context);
+  final username = capitalize(i18n.form.labels.username);
 
   return AppScaffold(
     body: Center(
@@ -59,7 +61,13 @@ Widget _loginPage(BuildContext context, WidgetRef ref) {
                 key: _formKey,
                 child: Column(
                   children: [
-                    const UsernameField(),
+                    FormTextField(
+                      name: 'username',
+                      label: 'Имя пользователя',
+                      validator: FormValidators.username(
+                        i18n.form.errorTexts.alphanumeric(field: username),
+                      ),
+                    ),
                     Gaps.normal,
                     const PasswordField(),
                     Gaps.normal,

@@ -1,12 +1,12 @@
 import mongoose from 'mongoose'
 
 const EventMessage = new mongoose.Schema({
-        id_user: {
+        userId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
             required: true,
         },
-        id_team: {
+        teamId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Event',
             required: true,

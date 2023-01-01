@@ -1,19 +1,25 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
+import 'package:app/data/api/api_services.dart';
+import 'package:app/data/dto/event_to_create.dart';
+import 'package:app/data/dto/user.dart';
+import 'package:app/i18n/strings.g.dart';
+import 'package:app/providers/auth_provider.dart';
+import 'package:app/providers/my_profile.dart';
+import 'package:app/utils/form_validators.dart';
+import 'package:app/utils/gaps.dart';
+import 'package:app/utils/paddings.dart';
+import 'package:app/utils/style_constants.dart';
+import 'package:app/utils/themes.dart';
+import 'package:app/widgets/basic_widgets/error_text.dart';
+import 'package:app/widgets/basic_widgets/forms/form_text_field.dart';
+import 'package:app/widgets/basic_widgets/hoverable.dart';
+import 'package:app/widgets/user_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:app/data/dto/user.dart';
-import 'package:app/i18n/strings.g.dart';
-import 'package:app/providers/auth_provider.dart';
-import 'package:app/providers/my_profile_provider.dart';
-import 'package:app/utils/gaps.dart';
-import 'package:app/utils/paddings.dart';
-import 'package:app/utils/themes.dart';
-import 'package:app/widgets/basic_widgets/error_text.dart';
-import 'package:app/widgets/basic_widgets/hoverable.dart';
-import 'package:app/widgets/user_preview.dart';
 
 part 'user_drawer.g.dart';
 
@@ -112,6 +118,14 @@ Widget __userSettings(BuildContext context, WidgetRef ref, User user) =>
                 .goNamed('user-profile', params: {'username': user.username}),
           ),
           _DrawerButton(
+            text: 'Создать мероприятие',
+            icon: const Icon(
+              Icons.event,
+              color: Colors.orangeAccent,
+            ),
+            onTap: () => _createEventForm(context),
+          ),
+          _DrawerButton(
             text: 'Настройки',
             icon: const Icon(
               Icons.settings,
@@ -188,3 +202,77 @@ Widget __drawerButton({
         ),
       ),
     );
+
+Future<void> _createEventForm(BuildContext context) {
+  final formKey = GlobalKey<FormBuilderState>();
+
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Center(child: const Text('Создать мероприятие')),
+        content: FormBuilder(
+          child: SizedBox(
+            width: StyleConstants.maxFormWidth,
+            child: FormBuilder(
+              key: formKey,
+              child: Column(
+                children: [
+                  FormTextField(
+                    name: 'name',
+                    label: 'Название',
+                    validator: FormValidators.name,
+                  ),
+                  Gaps.normal,
+                  FormTextField(
+                    name: 'description',
+                    label: 'Описание',
+                    validator: FormValidators.description,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Создать'),
+            onPressed: () async {
+              final currentState = formKey.currentState;
+
+              if (currentState?.saveAndValidate() ?? false) {
+                final value = currentState?.value;
+                if (value != null) {
+                  final response = await ApiServices.createEvent(
+                      EventToCreate.fromJson(value));
+                  if (response != null) {
+                    print('event create');
+                  } else {
+                    print('event not create');
+                  }
+                }
+              } else {
+                debugPrint(
+                  formKey.currentState?.value.toString(),
+                );
+                debugPrint('validation failed');
+              }
+            },
+          ),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Закрыть'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}

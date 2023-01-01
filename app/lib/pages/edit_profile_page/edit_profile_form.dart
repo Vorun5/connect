@@ -1,18 +1,19 @@
+import 'package:app/data/api/api_services.dart';
+import 'package:app/data/dto/user.dart';
+import 'package:app/data/dto/user_to_update.dart';
+import 'package:app/i18n/strings.g.dart';
+import 'package:app/providers/my_profile.dart';
+import 'package:app/utils/capitalize.dart';
+import 'package:app/utils/form_validators.dart';
+import 'package:app/utils/gaps.dart';
+import 'package:app/utils/paddings.dart';
+import 'package:app/utils/style_constants.dart';
+import 'package:app/widgets/basic_widgets/forms/form_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:app/data/api/api_services.dart';
-import 'package:app/data/dto/user.dart';
-import 'package:app/data/dto/user_to_update.dart';
-import 'package:app/providers/my_profile_provider.dart';
-import 'package:app/utils/gaps.dart';
-import 'package:app/utils/paddings.dart';
-import 'package:app/utils/style_constants.dart';
-import 'package:app/widgets/basic_widgets/forms/description_field.dart';
-import 'package:app/widgets/basic_widgets/forms/name_field.dart';
-import 'package:app/widgets/basic_widgets/forms/username_field.dart';
 
 part 'edit_profile_form.g.dart';
 
@@ -26,6 +27,8 @@ Widget _editProfileForm(
   required String? newProfileImageUrl,
   required String? newBackgroundUrl,
 }) {
+  final i18n = Translations.of(context);
+  final username = capitalize(i18n.form.labels.username);
   final errorStatus = useState<int?>(null);
 
   return Padding(
@@ -41,11 +44,28 @@ Widget _editProfileForm(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            NameField(initialValue: user.name),
+            FormTextField(
+              name: 'name',
+              label: 'Имя',
+              initialValue: user.name,
+              validator: FormValidators.name,
+            ),
             Gaps.normal,
-            UsernameField(initialValue: user.username),
+            FormTextField(
+              name: 'username',
+              label: 'Имя пользователя',
+              initialValue: user.username,
+              validator: FormValidators.username(
+                i18n.form.errorTexts.alphanumeric(field: username),
+              ),
+            ),
             Gaps.normal,
-            DescriptionField(initialValue: user.description),
+            FormTextField(
+              name: 'description',
+              label: 'Описание',
+              initialValue: user.description,
+              validator: FormValidators.description,
+            ),
             Gaps.normal,
             OutlinedButton(
               onPressed: () async {

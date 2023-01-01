@@ -5,4 +5,5 @@ class ApiConstants {
   static const String login = '/auth/login';
   static const String singUp = '/auth/sing-up';
   static const String uploadImageEndpoint = '/upload/';
+  static const String eventEndpoint = '/events';
 }
