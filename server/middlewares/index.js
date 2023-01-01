@@ -1,5 +1,5 @@
-import checkAuth from './checkAuth.js';
-import handleValidationErrors from './handleValidationErrors.js';
+import auth from './auth.js';
+import validation from './validation.js';
 
-export {checkAuth, handleValidationErrors};
+export {auth, validation};
 

@@ -2,10 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose'
 import {port} from './config.js';
-import * as Validations from './validations.js';
-import {EventController, TagController, UserController, FileController} from "./controllers/index.js";
-import {checkAuth, handleValidationErrors} from "./middlewares/index.js";
 import fileUpload from 'express-fileupload';
+import {authRouter, eventRouter, tagRouter, uploadRouter, userRouter} from "./routes/index.js";
+
+const PORT = process.env.PORT | port;
 
 mongoose.connect('mongodb://localhost/connect')
     .then(() => console.log('DB connected'))
@@ -13,58 +13,27 @@ mongoose.connect('mongodb://localhost/connect')
 
 const app = express();
 
+app.use(cors());
+app.use(express.json());
+
 app.use(fileUpload({
     createParentPath: true,
     limits: {
         width: 700,
-
         fileSize: 2 * 1024 * 1024 * 1024 //2MB max file(s) size
     },
 }));
-
-app.use(cors());
-app.use(express.json());
 app.use('/uploads', express.static('uploads'));
-// работатет
-app.post('/upload', checkAuth, FileController.uploadImage);
 
 
-// работает
-app.post('/auth/login', Validations.login, handleValidationErrors, UserController.login)
-// работает
-app.post('/auth/sing-up', Validations.signup, handleValidationErrors, UserController.singUp);
-
-// работает
-app.get('/users/:username', checkAuth, UserController.getOneUser);
-// работает
-app.get('/users', checkAuth, UserController.getMe);
-// работает
-app.patch('/users', checkAuth, Validations.updateUser, handleValidationErrors, UserController.update);
-
-// работает
-app.post('/tags', checkAuth, Validations.createTag, handleValidationErrors, TagController.create);
-// работает
-app.post('/tags/:string', checkAuth, TagController.find);
-
-// работает
-app.post('/events', checkAuth, Validations.createEvent, handleValidationErrors, EventController.create);
-// работатет
-app.patch('/events', checkAuth, Validations.updateEvent, handleValidationErrors, EventController.update);
-// работает
-app.get('/events/:id', checkAuth, EventController.getById);
-// работает
-app.post('/events/get-all-user-events', checkAuth, EventController.getAllUserEvents);
-// работатет
-app.post('/events/add-users', checkAuth, Validations.addOrRemoveUsersToEvent, handleValidationErrors, EventController.addUsers);
-// работатет
-app.post('/events/remove-users', checkAuth, Validations.addOrRemoveUsersToEvent, handleValidationErrors, EventController.removeUsers);
-// работает
-app.post('/events/join/:id', checkAuth, EventController.joinToEvent);
-// работает
-app.post('/events/leave/:id', checkAuth, EventController.leaveToEvent);
+app.use(authRouter);
+app.use(userRouter);
+app.use(tagRouter);
+app.use(eventRouter);
+app.use(uploadRouter);
 
 
-app.listen(port, (err) => {
+app.listen(PORT, (err) => {
     if (err) {
         return console.log(err);
     }
