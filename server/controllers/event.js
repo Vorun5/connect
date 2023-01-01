@@ -1,10 +1,10 @@
-import EventModel from "../models/Event.js";
+import {Event} from "../models/index.js";
 import {ObjectId} from "mongodb";
 
 export const create = async (req, res) => {
     try {
         const idCreator = req.userId;
-        const doc = new EventModel({
+        const doc = new Event({
             idCreator: idCreator, users: [{
                 id: idCreator, date: Date.now(),
             }], ...req.body,
@@ -26,7 +26,7 @@ export const update = async (req, res) => {
     try {
         const userId = req.userId;
         const eventId = req.body._id;
-        const event = await EventModel.findById(eventId);
+        const event = await Event.findById(eventId);
 
         if (!event) {
             return res.status(404).json({
@@ -50,7 +50,7 @@ export const update = async (req, res) => {
             usersWhoWantToJoin = event.usersWhoWantToJoin;
         }
 
-        const updateEvent = await EventModel.findByIdAndUpdate(eventId, {
+        const updateEvent = await Event.findByIdAndUpdate(eventId, {
             name: options.name,
             description: options.description,
             date: options.date,
@@ -86,7 +86,7 @@ export const getById = async (req, res) => {
     try {
         const id = req.params.id;
         const userId = req.userId;
-        const event = await EventModel.findById(id);
+        const event = await Event.findById(id);
         if (!event) {
             return res.status(404).json({
                 message: 'event is not found'
@@ -120,7 +120,7 @@ export const getAllUserEvents = async (req, res) => {
         const userId = ObjectId(req.userId);
 
         console.log(userId);
-        const events = await EventModel.find({
+        const events = await Event.find({
             users: {
                 $elemMatch: {
                     id: userId
@@ -165,7 +165,7 @@ export const addUsers = async (req, res) => {
         }
 
         if (usersAreOnWaitingList(users, event.usersWhoWantToJoin)) {
-            const newEvent = await EventModel.findByIdAndUpdate(eventId, {
+            const newEvent = await Event.findByIdAndUpdate(eventId, {
                 $pullAll: {usersWhoWantToJoin: users},
                 $push: {
                     users: users.map(user => ({
@@ -203,7 +203,7 @@ export const removeUsers = async (req, res) => {
         const userId = req.userId;
         const eventId = req.body.id;
         const users = req.body.users;
-        const event = await EventModel.findById(eventId);
+        const event = await Event.findById(eventId);
 
         if (!event) {
             return res.status(404).json({
@@ -219,7 +219,7 @@ export const removeUsers = async (req, res) => {
         }
 
         if (usersAreOnMemberEvent(users, event)) {
-            const newEvent = await EventModel.findByIdAndUpdate(eventId, {
+            const newEvent = await Event.findByIdAndUpdate(eventId, {
                 $pullAll: {
                     users: usersWithDateAndLastDateInChat(users, event),
                 },
@@ -253,7 +253,7 @@ export const joinToEvent = async (req, res) => {
     try {
         const userId = req.userId;
         const eventId = req.params.id;
-        const event = await EventModel.findById(eventId);
+        const event = await Event.findById(eventId);
 
 
         if (!event) {
@@ -269,7 +269,7 @@ export const joinToEvent = async (req, res) => {
         }
 
         if (event.entryAfterAdminApproval) {
-            const newEvent = await EventModel.findByIdAndUpdate(eventId, {
+            const newEvent = await Event.findByIdAndUpdate(eventId, {
                 $push: {usersWhoWantToJoin: userId},
             }, {
                 returnDocument: 'after',
@@ -286,7 +286,7 @@ export const joinToEvent = async (req, res) => {
             });
         }
 
-        const newEvent = await EventModel.findByIdAndUpdate(eventId, {
+        const newEvent = await Event.findByIdAndUpdate(eventId, {
             $push: {
                 users: {
                     id: userId
@@ -317,7 +317,7 @@ export const leaveToEvent = async (req, res) => {
     try {
         const userId = req.userId;
         const eventId = req.params.id;
-        const event = await EventModel.findById(eventId);
+        const event = await Event.findById(eventId);
 
 
         if (!event) {
@@ -332,7 +332,7 @@ export const leaveToEvent = async (req, res) => {
             });
         }
 
-        const newEvent = await EventModel.findByIdAndUpdate(eventId, {
+        const newEvent = await Event.findByIdAndUpdate(eventId, {
             $pull: {
                 users: {
                     id: userId

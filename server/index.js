@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import {port} from './config.js';
 import * as Validations from './validations.js';
 import {EventController, TagController, UserController, FileController} from "./controllers/index.js";
-import {checkAuth, handleValidationErrors} from "./utils/index.js";
+import {checkAuth, handleValidationErrors} from "./middlewares/index.js";
 import fileUpload from 'express-fileupload';
 
 mongoose.connect('mongodb://localhost/connect')

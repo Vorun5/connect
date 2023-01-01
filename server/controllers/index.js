@@ -1,4 +1,6 @@
-export * as  UserController from "./UserController.js";
-export * as  TagController from "./TagController.js";
-export * as  EventController from "./EventController.js";
-export * as FileController from "./FileController.js";
+import * as  UserController from "./user.js";
+import * as  TagController from "./tag.js";
+import * as  EventController from "./event.js";
+import * as FileController from "./file.js";
+
+export {UserController, TagController, EventController, FileController};

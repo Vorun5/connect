@@ -1,12 +1,12 @@
-import TagModel from "../models/Tag.js";
+import {Tag} from "../models/index.js";
 
 // создать тег, но если тег с таким названием уже создан, то он просто вернёт его
 export const create = async (req, res) => {
     try {
         const tagName = req.body.name;
-        const tag = await TagModel.findOne({'name': tagName});
+        const tag = await Tag.findOne({'name': tagName});
         if (!tag) {
-            const doc = new TagModel({name: tagName});
+            const doc = new Tag({name: tagName});
             const newTag = await doc.save();
 
             return res.json(newTag._doc)
@@ -24,7 +24,7 @@ export const create = async (req, res) => {
 export const find = async (req, res) => {
     try {
         const s = req.params.string;
-        const tags = await TagModel.find({
+        const tags = await Tag.find({
             name: new RegExp(s, 'i')
         });
 

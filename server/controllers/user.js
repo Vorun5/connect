@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import UserModel from "../models/User.js";
+import {User} from "../models/index.js";
 import jwt from "jsonwebtoken";
 import {secretKey} from "../config.js";
 
@@ -9,7 +9,7 @@ export const singUp = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
 
-        const checkUsername = await UserModel.findOne({"username": req.body.username.toLowerCase()});
+        const checkUsername = await User.findOne({"username": req.body.username.toLowerCase()});
 
         if (checkUsername) {
             return res.status(403).json({
@@ -17,7 +17,7 @@ export const singUp = async (req, res) => {
             });
         }
 
-        const doc = new UserModel({
+        const doc = new User({
             username: req.body.username.toLowerCase(),
             displayUsername: req.body.username,
             name: req.body.name,
@@ -46,7 +46,7 @@ export const singUp = async (req, res) => {
 export const login = async (req, res) => {
     try {
 
-        const user = await UserModel.findOne({username: req.body.username.toLowerCase()});
+        const user = await User.findOne({username: req.body.username.toLowerCase()});
         if (!user) {
             return res.status(403).json({
                 message: 'wrong username or password',
@@ -79,7 +79,7 @@ export const login = async (req, res) => {
 
 export const getMe = async (req, res) => {
     try {
-        const user = await UserModel.findById(req.userId);
+        const user = await User.findById(req.userId);
 
         if (!user) {
             return res.status(403).json({
@@ -101,7 +101,7 @@ export const getMe = async (req, res) => {
 export const getOneUser = async (req, res) => {
     try {
         const username = req.params.username.toLowerCase();
-        const user = await UserModel.findOne({'username': username});
+        const user = await User.findOne({'username': username});
 
         if (!user) {
             return res.status(404).json({
@@ -131,7 +131,7 @@ export const update = async (req, res) => {
         }
 
 
-        const user = await UserModel.findByIdAndUpdate(userId, {
+        const user = await User.findByIdAndUpdate(userId, {
             username: req.body.username.toLowerCase(),
             displayUsername: req.body.username,
             name: req.body.name,
