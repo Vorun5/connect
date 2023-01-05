@@ -1,10 +1,9 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:app/data/api/api_services.dart';
 import 'package:app/data/dto/user_to_login.dart';
 import 'package:app/data/dto/user_to_sign_up.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// ignore: prefer-match-file-name
 class AuthNotifier extends StateNotifier<bool?> {
   AuthNotifier() : super(null);
 

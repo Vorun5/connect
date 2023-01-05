@@ -1,5 +1,6 @@
 import 'package:app/data/api/api_constants.dart';
 import 'package:app/data/dto/event.dart';
+import 'package:app/data/dto/event_preview.dart';
 import 'package:app/data/dto/event_to_create.dart';
 import 'package:app/data/dto/user.dart';
 import 'package:app/data/dto/user_to_login.dart';
@@ -129,6 +130,27 @@ class ApiServices {
       }
 
       return const Tuple2(null, serverErrorStatus);
+    }
+  }
+
+  static Future<List<EventPreview>> getAllEvents() async {
+    final storage = await SharedPreferences.getInstance();
+    final token = storage.getString('token');
+    _dio.options.headers['authorization'] = token;
+    const url = ApiConstants.baseUrl + ApiConstants.getAllEvents;
+    try {
+      final response = await _dio.get(url);
+      final data = response.data as List;
+      final events = data
+          .map(
+            (jsonEvent) =>
+                EventPreview.fromJson(jsonEvent as Map<String, dynamic>),
+          )
+          .toList();
+
+      return events;
+    } on DioError {
+      return [];
     }
   }
 

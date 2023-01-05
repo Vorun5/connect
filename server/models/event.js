@@ -10,6 +10,7 @@ const Event = new mongoose.Schema({
             type: String,
             required: true,
         },
+        imageUrl: String,
         description: String,
         date: Date,
         appearInSearch: {

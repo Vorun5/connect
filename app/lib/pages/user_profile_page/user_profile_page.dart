@@ -46,7 +46,7 @@ Widget _userProfilePage(BuildContext context, WidgetRef ref) {
                     children: [
                       Text(
                         i18n.userProfile.aboutMe,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: FontSize.normal,
                           fontWeight: FontWeight.w500,
                         ),

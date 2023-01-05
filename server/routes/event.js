@@ -12,7 +12,7 @@ eventRouter.patch('/events', auth, updateEvent, validation, EventController.upda
 // работает
 eventRouter.get('/events/:id', auth, EventController.getById);
 // работает
-eventRouter.post('/events/get-all-user-events', auth, EventController.getAllUserEvents);
+eventRouter.get('/get-all-user-events', auth, EventController.getAllUserEvents);
 // работатет
 eventRouter.post('/events/add-users', auth, addOrRemoveUsersToEvent, validation, EventController.addUsers);
 // работатет

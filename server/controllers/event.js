@@ -41,9 +41,6 @@ export const update = async (req, res) => {
 
         const {_id, ...options} = req.body;
 
-        console.log(options);
-
-
         let usersWhoWantToJoin = [];
         if (options.entryAfterAdminApproval) {
             usersWhoWantToJoin = event.usersWhoWantToJoin;
@@ -57,6 +54,7 @@ export const update = async (req, res) => {
             showAllMessage: options.showAllMessage,
             entryAfterAdminApproval: options.entryAfterAdminApproval,
             tags: options.tags,
+            imageUrl: options.imageUrl,
             idPinnedMessages: options.idPinnedMessages,
             geotag: options.geotag,
             usersWhoWantToJoin: usersWhoWantToJoin,
@@ -117,7 +115,6 @@ export const getById = async (req, res) => {
 export const getAllUserEvents = async (req, res) => {
     try {
         const userId = ObjectId(req.userId);
-
         console.log(userId);
         const events = await Event.find({
             users: {
@@ -361,7 +358,9 @@ export const leaveToEvent = async (req, res) => {
 
 
 const eventInformationForUser = (event) => {
-    const {appearInSearch, showAllMessage, entryAfterAdminApproval, usersWhoWantToJoin, ...e} = event;
+    const {appearInSearch, showAllMessage, entryAfterAdminApproval, usersWhoWantToJoin, users, teams, idCreator, idPinnedMessages, ...e} = event;
+    e.userCount = users.length;
+    e.teamCount = teams.length;
 
     return e;
 }

@@ -51,6 +51,7 @@ export const createTag = [
 export const createEvent = [
     // body('name', 'name needed').isString().replace(/\s+/g, ' ').trim().isLength({min: minNumChName, max: maxNumChName}),
     body('name', 'name needed').isString().isLength({min: minNumChName, max: maxNumChName}),
+    body('imageUrl', 'imageUrl must be url').optional().isString(),
     body('description', 'description must be string').optional().isString().isLength({max: maxDescriptionChUsername}),
     body('date', 'date must be date string').optional().isDate(),
     body('tags', 'tags must be array tags id').optional().isArray(),
@@ -65,6 +66,7 @@ export const updateEvent = [
     ...createEvent,
     body('_id', '_id must be id').isMongoId(),
     body('idPinnedMessages', 'idPinnedMessage must be id').optional().isArray(),
+    body('imageUrl', 'imageUrl must be url').optional().isString(),
     body('appearInSearch', 'appearInSearch must be bool').isBoolean(),
     body('showAllMessage', 'appearInSearch must be bool').isBoolean(),
     body('entryAfterAdminApproval', 'entryAfterAdminApproval must be bool').isBoolean(),

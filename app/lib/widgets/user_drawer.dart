@@ -1,22 +1,17 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
-import 'package:app/data/api/api_services.dart';
-import 'package:app/data/dto/event_to_create.dart';
 import 'package:app/data/dto/user.dart';
 import 'package:app/i18n/strings.g.dart';
 import 'package:app/providers/auth_provider.dart';
 import 'package:app/providers/my_profile.dart';
-import 'package:app/utils/form_validators.dart';
 import 'package:app/utils/gaps.dart';
 import 'package:app/utils/paddings.dart';
-import 'package:app/utils/style_constants.dart';
 import 'package:app/utils/themes.dart';
 import 'package:app/widgets/basic_widgets/error_text.dart';
-import 'package:app/widgets/basic_widgets/forms/form_text_field.dart';
 import 'package:app/widgets/basic_widgets/hoverable.dart';
+import 'package:app/widgets/create_event_form.dart';
 import 'package:app/widgets/user_preview.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:go_router/go_router.dart';
@@ -39,7 +34,7 @@ Widget _userDrawer(BuildContext context, WidgetRef ref) {
         }
 
         return Padding(
-          padding: EdgeInsets.all(Paddings.small),
+          padding: const EdgeInsets.all(Paddings.small),
           child: Column(
             children: [
               Expanded(
@@ -61,7 +56,7 @@ Widget _userDrawer(BuildContext context, WidgetRef ref) {
                         Icons.event,
                         color: Colors.orangeAccent,
                       ),
-                      onTap: () => _createEventForm(context),
+                      onTap: () => createEventForm(context),
                     ),
                     _DrawerButton(
                       text: i18n.drawer.language,
@@ -75,7 +70,7 @@ Widget _userDrawer(BuildContext context, WidgetRef ref) {
                     ),
                     if (selectsLanguage.value)
                       Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           top: Paddings.tiny,
                           right: Paddings.tiny,
                           bottom: Paddings.small,
@@ -116,7 +111,7 @@ Widget _userDrawer(BuildContext context, WidgetRef ref) {
                 alignment: FractionalOffset.bottomCenter,
                 child: Column(
                   children: [
-                    Divider(),
+                    const Divider(),
                     _DrawerButton(
                       text: i18n.drawer.exit,
                       icon: const Icon(
@@ -168,7 +163,7 @@ Widget _userDrawer(BuildContext context, WidgetRef ref) {
 Widget __drawerHeader(BuildContext context, User user) => SizedBox(
       height: 180,
       child: DrawerHeader(
-        padding: EdgeInsets.only(bottom: Paddings.normal),
+        padding: const EdgeInsets.only(bottom: Paddings.normal),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -203,7 +198,7 @@ Widget __drawerHeader(BuildContext context, User user) => SizedBox(
                 ),
                 IconButton(
                   onPressed: () => context.goNamed('edit'),
-                  icon: Icon(Icons.edit),
+                  icon: const Icon(Icons.edit),
                 ),
               ],
             ),
@@ -254,76 +249,3 @@ Widget __drawerButton({
         ),
       ),
     );
-
-Future<void> _createEventForm(BuildContext context) {
-  final formKey = GlobalKey<FormBuilderState>();
-  final i18n = Translations.of(context);
-
-  return showDialog<void>(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Center(child: Text(i18n.drawer.createEvent)),
-        content: SizedBox(
-          width: StyleConstants.maxFormWidth,
-          child: FormBuilder(
-            key: formKey,
-            child: Column(
-              children: [
-                FormTextField(
-                  name: 'name',
-                  label: i18n.form.labels.name,
-                  validator: FormValidators.name,
-                ),
-                Gaps.normal,
-                FormTextField(
-                  name: 'description',
-                  label: i18n.form.labels.description,
-                  validator: FormValidators.description,
-                ),
-              ],
-            ),
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: Theme.of(context).textTheme.labelLarge,
-            ),
-            child: Text(i18n.buttons.create),
-            onPressed: () async {
-              final currentState = formKey.currentState;
-
-              if (currentState?.saveAndValidate() ?? false) {
-                final value = currentState?.value;
-                if (value != null) {
-                  final response = await ApiServices.createEvent(
-                      EventToCreate.fromJson(value));
-                  if (response != null) {
-                    print('event create');
-                  } else {
-                    print('event not create');
-                  }
-                }
-              } else {
-                debugPrint(
-                  formKey.currentState?.value.toString(),
-                );
-                debugPrint('validation failed');
-              }
-            },
-          ),
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: Theme.of(context).textTheme.labelLarge,
-            ),
-            child: Text(i18n.buttons.close),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
