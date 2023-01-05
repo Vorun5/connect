@@ -21,7 +21,7 @@ Tag _$TagFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Tag {
   @JsonKey(name: '_id')
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ abstract class $TagCopyWith<$Res> {
   factory $TagCopyWith(Tag value, $Res Function(Tag) then) =
       _$TagCopyWithImpl<$Res, Tag>;
   @useResult
-  $Res call({@JsonKey(name: '_id') int id, String name});
+  $Res call({@JsonKey(name: '_id') String id, String name});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$TagCopyWithImpl<$Res, $Val extends Tag> implements $TagCopyWith<$Res> {
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -71,7 +71,7 @@ abstract class _$$_TagCopyWith<$Res> implements $TagCopyWith<$Res> {
       __$$_TagCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: '_id') int id, String name});
+  $Res call({@JsonKey(name: '_id') String id, String name});
 }
 
 /// @nodoc
@@ -90,7 +90,7 @@ class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$_Tag>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -108,7 +108,7 @@ class _$_Tag implements _Tag {
 
   @override
   @JsonKey(name: '_id')
-  final int id;
+  final String id;
   @override
   final String name;
 
@@ -146,14 +146,14 @@ class _$_Tag implements _Tag {
 
 abstract class _Tag implements Tag {
   factory _Tag(
-      {@JsonKey(name: '_id') required final int id,
+      {@JsonKey(name: '_id') required final String id,
       required final String name}) = _$_Tag;
 
   factory _Tag.fromJson(Map<String, dynamic> json) = _$_Tag.fromJson;
 
   @override
   @JsonKey(name: '_id')
-  int get id;
+  String get id;
   @override
   String get name;
   @override

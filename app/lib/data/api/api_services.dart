@@ -73,10 +73,13 @@ class ApiServices {
     final storage = await SharedPreferences.getInstance();
     final token = storage.getString('token');
     _dio.options.headers['authorization'] = token;
-
     const url = ApiConstants.baseUrl + ApiConstants.eventEndpoint;
+
+    final data = eventToCreate.toJson()
+      ..removeWhere((key, value) => value == null);
+
     try {
-      final response = await _dio.post(url, data: eventToCreate.toJson());
+      final response = await _dio.post(url, data: data);
 
       return Event.fromJson(response.data as Map<String, dynamic>);
     } on DioError catch (e) {

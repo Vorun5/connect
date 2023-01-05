@@ -20,8 +20,8 @@ TeamMessage _$TeamMessageFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TeamMessage {
-  int get userId => throw _privateConstructorUsedError;
-  int get teamId => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
+  String get teamId => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
 
@@ -37,7 +37,7 @@ abstract class $TeamMessageCopyWith<$Res> {
           TeamMessage value, $Res Function(TeamMessage) then) =
       _$TeamMessageCopyWithImpl<$Res, TeamMessage>;
   @useResult
-  $Res call({int userId, int teamId, String text, DateTime date});
+  $Res call({String userId, String teamId, String text, DateTime date});
 }
 
 /// @nodoc
@@ -62,11 +62,11 @@ class _$TeamMessageCopyWithImpl<$Res, $Val extends TeamMessage>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -87,7 +87,7 @@ abstract class _$$_TeamMessageCopyWith<$Res>
       __$$_TeamMessageCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int userId, int teamId, String text, DateTime date});
+  $Res call({String userId, String teamId, String text, DateTime date});
 }
 
 /// @nodoc
@@ -110,11 +110,11 @@ class __$$_TeamMessageCopyWithImpl<$Res>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       teamId: null == teamId
           ? _value.teamId
           : teamId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -140,9 +140,9 @@ class _$_TeamMessage implements _TeamMessage {
       _$$_TeamMessageFromJson(json);
 
   @override
-  final int userId;
+  final String userId;
   @override
-  final int teamId;
+  final String teamId;
   @override
   final String text;
   @override
@@ -184,8 +184,8 @@ class _$_TeamMessage implements _TeamMessage {
 
 abstract class _TeamMessage implements TeamMessage {
   factory _TeamMessage(
-      {required final int userId,
-      required final int teamId,
+      {required final String userId,
+      required final String teamId,
       required final String text,
       required final DateTime date}) = _$_TeamMessage;
 
@@ -193,9 +193,9 @@ abstract class _TeamMessage implements TeamMessage {
       _$_TeamMessage.fromJson;
 
   @override
-  int get userId;
+  String get userId;
   @override
-  int get teamId;
+  String get teamId;
   @override
   String get text;
   @override

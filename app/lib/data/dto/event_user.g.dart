@@ -7,7 +7,7 @@ part of 'event_user.dart';
 // **************************************************************************
 
 _$_EventUser _$$_EventUserFromJson(Map<String, dynamic> json) => _$_EventUser(
-      id: json['id'] as int,
+      id: json['id'] as String,
       date: DateTime.parse(json['date'] as String),
       lastTimeInChat: DateTime.parse(json['lastTimeInChat'] as String),
     );

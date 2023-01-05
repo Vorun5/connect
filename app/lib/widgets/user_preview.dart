@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:app/data/dto/user.dart';
 import 'package:app/utils/font_size.dart';
 import 'package:app/utils/gaps.dart';
 import 'package:app/widgets/avatar.dart';
 import 'package:app/widgets/basic_widgets/username.dart';
+import 'package:flutter/material.dart';
+import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 
 part 'user_preview.g.dart';
 

@@ -264,26 +264,24 @@ Future<void> _createEventForm(BuildContext context) {
     builder: (BuildContext context) {
       return AlertDialog(
         title: Center(child: Text(i18n.drawer.createEvent)),
-        content: FormBuilder(
-          child: SizedBox(
-            width: StyleConstants.maxFormWidth,
-            child: FormBuilder(
-              key: formKey,
-              child: Column(
-                children: [
-                  FormTextField(
-                    name: 'name',
-                    label: i18n.form.labels.name,
-                    validator: FormValidators.name,
-                  ),
-                  Gaps.normal,
-                  FormTextField(
-                    name: 'description',
-                    label: i18n.form.labels.description,
-                    validator: FormValidators.description,
-                  ),
-                ],
-              ),
+        content: SizedBox(
+          width: StyleConstants.maxFormWidth,
+          child: FormBuilder(
+            key: formKey,
+            child: Column(
+              children: [
+                FormTextField(
+                  name: 'name',
+                  label: i18n.form.labels.name,
+                  validator: FormValidators.name,
+                ),
+                Gaps.normal,
+                FormTextField(
+                  name: 'description',
+                  label: i18n.form.labels.description,
+                  validator: FormValidators.description,
+                ),
+              ],
             ),
           ),
         ),

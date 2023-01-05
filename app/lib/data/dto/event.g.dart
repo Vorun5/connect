@@ -7,8 +7,8 @@ part of 'event.dart';
 // **************************************************************************
 
 _$_Event _$$_EventFromJson(Map<String, dynamic> json) => _$_Event(
-      id: json['_id'] as int,
-      idCreator: json['idCreator'] as int,
+      id: json['_id'] as String,
+      idCreator: json['idCreator'] as String,
       name: json['name'] as String,
       description: json['description'] as String?,
       date:
@@ -17,15 +17,15 @@ _$_Event _$$_EventFromJson(Map<String, dynamic> json) => _$_Event(
       showAllMessage: json['showAllMessage'] as bool,
       entryAfterAdminApproval: json['entryAfterAdminApproval'] as bool,
       idPinnedMessages: (json['idPinnedMessages'] as List<dynamic>)
-          .map((e) => e as int)
+          .map((e) => e as String)
           .toList(),
       usersWhoWantToJoin: (json['usersWhoWantToJoin'] as List<dynamic>)
-          .map((e) => e as int)
+          .map((e) => e as String)
           .toList(),
       users: (json['users'] as List<dynamic>)
           .map((e) => EventUser.fromJson(e as Map<String, dynamic>))
           .toList(),
-      teams: (json['teams'] as List<dynamic>).map((e) => e as int).toList(),
+      teams: (json['teams'] as List<dynamic>).map((e) => e as String).toList(),
       tags: (json['tags'] as List<dynamic>)
           .map((e) => Tag.fromJson(e as Map<String, dynamic>))
           .toList(),

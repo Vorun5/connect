@@ -21,18 +21,18 @@ Event _$EventFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Event {
   @JsonKey(name: '_id')
-  int get id => throw _privateConstructorUsedError;
-  int get idCreator => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get idCreator => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
   bool get appearInSearch => throw _privateConstructorUsedError;
   bool get showAllMessage => throw _privateConstructorUsedError;
   bool get entryAfterAdminApproval => throw _privateConstructorUsedError;
-  List<int> get idPinnedMessages => throw _privateConstructorUsedError;
-  List<int> get usersWhoWantToJoin => throw _privateConstructorUsedError;
+  List<String> get idPinnedMessages => throw _privateConstructorUsedError;
+  List<String> get usersWhoWantToJoin => throw _privateConstructorUsedError;
   List<EventUser> get users => throw _privateConstructorUsedError;
-  List<int> get teams => throw _privateConstructorUsedError;
+  List<String> get teams => throw _privateConstructorUsedError;
   List<Tag> get tags => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,18 +46,18 @@ abstract class $EventCopyWith<$Res> {
       _$EventCopyWithImpl<$Res, Event>;
   @useResult
   $Res call(
-      {@JsonKey(name: '_id') int id,
-      int idCreator,
+      {@JsonKey(name: '_id') String id,
+      String idCreator,
       String name,
       String? description,
       DateTime? date,
       bool appearInSearch,
       bool showAllMessage,
       bool entryAfterAdminApproval,
-      List<int> idPinnedMessages,
-      List<int> usersWhoWantToJoin,
+      List<String> idPinnedMessages,
+      List<String> usersWhoWantToJoin,
       List<EventUser> users,
-      List<int> teams,
+      List<String> teams,
       List<Tag> tags});
 }
 
@@ -92,11 +92,11 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       idCreator: null == idCreator
           ? _value.idCreator
           : idCreator // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -124,11 +124,11 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
       idPinnedMessages: null == idPinnedMessages
           ? _value.idPinnedMessages
           : idPinnedMessages // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
       usersWhoWantToJoin: null == usersWhoWantToJoin
           ? _value.usersWhoWantToJoin
           : usersWhoWantToJoin // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
       users: null == users
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
@@ -136,7 +136,7 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
       teams: null == teams
           ? _value.teams
           : teams // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
       tags: null == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -152,18 +152,18 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: '_id') int id,
-      int idCreator,
+      {@JsonKey(name: '_id') String id,
+      String idCreator,
       String name,
       String? description,
       DateTime? date,
       bool appearInSearch,
       bool showAllMessage,
       bool entryAfterAdminApproval,
-      List<int> idPinnedMessages,
-      List<int> usersWhoWantToJoin,
+      List<String> idPinnedMessages,
+      List<String> usersWhoWantToJoin,
       List<EventUser> users,
-      List<int> teams,
+      List<String> teams,
       List<Tag> tags});
 }
 
@@ -194,11 +194,11 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       idCreator: null == idCreator
           ? _value.idCreator
           : idCreator // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -226,11 +226,11 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
       idPinnedMessages: null == idPinnedMessages
           ? _value._idPinnedMessages
           : idPinnedMessages // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
       usersWhoWantToJoin: null == usersWhoWantToJoin
           ? _value._usersWhoWantToJoin
           : usersWhoWantToJoin // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
       users: null == users
           ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
@@ -238,7 +238,7 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
       teams: null == teams
           ? _value._teams
           : teams // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<String>,
       tags: null == tags
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -259,10 +259,10 @@ class _$_Event implements _Event {
       required this.appearInSearch,
       required this.showAllMessage,
       required this.entryAfterAdminApproval,
-      required final List<int> idPinnedMessages,
-      required final List<int> usersWhoWantToJoin,
+      required final List<String> idPinnedMessages,
+      required final List<String> usersWhoWantToJoin,
       required final List<EventUser> users,
-      required final List<int> teams,
+      required final List<String> teams,
       required final List<Tag> tags})
       : _idPinnedMessages = idPinnedMessages,
         _usersWhoWantToJoin = usersWhoWantToJoin,
@@ -275,9 +275,9 @@ class _$_Event implements _Event {
 
   @override
   @JsonKey(name: '_id')
-  final int id;
+  final String id;
   @override
-  final int idCreator;
+  final String idCreator;
   @override
   final String name;
   @override
@@ -290,16 +290,16 @@ class _$_Event implements _Event {
   final bool showAllMessage;
   @override
   final bool entryAfterAdminApproval;
-  final List<int> _idPinnedMessages;
+  final List<String> _idPinnedMessages;
   @override
-  List<int> get idPinnedMessages {
+  List<String> get idPinnedMessages {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_idPinnedMessages);
   }
 
-  final List<int> _usersWhoWantToJoin;
+  final List<String> _usersWhoWantToJoin;
   @override
-  List<int> get usersWhoWantToJoin {
+  List<String> get usersWhoWantToJoin {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_usersWhoWantToJoin);
   }
@@ -311,9 +311,9 @@ class _$_Event implements _Event {
     return EqualUnmodifiableListView(_users);
   }
 
-  final List<int> _teams;
+  final List<String> _teams;
   @override
-  List<int> get teams {
+  List<String> get teams {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_teams);
   }
@@ -392,27 +392,27 @@ class _$_Event implements _Event {
 
 abstract class _Event implements Event {
   factory _Event(
-      {@JsonKey(name: '_id') required final int id,
-      required final int idCreator,
+      {@JsonKey(name: '_id') required final String id,
+      required final String idCreator,
       required final String name,
       required final String? description,
       required final DateTime? date,
       required final bool appearInSearch,
       required final bool showAllMessage,
       required final bool entryAfterAdminApproval,
-      required final List<int> idPinnedMessages,
-      required final List<int> usersWhoWantToJoin,
+      required final List<String> idPinnedMessages,
+      required final List<String> usersWhoWantToJoin,
       required final List<EventUser> users,
-      required final List<int> teams,
+      required final List<String> teams,
       required final List<Tag> tags}) = _$_Event;
 
   factory _Event.fromJson(Map<String, dynamic> json) = _$_Event.fromJson;
 
   @override
   @JsonKey(name: '_id')
-  int get id;
+  String get id;
   @override
-  int get idCreator;
+  String get idCreator;
   @override
   String get name;
   @override
@@ -426,13 +426,13 @@ abstract class _Event implements Event {
   @override
   bool get entryAfterAdminApproval;
   @override
-  List<int> get idPinnedMessages;
+  List<String> get idPinnedMessages;
   @override
-  List<int> get usersWhoWantToJoin;
+  List<String> get usersWhoWantToJoin;
   @override
   List<EventUser> get users;
   @override
-  List<int> get teams;
+  List<String> get teams;
   @override
   List<Tag> get tags;
   @override

@@ -8,18 +8,18 @@ part 'event.g.dart';
 @freezed
 class Event with _$Event {
   factory Event({
-    @JsonKey(name: '_id') required int id,
-    required int idCreator,
+    @JsonKey(name: '_id') required String id,
+    required String idCreator,
     required String name,
     required String? description,
     required DateTime? date,
     required bool appearInSearch,
     required bool showAllMessage,
     required bool entryAfterAdminApproval,
-    required List<int> idPinnedMessages,
-    required List<int> usersWhoWantToJoin,
+    required List<String> idPinnedMessages,
+    required List<String> usersWhoWantToJoin,
     required List<EventUser> users,
-    required List<int> teams,
+    required List<String> teams,
     required List<Tag> tags,
   }) = _Event;
 

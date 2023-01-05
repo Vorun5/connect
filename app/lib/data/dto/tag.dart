@@ -6,7 +6,7 @@ part 'tag.g.dart';
 @freezed
 class Tag with _$Tag {
   factory Tag({
-    @JsonKey(name: '_id') required int id,
+    @JsonKey(name: '_id') required String id,
     required String name,
   }) = _Tag;
 

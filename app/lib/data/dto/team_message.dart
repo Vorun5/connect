@@ -6,8 +6,8 @@ part 'team_message.g.dart';
 @freezed
 class TeamMessage with _$TeamMessage {
   factory TeamMessage({
-    required int userId,
-    required int teamId,
+    required String userId,
+    required String teamId,
     required String text,
     required DateTime date,
   }) = _TeamMessage;

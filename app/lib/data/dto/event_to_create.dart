@@ -9,7 +9,7 @@ class EventToCreate with _$EventToCreate {
     required String name,
     required String? description,
     required DateTime? date,
-    required List<String> tags,
+    required List<String>? tags,
   }) = _EventToCreate;
 
   factory EventToCreate.fromJson(Map<String, dynamic> json) =>

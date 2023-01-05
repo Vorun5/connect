@@ -6,7 +6,7 @@ part 'event_user.g.dart';
 @freezed
 class EventUser with _$EventUser {
   factory EventUser({
-    required int id,
+    required String id,
     required DateTime date,
     required DateTime lastTimeInChat,
   }) = _EventUser;

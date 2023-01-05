@@ -8,8 +8,8 @@ part of 'team_message.dart';
 
 _$_TeamMessage _$$_TeamMessageFromJson(Map<String, dynamic> json) =>
     _$_TeamMessage(
-      userId: json['userId'] as int,
-      teamId: json['teamId'] as int,
+      userId: json['userId'] as String,
+      teamId: json['teamId'] as String,
       text: json['text'] as String,
       date: DateTime.parse(json['date'] as String),
     );

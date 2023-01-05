@@ -20,7 +20,7 @@ EventUser _$EventUserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$EventUser {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   DateTime get lastTimeInChat => throw _privateConstructorUsedError;
 
@@ -35,7 +35,7 @@ abstract class $EventUserCopyWith<$Res> {
   factory $EventUserCopyWith(EventUser value, $Res Function(EventUser) then) =
       _$EventUserCopyWithImpl<$Res, EventUser>;
   @useResult
-  $Res call({int id, DateTime date, DateTime lastTimeInChat});
+  $Res call({String id, DateTime date, DateTime lastTimeInChat});
 }
 
 /// @nodoc
@@ -59,7 +59,7 @@ class _$EventUserCopyWithImpl<$Res, $Val extends EventUser>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -79,7 +79,7 @@ abstract class _$$_EventUserCopyWith<$Res> implements $EventUserCopyWith<$Res> {
       __$$_EventUserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, DateTime date, DateTime lastTimeInChat});
+  $Res call({String id, DateTime date, DateTime lastTimeInChat});
 }
 
 /// @nodoc
@@ -101,7 +101,7 @@ class __$$_EventUserCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -124,7 +124,7 @@ class _$_EventUser implements _EventUser {
       _$$_EventUserFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final DateTime date;
   @override
@@ -166,7 +166,7 @@ class _$_EventUser implements _EventUser {
 
 abstract class _EventUser implements EventUser {
   factory _EventUser(
-      {required final int id,
+      {required final String id,
       required final DateTime date,
       required final DateTime lastTimeInChat}) = _$_EventUser;
 
@@ -174,7 +174,7 @@ abstract class _EventUser implements EventUser {
       _$_EventUser.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   DateTime get date;
   @override
