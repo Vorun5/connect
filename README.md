@@ -11,5 +11,3 @@
 - ###### Выбираем платформу 
 - ###### Даётся выбор платформ
 - ###### Запускаем проект
-
-![N|Solid](https://sun9-west.userapi.com/sun9-46/s/v1/ig2/Gb_Op47feOQMR2Rm-8NkflrWnFEyxK7q5ecIQGSeEb3INF3o6Q4ETMyz7GxgQC2RW02Juim60JldEuEQpnKt-xbw.jpg?size=1920x1032&quality=95&type=album)
