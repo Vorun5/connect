@@ -3,11 +3,19 @@
     "labels": {
       "username": "имя пользователя",
       "name": "имя",
-      "password": "пароль"
+      "password": "пароль",
+      "description": "описание"
     },
     "errorTexts": {
       "alphanumeric": "$field может состоять только из латинских букв и цифр"
     }
+  },
+  "buttons": {
+    "update": "Обновить",
+    "create": "Создать",
+    "yes": "Да",
+    "no": "Нет",
+    "close": "Закрыть"
   },
   "unknownError": "Неизвестная ошибка!",
   "auth": {
@@ -31,5 +39,22 @@
     "403": "No access (status code: 403)",
     "404": "Nothing found (status code: 404)",
     "500": "Server error. Sorry >_< (status code: 500)"
-  }
+  },
+  "drawer": {
+    "myProfile": "Мой профиль",
+    "createEvent": "Создать мероприятие",
+    "language": "Язык",
+    "exit": "Выйти из приложения",
+    "confidentiality": "Конфиденциальность",
+    "logoutOfApp": "Вы точно хотите выти из приложения?"
+  },
+  "screenTitles": {
+    "userProfile": "Профиль пользователя",
+    "editProfile": "Редактировать профиль",
+    "allEvents": "Все мероприятия"
+  },
+  "userProfile": {
+    "aboutMe": "Обо мне"
+  },
+  "exit": "Выйти"
 }

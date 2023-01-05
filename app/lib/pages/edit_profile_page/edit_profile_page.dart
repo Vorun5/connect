@@ -22,7 +22,7 @@ Widget _editProfilePage(BuildContext context, WidgetRef ref) {
 
   return AppScaffold(
     appBar: AppBar(
-      title: const Text('edit profile'),
+      title: Text(i18n.screenTitles.editProfile),
       centerTitle: false,
     ),
     body: user.when(

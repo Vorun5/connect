@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 2
-/// Strings: 38 (19 per locale)
+/// Strings: 72 (36 per locale)
 ///
-/// Built on 2023-01-04 at 18:56 UTC
+/// Built on 2023-01-05 at 15:54 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -149,14 +149,19 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 
 	// Translations
 	late final _StringsFormEn form = _StringsFormEn._(_root);
+	late final _StringsButtonsEn buttons = _StringsButtonsEn._(_root);
 	String get unknownError => 'Unknown error!';
 	late final _StringsAuthEn auth = _StringsAuthEn._(_root);
 	Map<String, String> get statusCode => {
-		'400': 'Request data failed server validation  (status code: 400)',
+		'400': 'Request data failed server validation (status code: 400)',
 		'403': 'No access (status code: 403)',
 		'404': 'Nothing found (status code: 404)',
 		'500': 'Server error. Sorry >_< (status code: 500)',
 	};
+	late final _StringsDrawerEn drawer = _StringsDrawerEn._(_root);
+	late final _StringsScreenTitlesEn screenTitles = _StringsScreenTitlesEn._(_root);
+	late final _StringsUserProfileEn userProfile = _StringsUserProfileEn._(_root);
+	String get exit => 'Exit';
 }
 
 // Path: form
@@ -168,6 +173,20 @@ class _StringsFormEn {
 	// Translations
 	late final _StringsFormLabelsEn labels = _StringsFormLabelsEn._(_root);
 	late final _StringsFormErrorTextsEn errorTexts = _StringsFormErrorTextsEn._(_root);
+}
+
+// Path: buttons
+class _StringsButtonsEn {
+	_StringsButtonsEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get update => 'Update';
+	String get create => 'Create';
+	String get yes => 'Yes';
+	String get no => 'No';
+	String get close => 'Close';
 }
 
 // Path: auth
@@ -193,6 +212,43 @@ class _StringsAuthEn {
 	};
 }
 
+// Path: drawer
+class _StringsDrawerEn {
+	_StringsDrawerEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get myProfile => 'My profile';
+	String get createEvent => 'Create event';
+	String get language => 'Language';
+	String get exit => 'Log out';
+	String get confidentiality => 'Confidentiality';
+	String get logoutOfApp => 'Are you sure want to exit?';
+}
+
+// Path: screenTitles
+class _StringsScreenTitlesEn {
+	_StringsScreenTitlesEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get userProfile => 'User profile';
+	String get editProfile => 'Edit profile';
+	String get allEvents => 'All events';
+}
+
+// Path: userProfile
+class _StringsUserProfileEn {
+	_StringsUserProfileEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get aboutMe => 'About me';
+}
+
 // Path: form.labels
 class _StringsFormLabelsEn {
 	_StringsFormLabelsEn._(this._root);
@@ -203,6 +259,7 @@ class _StringsFormLabelsEn {
 	String get username => 'username';
 	String get name => 'name';
 	String get password => 'password';
+	String get description => 'description';
 }
 
 // Path: form.errorTexts
@@ -241,6 +298,7 @@ class _StringsRu implements _StringsEn {
 
 	// Translations
 	@override late final _StringsFormRu form = _StringsFormRu._(_root);
+	@override late final _StringsButtonsRu buttons = _StringsButtonsRu._(_root);
 	@override String get unknownError => 'Неизвестная ошибка!';
 	@override late final _StringsAuthRu auth = _StringsAuthRu._(_root);
 	@override Map<String, String> get statusCode => {
@@ -249,6 +307,10 @@ class _StringsRu implements _StringsEn {
 		'404': 'Nothing found (status code: 404)',
 		'500': 'Server error. Sorry >_< (status code: 500)',
 	};
+	@override late final _StringsDrawerRu drawer = _StringsDrawerRu._(_root);
+	@override late final _StringsScreenTitlesRu screenTitles = _StringsScreenTitlesRu._(_root);
+	@override late final _StringsUserProfileRu userProfile = _StringsUserProfileRu._(_root);
+	@override String get exit => 'Выйти';
 }
 
 // Path: form
@@ -260,6 +322,20 @@ class _StringsFormRu implements _StringsFormEn {
 	// Translations
 	@override late final _StringsFormLabelsRu labels = _StringsFormLabelsRu._(_root);
 	@override late final _StringsFormErrorTextsRu errorTexts = _StringsFormErrorTextsRu._(_root);
+}
+
+// Path: buttons
+class _StringsButtonsRu implements _StringsButtonsEn {
+	_StringsButtonsRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get update => 'Обновить';
+	@override String get create => 'Создать';
+	@override String get yes => 'Да';
+	@override String get no => 'Нет';
+	@override String get close => 'Закрыть';
 }
 
 // Path: auth
@@ -285,6 +361,43 @@ class _StringsAuthRu implements _StringsAuthEn {
 	};
 }
 
+// Path: drawer
+class _StringsDrawerRu implements _StringsDrawerEn {
+	_StringsDrawerRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get myProfile => 'Мой профиль';
+	@override String get createEvent => 'Создать мероприятие';
+	@override String get language => 'Язык';
+	@override String get exit => 'Выйти из приложения';
+	@override String get confidentiality => 'Конфиденциальность';
+	@override String get logoutOfApp => 'Вы точно хотите выти из приложения?';
+}
+
+// Path: screenTitles
+class _StringsScreenTitlesRu implements _StringsScreenTitlesEn {
+	_StringsScreenTitlesRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get userProfile => 'Профиль пользователя';
+	@override String get editProfile => 'Редактировать профиль';
+	@override String get allEvents => 'Все мероприятия';
+}
+
+// Path: userProfile
+class _StringsUserProfileRu implements _StringsUserProfileEn {
+	_StringsUserProfileRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get aboutMe => 'Обо мне';
+}
+
 // Path: form.labels
 class _StringsFormLabelsRu implements _StringsFormLabelsEn {
 	_StringsFormLabelsRu._(this._root);
@@ -295,6 +408,7 @@ class _StringsFormLabelsRu implements _StringsFormLabelsEn {
 	@override String get username => 'имя пользователя';
 	@override String get name => 'имя';
 	@override String get password => 'пароль';
+	@override String get description => 'описание';
 }
 
 // Path: form.errorTexts
@@ -316,7 +430,13 @@ extension on _StringsEn {
 			case 'form.labels.username': return 'username';
 			case 'form.labels.name': return 'name';
 			case 'form.labels.password': return 'password';
+			case 'form.labels.description': return 'description';
 			case 'form.errorTexts.alphanumeric': return ({required Object field}) => '${field} can only consist of latin letters and numbers';
+			case 'buttons.update': return 'Update';
+			case 'buttons.create': return 'Create';
+			case 'buttons.yes': return 'Yes';
+			case 'buttons.no': return 'No';
+			case 'buttons.close': return 'Close';
 			case 'unknownError': return 'Unknown error!';
 			case 'auth.login': return 'login';
 			case 'auth.signUp': return 'sign up';
@@ -328,10 +448,21 @@ extension on _StringsEn {
 			case 'auth.loginErrors.500': return 'Server error. Sorry💀';
 			case 'auth.signUpErrors.403': return 'A user with the same username already exists🤔';
 			case 'auth.signUpErrors.500': return 'Server error. Sorry💀';
-			case 'statusCode.400': return 'Request data failed server validation  (status code: 400)';
+			case 'statusCode.400': return 'Request data failed server validation (status code: 400)';
 			case 'statusCode.403': return 'No access (status code: 403)';
 			case 'statusCode.404': return 'Nothing found (status code: 404)';
 			case 'statusCode.500': return 'Server error. Sorry >_< (status code: 500)';
+			case 'drawer.myProfile': return 'My profile';
+			case 'drawer.createEvent': return 'Create event';
+			case 'drawer.language': return 'Language';
+			case 'drawer.exit': return 'Log out';
+			case 'drawer.confidentiality': return 'Confidentiality';
+			case 'drawer.logoutOfApp': return 'Are you sure want to exit?';
+			case 'screenTitles.userProfile': return 'User profile';
+			case 'screenTitles.editProfile': return 'Edit profile';
+			case 'screenTitles.allEvents': return 'All events';
+			case 'userProfile.aboutMe': return 'About me';
+			case 'exit': return 'Exit';
 			default: return null;
 		}
 	}
@@ -343,7 +474,13 @@ extension on _StringsRu {
 			case 'form.labels.username': return 'имя пользователя';
 			case 'form.labels.name': return 'имя';
 			case 'form.labels.password': return 'пароль';
+			case 'form.labels.description': return 'описание';
 			case 'form.errorTexts.alphanumeric': return ({required Object field}) => '${field} может состоять только из латинских букв и цифр';
+			case 'buttons.update': return 'Обновить';
+			case 'buttons.create': return 'Создать';
+			case 'buttons.yes': return 'Да';
+			case 'buttons.no': return 'Нет';
+			case 'buttons.close': return 'Закрыть';
 			case 'unknownError': return 'Неизвестная ошибка!';
 			case 'auth.login': return 'войти';
 			case 'auth.signUp': return 'зарегистрироваться';
@@ -359,6 +496,17 @@ extension on _StringsRu {
 			case 'statusCode.403': return 'No access (status code: 403)';
 			case 'statusCode.404': return 'Nothing found (status code: 404)';
 			case 'statusCode.500': return 'Server error. Sorry >_< (status code: 500)';
+			case 'drawer.myProfile': return 'Мой профиль';
+			case 'drawer.createEvent': return 'Создать мероприятие';
+			case 'drawer.language': return 'Язык';
+			case 'drawer.exit': return 'Выйти из приложения';
+			case 'drawer.confidentiality': return 'Конфиденциальность';
+			case 'drawer.logoutOfApp': return 'Вы точно хотите выти из приложения?';
+			case 'screenTitles.userProfile': return 'Профиль пользователя';
+			case 'screenTitles.editProfile': return 'Редактировать профиль';
+			case 'screenTitles.allEvents': return 'Все мероприятия';
+			case 'userProfile.aboutMe': return 'Обо мне';
+			case 'exit': return 'Выйти';
 			default: return null;
 		}
 	}

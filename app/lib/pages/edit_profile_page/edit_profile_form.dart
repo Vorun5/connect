@@ -37,23 +37,19 @@ Widget _editProfileForm(
       key: _formKey,
       child: SizedBox(
         width: StyleConstants.maxFormWidth,
-        // constraints: const BoxConstraints(
-        // maxWidth: StyleConstants.maxFormWidth,
-        // minWidth: StyleConstants.minFormWidth,
-        // ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             FormTextField(
               name: 'name',
-              label: 'Имя',
+              label: i18n.form.labels.name,
               initialValue: user.name,
               validator: FormValidators.name,
             ),
             Gaps.normal,
             FormTextField(
               name: 'username',
-              label: 'Имя пользователя',
+              label: i18n.form.labels.username,
               initialValue: user.username,
               validator: FormValidators.username(
                 i18n.form.errorTexts.alphanumeric(field: username),
@@ -62,7 +58,7 @@ Widget _editProfileForm(
             Gaps.normal,
             FormTextField(
               name: 'description',
-              label: 'Описание',
+              label: i18n.form.labels.description,
               initialValue: user.description,
               validator: FormValidators.description,
             ),
@@ -101,7 +97,7 @@ Widget _editProfileForm(
                   debugPrint('validation failed');
                 }
               },
-              child: const Text('Обновить'),
+              child: Text(i18n.buttons.update),
             ),
           ],
         ),

@@ -3,11 +3,19 @@
     "labels": {
       "username": "username",
       "name": "name",
-      "password": "password"
+      "password": "password",
+      "description": "description"
     },
     "errorTexts": {
       "alphanumeric": "$field can only consist of latin letters and numbers"
     }
+  },
+  "buttons": {
+    "update": "Update",
+    "create": "Create",
+    "yes": "Yes",
+    "no": "No",
+    "close": "Close"
   },
   "unknownError": "Unknown error!",
   "auth": {
@@ -27,9 +35,26 @@
     }
   },
   "statusCode(map)": {
-    "400": "Request data failed server validation  (status code: 400)",
+    "400": "Request data failed server validation (status code: 400)",
     "403": "No access (status code: 403)",
     "404": "Nothing found (status code: 404)",
     "500": "Server error. Sorry >_< (status code: 500)"
-  }
+  },
+  "drawer": {
+    "myProfile": "My profile",
+    "createEvent": "Create event",
+    "language": "Language",
+    "exit": "Log out",
+    "confidentiality": "Confidentiality",
+    "logoutOfApp": "Are you sure want to exit?"
+  },
+  "screenTitles": {
+    "userProfile": "User profile",
+    "editProfile": "Edit profile",
+    "allEvents": "All events"
+  },
+  "userProfile": {
+    "aboutMe": "About me"
+  },
+  "exit": "Exit"
 }

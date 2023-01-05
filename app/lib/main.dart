@@ -5,6 +5,7 @@ import 'package:app/i18n/strings.g.dart';
 import 'package:app/providers/auth_provider.dart';
 import 'package:app/providers/router_provider.dart';
 import 'package:app/utils/themes.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -19,11 +20,19 @@ void main() async {
   // ignore: avoid-ignoring-return-values
   WidgetsFlutterBinding.ensureInitialized();
   // ignore: avoid-ignoring-return-values
-  LocaleSettings.useDeviceLocale();
+  final storage = await SharedPreferences.getInstance();
+  final locallyStoredLanguageCode = storage.getString('language');
+  final locallyStoredLanguage = AppLocale.values
+      .firstWhereOrNull((e) => e.languageCode == locallyStoredLanguageCode);
+  if (locallyStoredLanguage != null) {
+    LocaleSettings.setLocale(locallyStoredLanguage);
+  } else {
+    LocaleSettings.useDeviceLocale();
+  }
+
   final isPlatformDark =
       WidgetsBinding.instance.window.platformBrightness == Brightness.dark;
 
-  final storage = await SharedPreferences.getInstance();
   final isDark = storage.getBool('theme');
   final initTheme = isDark ?? isPlatformDark ? Themes.dark : Themes.light;
   runApp(

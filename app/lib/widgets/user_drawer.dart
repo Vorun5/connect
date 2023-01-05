@@ -14,8 +14,10 @@ import 'package:app/widgets/basic_widgets/error_text.dart';
 import 'package:app/widgets/basic_widgets/forms/form_text_field.dart';
 import 'package:app/widgets/basic_widgets/hoverable.dart';
 import 'package:app/widgets/user_preview.dart';
+import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,6 +29,7 @@ part 'user_drawer.g.dart';
 Widget _userDrawer(BuildContext context, WidgetRef ref) {
   final myProfile = ref.watch(myProfileProvider);
   final i18n = Translations.of(context);
+  final selectsLanguage = useState(false);
 
   return Drawer(
     child: myProfile.when(
@@ -44,7 +47,7 @@ Widget _userDrawer(BuildContext context, WidgetRef ref) {
                   children: [
                     _DrawerHeader(user),
                     _DrawerButton(
-                      text: 'Мой профиль',
+                      text: i18n.drawer.myProfile,
                       icon: const Icon(
                         Icons.account_circle,
                         color: Colors.amber,
@@ -53,13 +56,59 @@ Widget _userDrawer(BuildContext context, WidgetRef ref) {
                           params: {'username': user.username}),
                     ),
                     _DrawerButton(
-                      text: 'Создать мероприятие',
+                      text: i18n.drawer.createEvent,
                       icon: const Icon(
                         Icons.event,
                         color: Colors.orangeAccent,
                       ),
                       onTap: () => _createEventForm(context),
                     ),
+                    _DrawerButton(
+                      text: i18n.drawer.language,
+                      isOpen: selectsLanguage.value,
+                      icon: const Icon(
+                        Icons.language_outlined,
+                        color: Color.fromARGB(255, 195, 88, 245),
+                      ),
+                      onTap: () =>
+                          selectsLanguage.value = !selectsLanguage.value,
+                    ),
+                    if (selectsLanguage.value)
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: Paddings.tiny,
+                          right: Paddings.tiny,
+                          bottom: Paddings.small,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: AppLocale.values
+                              .map(
+                                (locale) => TextButton.icon(
+                                  onPressed: () async {
+                                    final storage =
+                                        await SharedPreferences.getInstance();
+                                    final result = await storage.setString(
+                                        'language', locale.languageCode);
+                                    if (result) {
+                                      LocaleSettings.setLocale(locale);
+                                    }
+                                  },
+                                  icon: Flag.fromString(
+                                    locale.languageCode.toLowerCase() != 'en'
+                                        ? locale.languageCode
+                                        : 'GB',
+                                    width: 20,
+                                    height: 20,
+                                  ),
+                                  label: Text(
+                                    locale.languageCode.toUpperCase(),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      )
                   ],
                 ),
               ),
@@ -69,7 +118,7 @@ Widget _userDrawer(BuildContext context, WidgetRef ref) {
                   children: [
                     Divider(),
                     _DrawerButton(
-                      text: 'Выйти из приложения',
+                      text: i18n.drawer.exit,
                       icon: const Icon(
                         Icons.sentiment_very_dissatisfied_sharp,
                         color: Color.fromARGB(255, 238, 52, 114),
@@ -77,25 +126,25 @@ Widget _userDrawer(BuildContext context, WidgetRef ref) {
                       onTap: () => showDialog<void>(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: Text('Выход'),
-                          content: Text('Вы точно хотите выйти из аккаунты?'),
+                          title: Text(i18n.exit),
+                          content: Text(i18n.drawer.logoutOfApp),
                           actions: [
                             TextButton(
                               onPressed: () async => await ref
                                   .read(authProvider.notifier)
                                   .logout(),
-                              child: Text('Да'),
+                              child: Text(i18n.buttons.yes),
                             ),
                             TextButton(
                               onPressed: () => Navigator.of(context).pop(),
-                              child: Text('Нет'),
+                              child: Text(i18n.buttons.no),
                             ),
                           ],
                         ),
                       ),
                     ),
                     _DrawerButton(
-                      text: 'Конфиденциальность',
+                      text: i18n.drawer.confidentiality,
                       icon: const Icon(
                         Icons.security,
                         color: Color.fromARGB(255, 7, 226, 255),
@@ -140,10 +189,8 @@ Widget __drawerHeader(BuildContext context, User user) => SizedBox(
                     ),
                     onPressed: () async {
                       final storage = await SharedPreferences.getInstance();
-
                       final res =
                           await storage.setBool('theme', theme != Themes.dark);
-
                       if (res) {
                         switcher.changeTheme(
                           isReversed: theme == Themes.dark,
@@ -170,13 +217,14 @@ Widget __drawerButton({
   required String text,
   required Icon icon,
   required void Function()? onTap,
+  bool isOpen = false,
 }) =>
     Hoverable(
       child: (isHovered) => GestureDetector(
         onTap: onTap,
         child: Container(
           decoration: BoxDecoration(
-            color: isHovered
+            color: isHovered || isOpen
                 ? const Color.fromARGB(71, 168, 65, 154)
                 : Colors.transparent,
             borderRadius: const BorderRadius.all(
@@ -194,9 +242,11 @@ Widget __drawerButton({
                   Text(text),
                 ],
               ),
-              const Icon(
-                Icons.double_arrow,
-                size: 15,
+              Icon(
+                isOpen
+                    ? Icons.keyboard_double_arrow_down_outlined
+                    : Icons.keyboard_double_arrow_right_outlined,
+                size: 20,
                 color: Colors.grey,
               ),
             ],
@@ -207,12 +257,13 @@ Widget __drawerButton({
 
 Future<void> _createEventForm(BuildContext context) {
   final formKey = GlobalKey<FormBuilderState>();
+  final i18n = Translations.of(context);
 
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Center(child: const Text('Создать мероприятие')),
+        title: Center(child: Text(i18n.drawer.createEvent)),
         content: FormBuilder(
           child: SizedBox(
             width: StyleConstants.maxFormWidth,
@@ -222,13 +273,13 @@ Future<void> _createEventForm(BuildContext context) {
                 children: [
                   FormTextField(
                     name: 'name',
-                    label: 'Название',
+                    label: i18n.form.labels.name,
                     validator: FormValidators.name,
                   ),
                   Gaps.normal,
                   FormTextField(
                     name: 'description',
-                    label: 'Описание',
+                    label: i18n.form.labels.description,
                     validator: FormValidators.description,
                   ),
                 ],
@@ -241,7 +292,7 @@ Future<void> _createEventForm(BuildContext context) {
             style: TextButton.styleFrom(
               textStyle: Theme.of(context).textTheme.labelLarge,
             ),
-            child: const Text('Создать'),
+            child: Text(i18n.buttons.create),
             onPressed: () async {
               final currentState = formKey.currentState;
 
@@ -268,7 +319,7 @@ Future<void> _createEventForm(BuildContext context) {
             style: TextButton.styleFrom(
               textStyle: Theme.of(context).textTheme.labelLarge,
             ),
-            child: const Text('Закрыть'),
+            child: Text(i18n.buttons.close),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -278,20 +329,3 @@ Future<void> _createEventForm(BuildContext context) {
     },
   );
 }
-
-// _DrawerButton(
-//   text: 'Язык',
-//   icon: const Icon(
-//     Icons.language_outlined,
-//     color: Color.fromARGB(255, 195, 88, 245),
-//   ),
-//   onTap: () {},
-// ),
-// _DrawerButton(
-//   text: 'Конфиденциальность',
-//   icon: const Icon(
-//     Icons.security,
-//     color: Color.fromARGB(255, 7, 226, 255),
-//   ),
-//   onTap: () {},
-// ),

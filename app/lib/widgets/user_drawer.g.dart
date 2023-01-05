@@ -41,6 +41,7 @@ class _DrawerButton extends StatelessWidget {
     required this.text,
     required this.icon,
     required this.onTap,
+    this.isOpen = false,
   }) : super(key: key);
 
   final String text;
@@ -49,10 +50,13 @@ class _DrawerButton extends StatelessWidget {
 
   final void Function()? onTap;
 
+  final bool isOpen;
+
   @override
   Widget build(BuildContext _context) => __drawerButton(
         text: text,
         icon: icon,
         onTap: onTap,
+        isOpen: isOpen,
       );
 }

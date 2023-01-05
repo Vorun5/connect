@@ -21,7 +21,7 @@ Widget _userProfilePage(BuildContext context, WidgetRef ref) {
 
   return AppScaffold(
     appBar: AppBar(
-      title: Text('user profile'),
+      title: Text(i18n.screenTitles.userProfile),
       centerTitle: false,
     ),
     body: user.when(
@@ -45,7 +45,7 @@ Widget _userProfilePage(BuildContext context, WidgetRef ref) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Обо мне',
+                        i18n.userProfile.aboutMe,
                         style: TextStyle(
                           fontSize: FontSize.normal,
                           fontWeight: FontWeight.w500,
