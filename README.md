@@ -4,10 +4,10 @@
 ##### 3. В connect/server ввести команду npm run start
 ##### 4. Сервер запустится на хосте 4040. Изменить можно в файле connect/server/config.js
 
-# connect_frontend start
+# app start
 ##### 1. Установить актуальную версию flutter
-##### 2. В connect/connect_frontend/packages/site ввести команду flutter pub get 
-##### 3. Следуем трём шагам на скрине. 
+##### 2. В connect/app ввести команду flutter pub get 
+##### 3. Следуем трём шагам на скрине.
 - ###### Выбираем платформу 
 - ###### Даётся выбор платформ
 - ###### Запускаем проект
