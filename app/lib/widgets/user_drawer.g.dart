@@ -29,25 +29,8 @@ class _DrawerHeader extends StatelessWidget {
   final User user;
 
   @override
-  Widget build(BuildContext _context) => __drawerHeader(user);
-}
-
-class _UserSettings extends HookConsumerWidget {
-  const _UserSettings(
-    this.user, {
-    Key? key,
-  }) : super(key: key);
-
-  final User user;
-
-  @override
-  Widget build(
-    BuildContext _context,
-    WidgetRef _ref,
-  ) =>
-      __userSettings(
+  Widget build(BuildContext _context) => __drawerHeader(
         _context,
-        _ref,
         user,
       );
 }

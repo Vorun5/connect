@@ -29,137 +29,139 @@ Widget _userDrawer(BuildContext context, WidgetRef ref) {
   final i18n = Translations.of(context);
 
   return Drawer(
-    child: ListView(
-      shrinkWrap: true,
-      children: [
-        myProfile.when(
-          data: (user) {
-            if (user == null) {
-              return Center(child: ErrorText(i18n.unknownError));
-            }
+    child: myProfile.when(
+      data: (user) {
+        if (user == null) {
+          return Center(child: ErrorText(i18n.unknownError));
+        }
 
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                _DrawerHeader(user),
-                _UserSettings(user),
-              ],
-            );
-          },
-          error: (error, _) => Center(child: ErrorText(error.toString())),
-          loading: () => const Center(child: CircularProgressIndicator()),
-        ),
-      ],
+        return Padding(
+          padding: EdgeInsets.all(Paddings.small),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView(
+                  children: [
+                    _DrawerHeader(user),
+                    _DrawerButton(
+                      text: 'Мой профиль',
+                      icon: const Icon(
+                        Icons.account_circle,
+                        color: Colors.amber,
+                      ),
+                      onTap: () => context.goNamed('user-profile',
+                          params: {'username': user.username}),
+                    ),
+                    _DrawerButton(
+                      text: 'Создать мероприятие',
+                      icon: const Icon(
+                        Icons.event,
+                        color: Colors.orangeAccent,
+                      ),
+                      onTap: () => _createEventForm(context),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: Column(
+                  children: [
+                    Divider(),
+                    _DrawerButton(
+                      text: 'Выйти из приложения',
+                      icon: const Icon(
+                        Icons.sentiment_very_dissatisfied_sharp,
+                        color: Color.fromARGB(255, 238, 52, 114),
+                      ),
+                      onTap: () => showDialog<void>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text('Выход'),
+                          content: Text('Вы точно хотите выйти из аккаунты?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () async => await ref
+                                  .read(authProvider.notifier)
+                                  .logout(),
+                              child: Text('Да'),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: Text('Нет'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    _DrawerButton(
+                      text: 'Конфиденциальность',
+                      icon: const Icon(
+                        Icons.security,
+                        color: Color.fromARGB(255, 7, 226, 255),
+                      ),
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+      error: (error, _) => Center(child: ErrorText(error.toString())),
+      loading: () => const Center(child: CircularProgressIndicator()),
     ),
   );
 }
 
 @swidget
-Widget __drawerHeader(User user) => SizedBox(
+Widget __drawerHeader(BuildContext context, User user) => SizedBox(
       height: 180,
       child: DrawerHeader(
+        padding: EdgeInsets.only(bottom: Paddings.normal),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             UserPreview(user),
-            ThemeSwitcher.withTheme(
-              builder: (context, switcher, theme) => IconButton(
-                hoverColor: Colors.transparent,
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                icon: Icon(
-                  theme == Themes.dark
-                      ? Icons.nightlight_round
-                      : Icons.wb_sunny,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ThemeSwitcher.withTheme(
+                  builder: (context, switcher, theme) => IconButton(
+                    hoverColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    icon: Icon(
+                      theme == Themes.dark
+                          ? Icons.nightlight_round
+                          : Icons.wb_sunny,
+                    ),
+                    onPressed: () async {
+                      final storage = await SharedPreferences.getInstance();
+
+                      final res =
+                          await storage.setBool('theme', theme != Themes.dark);
+
+                      if (res) {
+                        switcher.changeTheme(
+                          isReversed: theme == Themes.dark,
+                          theme:
+                              theme == Themes.dark ? Themes.light : Themes.dark,
+                        );
+                      }
+                    },
+                  ),
                 ),
-                onPressed: () async {
-                  final storage = await SharedPreferences.getInstance();
-
-                  final res =
-                      await storage.setBool('theme', theme != Themes.dark);
-
-                  if (res) {
-                    switcher.changeTheme(
-                      isReversed: theme == Themes.dark,
-                      theme: theme == Themes.dark ? Themes.light : Themes.dark,
-                    );
-                  }
-                },
-              ),
+                IconButton(
+                  onPressed: () => context.goNamed('edit'),
+                  icon: Icon(Icons.edit),
+                ),
+              ],
             ),
           ],
         ),
-      ),
-    );
-
-// TODO(Vorun5):
-// поля (порядок не правльный):
-// 1. Изменить язык
-// 2. Выйти из приложения
-// 3. Изменить профиль (перенапралять на route '/u')
-// 4. Посмотреть свой профиль
-// 5. Возможно, изменить свой пароль и добавить почту для
-// восстановления доступа, но это в самый конец если будет время
-// конфиденциальность + язык
-@hcwidget
-Widget __userSettings(BuildContext context, WidgetRef ref, User user) =>
-    Padding(
-      padding: const EdgeInsets.all(Paddings.small),
-      child: Column(
-        children: [
-          _DrawerButton(
-            text: 'Мой профиль',
-            icon: const Icon(
-              Icons.account_circle,
-              color: Colors.amber,
-            ),
-            onTap: () => context
-                .goNamed('user-profile', params: {'username': user.username}),
-          ),
-          _DrawerButton(
-            text: 'Создать мероприятие',
-            icon: const Icon(
-              Icons.event,
-              color: Colors.orangeAccent,
-            ),
-            onTap: () => _createEventForm(context),
-          ),
-          _DrawerButton(
-            text: 'Настройки',
-            icon: const Icon(
-              Icons.settings,
-              color: Colors.lime,
-            ),
-            onTap: () => context.goNamed('edit'),
-          ),
-          // _DrawerButton(
-          //   text: 'Язык',
-          //   icon: const Icon(
-          //     Icons.language_outlined,
-          //     color: Color.fromARGB(255, 195, 88, 245),
-          //   ),
-          //   onTap: () {},
-          // ),
-          // _DrawerButton(
-          //   text: 'Конфиденциальность',
-          //   icon: const Icon(
-          //     Icons.security,
-          //     color: Color.fromARGB(255, 7, 226, 255),
-          //   ),
-          //   onTap: () {},
-          // ),
-          _DrawerButton(
-            text: 'Выйти из приложения',
-            icon: const Icon(
-              Icons.sentiment_very_dissatisfied_sharp,
-              color: Color.fromARGB(255, 238, 52, 114),
-            ),
-            onTap: () async {
-              await ref.read(authProvider.notifier).logout();
-            },
-          ),
-        ],
       ),
     );
 
@@ -276,3 +278,20 @@ Future<void> _createEventForm(BuildContext context) {
     },
   );
 }
+
+// _DrawerButton(
+//   text: 'Язык',
+//   icon: const Icon(
+//     Icons.language_outlined,
+//     color: Color.fromARGB(255, 195, 88, 245),
+//   ),
+//   onTap: () {},
+// ),
+// _DrawerButton(
+//   text: 'Конфиденциальность',
+//   icon: const Icon(
+//     Icons.security,
+//     color: Color.fromARGB(255, 7, 226, 255),
+//   ),
+//   onTap: () {},
+// ),
