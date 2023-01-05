@@ -13,7 +13,6 @@ export const create = async (req, res) => {
         const event = await doc.save();
 
         return res.json(event);
-
     } catch (e) {
         console.log('failed to create event', e);
         res.status(500).json({

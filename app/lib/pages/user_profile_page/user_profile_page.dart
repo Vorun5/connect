@@ -2,6 +2,8 @@ import 'package:app/data/dto/user.dart';
 import 'package:app/i18n/strings.g.dart';
 import 'package:app/providers/my_profile.dart';
 import 'package:app/utils/constants.dart';
+import 'package:app/utils/font_size.dart';
+import 'package:app/utils/gaps.dart';
 import 'package:app/utils/paddings.dart';
 import 'package:app/widgets/app_scaffold.dart';
 import 'package:app/widgets/basic_widgets/error_text.dart';
@@ -19,7 +21,8 @@ Widget _userProfilePage(BuildContext context, WidgetRef ref) {
 
   return AppScaffold(
     appBar: AppBar(
-      title: const Text('Profile'),
+      title: Text('user profile'),
+      centerTitle: false,
     ),
     body: user.when(
       data: (user) {
@@ -32,13 +35,26 @@ Widget _userProfilePage(BuildContext context, WidgetRef ref) {
         return ListView(
           children: [
             _Header(user),
+            Gaps.tiny,
             if (description != null && description.isNotEmpty)
               Card(
                 elevation: 0,
-                color: Theme.of(context).colorScheme.onInverseSurface,
                 child: Container(
                   padding: const EdgeInsets.all(Paddings.normal),
-                  child: Text(description),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Обо мне',
+                        style: TextStyle(
+                          fontSize: FontSize.normal,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Gaps.tiny,
+                      Text(description),
+                    ],
+                  ),
                 ),
               ),
           ],

@@ -29,14 +29,14 @@ class _SystemHash {
   }
 }
 
-String $MyProfileHash() => r'c0911592235597cc7468e65bf4caa5b7cf69f1c1';
+String _$MyProfileHash() => r'c0911592235597cc7468e65bf4caa5b7cf69f1c1';
 
 /// See also [MyProfile].
 final myProfileProvider = AutoDisposeAsyncNotifierProvider<MyProfile, User?>(
   MyProfile.new,
   name: r'myProfileProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : $MyProfileHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$MyProfileHash,
 );
 typedef MyProfileRef = AutoDisposeAsyncNotifierProviderRef<User?>;
 
