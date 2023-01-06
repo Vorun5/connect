@@ -11,6 +11,7 @@ class Event with _$Event {
     @JsonKey(name: '_id') required String id,
     required String idCreator,
     required String name,
+    required int? unreadMessages,
     required String? imageUrl,
     required String? description,
     required DateTime? date,

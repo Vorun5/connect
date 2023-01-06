@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:slang/builder/utils/string_extensions.dart';
 
 part 'form_text_field.g.dart';
 
@@ -18,7 +19,7 @@ Widget _formTextField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       autocorrect: false,
       decoration: InputDecoration(
-        labelText: label,
+        labelText: label.capitalize(),
         isDense: true,
         border: const OutlineInputBorder(),
       ),

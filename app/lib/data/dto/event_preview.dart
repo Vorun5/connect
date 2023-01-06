@@ -15,6 +15,7 @@ class EventPreview with _$EventPreview {
     required int userCount,
     required int teamCount,
     required List<Tag> tags,
+    required int? unreadMessages,
   }) = _EventPreview;
 
   factory EventPreview.fromJson(Map<String, dynamic> json) =>

@@ -24,6 +24,7 @@ mixin _$Event {
   String get id => throw _privateConstructorUsedError;
   String get idCreator => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  int? get unreadMessages => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
@@ -50,6 +51,7 @@ abstract class $EventCopyWith<$Res> {
       {@JsonKey(name: '_id') String id,
       String idCreator,
       String name,
+      int? unreadMessages,
       String? imageUrl,
       String? description,
       DateTime? date,
@@ -79,6 +81,7 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
     Object? id = null,
     Object? idCreator = null,
     Object? name = null,
+    Object? unreadMessages = freezed,
     Object? imageUrl = freezed,
     Object? description = freezed,
     Object? date = freezed,
@@ -104,6 +107,10 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      unreadMessages: freezed == unreadMessages
+          ? _value.unreadMessages
+          : unreadMessages // ignore: cast_nullable_to_non_nullable
+              as int?,
       imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -162,6 +169,7 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       {@JsonKey(name: '_id') String id,
       String idCreator,
       String name,
+      int? unreadMessages,
       String? imageUrl,
       String? description,
       DateTime? date,
@@ -187,6 +195,7 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
     Object? id = null,
     Object? idCreator = null,
     Object? name = null,
+    Object? unreadMessages = freezed,
     Object? imageUrl = freezed,
     Object? description = freezed,
     Object? date = freezed,
@@ -212,6 +221,10 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      unreadMessages: freezed == unreadMessages
+          ? _value.unreadMessages
+          : unreadMessages // ignore: cast_nullable_to_non_nullable
+              as int?,
       imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -267,6 +280,7 @@ class _$_Event implements _Event {
       {@JsonKey(name: '_id') required this.id,
       required this.idCreator,
       required this.name,
+      required this.unreadMessages,
       required this.imageUrl,
       required this.description,
       required this.date,
@@ -294,6 +308,8 @@ class _$_Event implements _Event {
   final String idCreator;
   @override
   final String name;
+  @override
+  final int? unreadMessages;
   @override
   final String? imageUrl;
   @override
@@ -345,7 +361,7 @@ class _$_Event implements _Event {
 
   @override
   String toString() {
-    return 'Event(id: $id, idCreator: $idCreator, name: $name, imageUrl: $imageUrl, description: $description, date: $date, appearInSearch: $appearInSearch, showAllMessage: $showAllMessage, entryAfterAdminApproval: $entryAfterAdminApproval, idPinnedMessages: $idPinnedMessages, usersWhoWantToJoin: $usersWhoWantToJoin, users: $users, teams: $teams, tags: $tags)';
+    return 'Event(id: $id, idCreator: $idCreator, name: $name, unreadMessages: $unreadMessages, imageUrl: $imageUrl, description: $description, date: $date, appearInSearch: $appearInSearch, showAllMessage: $showAllMessage, entryAfterAdminApproval: $entryAfterAdminApproval, idPinnedMessages: $idPinnedMessages, usersWhoWantToJoin: $usersWhoWantToJoin, users: $users, teams: $teams, tags: $tags)';
   }
 
   @override
@@ -357,6 +373,8 @@ class _$_Event implements _Event {
             (identical(other.idCreator, idCreator) ||
                 other.idCreator == idCreator) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.unreadMessages, unreadMessages) ||
+                other.unreadMessages == unreadMessages) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
             (identical(other.description, description) ||
@@ -385,6 +403,7 @@ class _$_Event implements _Event {
       id,
       idCreator,
       name,
+      unreadMessages,
       imageUrl,
       description,
       date,
@@ -416,6 +435,7 @@ abstract class _Event implements Event {
       {@JsonKey(name: '_id') required final String id,
       required final String idCreator,
       required final String name,
+      required final int? unreadMessages,
       required final String? imageUrl,
       required final String? description,
       required final DateTime? date,
@@ -437,6 +457,8 @@ abstract class _Event implements Event {
   String get idCreator;
   @override
   String get name;
+  @override
+  int? get unreadMessages;
   @override
   String? get imageUrl;
   @override

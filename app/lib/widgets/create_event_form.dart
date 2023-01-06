@@ -21,20 +21,23 @@ Future<void> createEventForm(BuildContext context) {
           width: StyleConstants.maxFormWidth,
           child: FormBuilder(
             key: formKey,
-            child: Column(
-              children: [
-                FormTextField(
-                  name: 'name',
-                  label: i18n.form.labels.name,
-                  validator: FormValidators.name,
-                ),
-                Gaps.normal,
-                FormTextField(
-                  name: 'description',
-                  label: i18n.form.labels.description,
-                  validator: FormValidators.description,
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  FormTextField(
+                    name: 'name',
+                    label: i18n.form.labels.name,
+                    validator: FormValidators.name,
+                  ),
+                  Gaps.normal,
+                  FormTextField(
+                    name: 'description',
+                    label: i18n.form.labels.description,
+                    validator: FormValidators.description,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -62,9 +65,7 @@ Future<void> createEventForm(BuildContext context) {
                   }
                 }
               } else {
-                debugPrint(
-                  formKey.currentState?.value.toString(),
-                );
+                debugPrint(formKey.currentState?.value.toString());
                 debugPrint('validation failed');
               }
             },

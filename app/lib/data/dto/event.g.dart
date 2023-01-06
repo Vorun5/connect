@@ -10,6 +10,7 @@ _$_Event _$$_EventFromJson(Map<String, dynamic> json) => _$_Event(
       id: json['_id'] as String,
       idCreator: json['idCreator'] as String,
       name: json['name'] as String,
+      unreadMessages: json['unreadMessages'] as int?,
       imageUrl: json['imageUrl'] as String?,
       description: json['description'] as String?,
       date:
@@ -36,6 +37,7 @@ Map<String, dynamic> _$$_EventToJson(_$_Event instance) => <String, dynamic>{
       '_id': instance.id,
       'idCreator': instance.idCreator,
       'name': instance.name,
+      'unreadMessages': instance.unreadMessages,
       'imageUrl': instance.imageUrl,
       'description': instance.description,
       'date': instance.date?.toIso8601String(),

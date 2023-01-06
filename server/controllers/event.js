@@ -361,6 +361,7 @@ const eventInformationForUser = (event) => {
     const {appearInSearch, showAllMessage, entryAfterAdminApproval, usersWhoWantToJoin, users, teams, idCreator, idPinnedMessages, ...e} = event;
     e.userCount = users.length;
     e.teamCount = teams.length;
+    e.unreadMessages = 39;
 
     return e;
 }

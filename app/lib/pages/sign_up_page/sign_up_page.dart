@@ -2,7 +2,6 @@ import 'package:app/data/dto/user_to_sign_up.dart';
 import 'package:app/i18n/strings.g.dart';
 import 'package:app/providers/auth_provider.dart';
 import 'package:app/providers/my_profile.dart';
-import 'package:app/utils/capitalize.dart';
 import 'package:app/utils/color_palette.dart';
 import 'package:app/utils/font_size.dart';
 import 'package:app/utils/form_validators.dart';
@@ -19,6 +18,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:slang/builder/utils/string_extensions.dart';
 
 part 'sign_up_page.g.dart';
 
@@ -28,7 +28,7 @@ final _formKey = GlobalKey<FormBuilderState>();
 Widget _signUpPage(BuildContext context, WidgetRef ref) {
   final errorStatus = useState<int?>(null);
   final i18n = Translations.of(context);
-  final username = capitalize(i18n.form.labels.username);
+  final username = i18n.form.labels.username.capitalize();
 
   return AppScaffold(
     body: Center(
@@ -81,7 +81,7 @@ Widget _signUpPage(BuildContext context, WidgetRef ref) {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          capitalize(i18n.auth.signUp),
+                          i18n.auth.signUp.capitalize(),
                           style: const TextStyle(fontSize: FontSize.large),
                         ),
                         IconButtonWithBackground(
@@ -117,7 +117,7 @@ Widget _signUpPage(BuildContext context, WidgetRef ref) {
                         Gaps.tiny,
                         TextButton(
                           onPressed: () => context.goNamed('login'),
-                          child: Text('${capitalize(i18n.auth.login)}!'),
+                          child: Text('${i18n.auth.login.capitalize()}!'),
                         ),
                       ],
                     ),

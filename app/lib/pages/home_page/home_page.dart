@@ -3,6 +3,7 @@ import 'package:app/providers/my_events.dart';
 import 'package:app/utils/paddings.dart';
 import 'package:app/widgets/app_scaffold.dart';
 import 'package:app/widgets/basic_widgets/error_text.dart';
+import 'package:app/widgets/event_card.dart';
 import 'package:app/widgets/user_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
@@ -29,35 +30,8 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
           );
         }
         return ListView(
-          padding: const EdgeInsets.symmetric(vertical: Paddings.normal),
-          children: data
-              .map(
-                (event) => Card(
-                  elevation: 0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(Paddings.small),
-                    child: Column(
-                      children: [
-                        Text('Название: ${event.name}'),
-                        Text('Описание: ${event.description}'),
-                        Text('Количество команд: ${event.teamCount}'),
-                        Text('Количество пользователей: ${event.userCount}'),
-                        Text('URL фото: ${event.imageUrl}'),
-                        Text('Время: ${event.date}'),
-                        const Text('Теги:'),
-                        Row(
-                          children: event.tags
-                              .map(
-                                (tag) => Text(tag.name),
-                              )
-                              .toList(),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              )
-              .toList(),
+          padding: const EdgeInsets.all(Paddings.small),
+          children: data.map((event) => EventCard(event)).toList(),
         );
       },
       error: (error, _) => Center(child: ErrorText(error.toString())),

@@ -29,6 +29,7 @@ mixin _$EventPreview {
   int get userCount => throw _privateConstructorUsedError;
   int get teamCount => throw _privateConstructorUsedError;
   List<Tag> get tags => throw _privateConstructorUsedError;
+  int? get unreadMessages => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,7 +51,8 @@ abstract class $EventPreviewCopyWith<$Res> {
       DateTime? date,
       int userCount,
       int teamCount,
-      List<Tag> tags});
+      List<Tag> tags,
+      int? unreadMessages});
 }
 
 /// @nodoc
@@ -74,6 +76,7 @@ class _$EventPreviewCopyWithImpl<$Res, $Val extends EventPreview>
     Object? userCount = null,
     Object? teamCount = null,
     Object? tags = null,
+    Object? unreadMessages = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -108,6 +111,10 @@ class _$EventPreviewCopyWithImpl<$Res, $Val extends EventPreview>
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<Tag>,
+      unreadMessages: freezed == unreadMessages
+          ? _value.unreadMessages
+          : unreadMessages // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -128,7 +135,8 @@ abstract class _$$_EventPreviewCopyWith<$Res>
       DateTime? date,
       int userCount,
       int teamCount,
-      List<Tag> tags});
+      List<Tag> tags,
+      int? unreadMessages});
 }
 
 /// @nodoc
@@ -150,6 +158,7 @@ class __$$_EventPreviewCopyWithImpl<$Res>
     Object? userCount = null,
     Object? teamCount = null,
     Object? tags = null,
+    Object? unreadMessages = freezed,
   }) {
     return _then(_$_EventPreview(
       id: null == id
@@ -184,6 +193,10 @@ class __$$_EventPreviewCopyWithImpl<$Res>
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<Tag>,
+      unreadMessages: freezed == unreadMessages
+          ? _value.unreadMessages
+          : unreadMessages // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -199,7 +212,8 @@ class _$_EventPreview implements _EventPreview {
       required this.date,
       required this.userCount,
       required this.teamCount,
-      required final List<Tag> tags})
+      required final List<Tag> tags,
+      required this.unreadMessages})
       : _tags = tags;
 
   factory _$_EventPreview.fromJson(Map<String, dynamic> json) =>
@@ -228,8 +242,11 @@ class _$_EventPreview implements _EventPreview {
   }
 
   @override
+  final int? unreadMessages;
+
+  @override
   String toString() {
-    return 'EventPreview(id: $id, name: $name, imageUrl: $imageUrl, description: $description, date: $date, userCount: $userCount, teamCount: $teamCount, tags: $tags)';
+    return 'EventPreview(id: $id, name: $name, imageUrl: $imageUrl, description: $description, date: $date, userCount: $userCount, teamCount: $teamCount, tags: $tags, unreadMessages: $unreadMessages)';
   }
 
   @override
@@ -248,13 +265,24 @@ class _$_EventPreview implements _EventPreview {
                 other.userCount == userCount) &&
             (identical(other.teamCount, teamCount) ||
                 other.teamCount == teamCount) &&
-            const DeepCollectionEquality().equals(other._tags, _tags));
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
+            (identical(other.unreadMessages, unreadMessages) ||
+                other.unreadMessages == unreadMessages));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, imageUrl, description,
-      date, userCount, teamCount, const DeepCollectionEquality().hash(_tags));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      imageUrl,
+      description,
+      date,
+      userCount,
+      teamCount,
+      const DeepCollectionEquality().hash(_tags),
+      unreadMessages);
 
   @JsonKey(ignore: true)
   @override
@@ -279,7 +307,8 @@ abstract class _EventPreview implements EventPreview {
       required final DateTime? date,
       required final int userCount,
       required final int teamCount,
-      required final List<Tag> tags}) = _$_EventPreview;
+      required final List<Tag> tags,
+      required final int? unreadMessages}) = _$_EventPreview;
 
   factory _EventPreview.fromJson(Map<String, dynamic> json) =
       _$_EventPreview.fromJson;
@@ -301,6 +330,8 @@ abstract class _EventPreview implements EventPreview {
   int get teamCount;
   @override
   List<Tag> get tags;
+  @override
+  int? get unreadMessages;
   @override
   @JsonKey(ignore: true)
   _$$_EventPreviewCopyWith<_$_EventPreview> get copyWith =>

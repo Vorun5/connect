@@ -3,7 +3,6 @@ import 'package:app/data/dto/user.dart';
 import 'package:app/data/dto/user_to_update.dart';
 import 'package:app/i18n/strings.g.dart';
 import 'package:app/providers/my_profile.dart';
-import 'package:app/utils/capitalize.dart';
 import 'package:app/utils/form_validators.dart';
 import 'package:app/utils/gaps.dart';
 import 'package:app/utils/paddings.dart';
@@ -14,6 +13,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:slang/builder/utils/string_extensions.dart';
 
 part 'edit_profile_form.g.dart';
 
@@ -28,7 +28,7 @@ Widget _editProfileForm(
   required String? newBackgroundUrl,
 }) {
   final i18n = Translations.of(context);
-  final username = capitalize(i18n.form.labels.username);
+  final username = i18n.form.labels.username.capitalize();
   final errorStatus = useState<int?>(null);
 
   return Padding(

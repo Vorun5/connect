@@ -35,25 +35,28 @@ Widget _userProfilePage(BuildContext context, WidgetRef ref) {
         return ListView(
           children: [
             _Header(user),
-            Gaps.tiny,
+            Gaps.small,
             if (description != null && description.isNotEmpty)
-              Card(
-                elevation: 0,
-                child: Container(
-                  padding: const EdgeInsets.all(Paddings.normal),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        i18n.userProfile.aboutMe,
-                        style: const TextStyle(
-                          fontSize: FontSize.normal,
-                          fontWeight: FontWeight.w500,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Paddings.small),
+                child: Card(
+                  elevation: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(Paddings.normal),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          i18n.userProfile.aboutMe,
+                          style: const TextStyle(
+                            fontSize: FontSize.normal,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      Gaps.tiny,
-                      Text(description),
-                    ],
+                        Gaps.tiny,
+                        Text(description),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -78,8 +81,8 @@ Widget __header(User user) => Stack(
         ),
         Padding(
           padding: const EdgeInsets.only(
-            left: Paddings.small,
-            right: Paddings.small,
+            left: Paddings.normal,
+            right: Paddings.normal,
             top: Constants.backgroundheight - Constants.avatarRadius,
           ),
           child: Row(

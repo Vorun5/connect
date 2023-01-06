@@ -19,6 +19,7 @@ _$_EventPreview _$$_EventPreviewFromJson(Map<String, dynamic> json) =>
       tags: (json['tags'] as List<dynamic>)
           .map((e) => Tag.fromJson(e as Map<String, dynamic>))
           .toList(),
+      unreadMessages: json['unreadMessages'] as int?,
     );
 
 Map<String, dynamic> _$$_EventPreviewToJson(_$_EventPreview instance) =>
@@ -31,4 +32,5 @@ Map<String, dynamic> _$$_EventPreviewToJson(_$_EventPreview instance) =>
       'userCount': instance.userCount,
       'teamCount': instance.teamCount,
       'tags': instance.tags,
+      'unreadMessages': instance.unreadMessages,
     };
