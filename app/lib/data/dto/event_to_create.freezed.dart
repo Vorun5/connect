@@ -23,7 +23,7 @@ mixin _$EventToCreate {
   String get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
-  List<String>? get tags => throw _privateConstructorUsedError;
+  List<Tag>? get tags => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +38,7 @@ abstract class $EventToCreateCopyWith<$Res> {
       _$EventToCreateCopyWithImpl<$Res, EventToCreate>;
   @useResult
   $Res call(
-      {String name, String? description, DateTime? date, List<String>? tags});
+      {String name, String? description, DateTime? date, List<Tag>? tags});
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$EventToCreateCopyWithImpl<$Res, $Val extends EventToCreate>
       tags: freezed == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<Tag>?,
     ) as $Val);
   }
 }
@@ -89,7 +89,7 @@ abstract class _$$_EventToCreateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name, String? description, DateTime? date, List<String>? tags});
+      {String name, String? description, DateTime? date, List<Tag>? tags});
 }
 
 /// @nodoc
@@ -124,7 +124,7 @@ class __$$_EventToCreateCopyWithImpl<$Res>
       tags: freezed == tags
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<Tag>?,
     ));
   }
 }
@@ -136,7 +136,7 @@ class _$_EventToCreate implements _EventToCreate {
       {required this.name,
       required this.description,
       required this.date,
-      required final List<String>? tags})
+      required final List<Tag>? tags})
       : _tags = tags;
 
   factory _$_EventToCreate.fromJson(Map<String, dynamic> json) =>
@@ -148,9 +148,9 @@ class _$_EventToCreate implements _EventToCreate {
   final String? description;
   @override
   final DateTime? date;
-  final List<String>? _tags;
+  final List<Tag>? _tags;
   @override
-  List<String>? get tags {
+  List<Tag>? get tags {
     final value = _tags;
     if (value == null) return null;
     // ignore: implicit_dynamic_type
@@ -198,7 +198,7 @@ abstract class _EventToCreate implements EventToCreate {
       {required final String name,
       required final String? description,
       required final DateTime? date,
-      required final List<String>? tags}) = _$_EventToCreate;
+      required final List<Tag>? tags}) = _$_EventToCreate;
 
   factory _EventToCreate.fromJson(Map<String, dynamic> json) =
       _$_EventToCreate.fromJson;
@@ -210,7 +210,7 @@ abstract class _EventToCreate implements EventToCreate {
   @override
   DateTime? get date;
   @override
-  List<String>? get tags;
+  List<Tag>? get tags;
   @override
   @JsonKey(ignore: true)
   _$$_EventToCreateCopyWith<_$_EventToCreate> get copyWith =>

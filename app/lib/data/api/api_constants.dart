@@ -3,6 +3,8 @@ class ApiConstants {
   static const String usersEndpoint = '/users';
   static const String getAllEvents = '/get-all-user-events';
   static String userByUsername(String username) => '/users/$username';
+  static String searchTags(String str) => '/tags/$str';
+  static const String createTag = '/tags';
   static const String login = '/auth/login';
   static const String singUp = '/auth/sing-up';
   static const String uploadImageEndpoint = '/upload/';

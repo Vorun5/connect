@@ -1,14 +1,15 @@
 import {Event} from "../models/index.js";
 import {ObjectId} from "mongodb";
+import {removePasswordHashFromUsers} from "./shared.js";
 
 export const create = async (req, res) => {
     try {
         const idCreator = req.userId;
-        const doc = new Event({
+        const doc = (await new Event({
             idCreator: idCreator, users: [{
-                id: idCreator, date: Date.now(),
+                user: idCreator, date: Date.now(),
             }], ...req.body,
-        });
+        }).populate('users.user')).populate('tags');
 
         const event = await doc.save();
 
@@ -115,14 +116,13 @@ export const getById = async (req, res) => {
 export const getAllUserEvents = async (req, res) => {
     try {
         const userId = ObjectId(req.userId);
-        console.log(userId);
         const events = await Event.find({
             users: {
                 $elemMatch: {
                     id: userId
                 }
             }
-        });
+        }).populate('users.user').populate('tags');
 
         if (!events) {
             return res.status(404).json({
@@ -145,7 +145,7 @@ export const addUsers = async (req, res) => {
         const userId = req.userId;
         const eventId = req.body.id;
         const users = req.body.users;
-        const event = await EventModel.findById(eventId);
+        const event = await Event.findById(eventId);
 
         if (!event) {
             return res.status(404).json({
@@ -355,10 +355,14 @@ export const leaveToEvent = async (req, res) => {
     }
 }
 
-
-
 const eventInformationForUser = (event) => {
     const {appearInSearch, showAllMessage, entryAfterAdminApproval, usersWhoWantToJoin, users, teams, idCreator, idPinnedMessages, ...e} = event;
+    if (users.length < 3) {
+        e.users = removePasswordHashFromUsers(users);
+    } else {
+        e.users = removePasswordHashFromUsers(users.slice(2));
+    }
+
     e.userCount = users.length;
     e.teamCount = teams.length;
     e.unreadMessages = 39;

@@ -56,7 +56,10 @@ Widget _userDrawer(BuildContext context, WidgetRef ref) {
                         Icons.event,
                         color: Colors.orangeAccent,
                       ),
-                      onTap: () => createEventForm(context),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        createEventForm(context, ref);
+                      },
                     ),
                     _DrawerButton(
                       text: i18n.drawer.language,

@@ -12,7 +12,9 @@ _$_EventToCreate _$$_EventToCreateFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String?,
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
-      tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      tags: (json['tags'] as List<dynamic>?)
+          ?.map((e) => Tag.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_EventToCreateToJson(_$_EventToCreate instance) =>

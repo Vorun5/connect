@@ -20,7 +20,7 @@ EventUser _$EventUserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$EventUser {
-  String get id => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   DateTime get lastTimeInChat => throw _privateConstructorUsedError;
 
@@ -35,7 +35,9 @@ abstract class $EventUserCopyWith<$Res> {
   factory $EventUserCopyWith(EventUser value, $Res Function(EventUser) then) =
       _$EventUserCopyWithImpl<$Res, EventUser>;
   @useResult
-  $Res call({String id, DateTime date, DateTime lastTimeInChat});
+  $Res call({User user, DateTime date, DateTime lastTimeInChat});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -51,15 +53,15 @@ class _$EventUserCopyWithImpl<$Res, $Val extends EventUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? user = null,
     Object? date = null,
     Object? lastTimeInChat = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -70,6 +72,14 @@ class _$EventUserCopyWithImpl<$Res, $Val extends EventUser>
               as DateTime,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -79,7 +89,10 @@ abstract class _$$_EventUserCopyWith<$Res> implements $EventUserCopyWith<$Res> {
       __$$_EventUserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, DateTime date, DateTime lastTimeInChat});
+  $Res call({User user, DateTime date, DateTime lastTimeInChat});
+
+  @override
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -93,15 +106,15 @@ class __$$_EventUserCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? user = null,
     Object? date = null,
     Object? lastTimeInChat = null,
   }) {
     return _then(_$_EventUser(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -118,13 +131,13 @@ class __$$_EventUserCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_EventUser implements _EventUser {
   _$_EventUser(
-      {required this.id, required this.date, required this.lastTimeInChat});
+      {required this.user, required this.date, required this.lastTimeInChat});
 
   factory _$_EventUser.fromJson(Map<String, dynamic> json) =>
       _$$_EventUserFromJson(json);
 
   @override
-  final String id;
+  final User user;
   @override
   final DateTime date;
   @override
@@ -132,7 +145,7 @@ class _$_EventUser implements _EventUser {
 
   @override
   String toString() {
-    return 'EventUser(id: $id, date: $date, lastTimeInChat: $lastTimeInChat)';
+    return 'EventUser(user: $user, date: $date, lastTimeInChat: $lastTimeInChat)';
   }
 
   @override
@@ -140,7 +153,7 @@ class _$_EventUser implements _EventUser {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EventUser &&
-            (identical(other.id, id) || other.id == id) &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.lastTimeInChat, lastTimeInChat) ||
                 other.lastTimeInChat == lastTimeInChat));
@@ -148,7 +161,7 @@ class _$_EventUser implements _EventUser {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, date, lastTimeInChat);
+  int get hashCode => Object.hash(runtimeType, user, date, lastTimeInChat);
 
   @JsonKey(ignore: true)
   @override
@@ -166,7 +179,7 @@ class _$_EventUser implements _EventUser {
 
 abstract class _EventUser implements EventUser {
   factory _EventUser(
-      {required final String id,
+      {required final User user,
       required final DateTime date,
       required final DateTime lastTimeInChat}) = _$_EventUser;
 
@@ -174,7 +187,7 @@ abstract class _EventUser implements EventUser {
       _$_EventUser.fromJson;
 
   @override
-  String get id;
+  User get user;
   @override
   DateTime get date;
   @override

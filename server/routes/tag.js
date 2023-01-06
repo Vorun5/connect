@@ -8,6 +8,6 @@ const tagRouter = express.Router();
 // работает
 tagRouter.post('/tags', auth, createTag, validation, TagController.create);
 // работает
-tagRouter.post('/tags/:string', auth, TagController.find);
+tagRouter.get('/tags/:string', auth, TagController.find);
 
 export default tagRouter;

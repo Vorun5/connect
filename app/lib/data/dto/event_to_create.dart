@@ -1,3 +1,4 @@
+import 'package:app/data/dto/tag.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'event_to_create.freezed.dart';
@@ -9,7 +10,7 @@ class EventToCreate with _$EventToCreate {
     required String name,
     required String? description,
     required DateTime? date,
-    required List<String>? tags,
+    required List<Tag>? tags,
   }) = _EventToCreate;
 
   factory EventToCreate.fromJson(Map<String, dynamic> json) =>

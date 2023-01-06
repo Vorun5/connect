@@ -6,6 +6,7 @@ const maxNumChUsername = 20;
 const minNumChUsername = 3;
 const maxNumChName = 30;
 const minNumChName = 3;
+const maxNumChTagName = 20;
 
 const maxDescriptionChUsername = 256;
 
@@ -45,7 +46,9 @@ export const updateUser = [
 ]
 
 export const createTag = [
-    body('name', 'should be a line').isString(),
+    body('name', 'should be a line').isString().isLength({
+        max: maxNumChTagName
+    }),
 ]
 
 export const createEvent = [

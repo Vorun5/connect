@@ -7,7 +7,9 @@ import 'package:app/utils/form_validators.dart';
 import 'package:app/utils/gaps.dart';
 import 'package:app/utils/paddings.dart';
 import 'package:app/utils/style_constants.dart';
+import 'package:app/widgets/basic_widgets/forms/form_text_area.dart';
 import 'package:app/widgets/basic_widgets/forms/form_text_field.dart';
+import 'package:app/widgets/snack_bars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -56,8 +58,7 @@ Widget _editProfileForm(
               ),
             ),
             Gaps.normal,
-            FormTextField(
-              name: 'description',
+            FormTextArea(
               label: i18n.form.labels.description,
               initialValue: user.description,
               validator: FormValidators.description,
@@ -65,6 +66,7 @@ Widget _editProfileForm(
             Gaps.normal,
             OutlinedButton(
               onPressed: () async {
+                final messager = ScaffoldMessenger.of(context);
                 final currentState = _formKey.currentState;
 
                 if (currentState?.saveAndValidate() ?? false) {
@@ -88,6 +90,15 @@ Widget _editProfileForm(
                         await ApiServices.updateUserInformation(updatedUser);
                     if (errorStatus.value == null) {
                       ref.refresh(myProfileProvider);
+                      messager.showSnackBar(
+                        successSnackBar('Профиль успещно обновлён!'),
+                      );
+                    } else {
+                      messager.showSnackBar(
+                        errorSnackBar(
+                          'Не удалось обновить профиль. Попробуйте ещё раз',
+                        ),
+                      );
                     }
                   }
                 } else {

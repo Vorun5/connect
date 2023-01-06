@@ -39,8 +39,7 @@ const Event = new mongoose.Schema({
             type: Array,
             of: {
                 _id: false,
-                // TODO: переименовать поле id в user
-                id: {
+                user: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: 'User',
                     required: true,
@@ -58,9 +57,7 @@ const Event = new mongoose.Schema({
         },
         teams: {
             type: Array,
-            of:  mongoose.Schema.Types.ObjectId,
-            ref: 'Team',
-            required: false,
+            of: {type: mongoose.Schema.Types.ObjectId, ref: 'Team'},
         },
         tags: {
             type: Array,

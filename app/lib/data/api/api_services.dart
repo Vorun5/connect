@@ -2,6 +2,7 @@ import 'package:app/data/api/api_constants.dart';
 import 'package:app/data/dto/event.dart';
 import 'package:app/data/dto/event_preview.dart';
 import 'package:app/data/dto/event_to_create.dart';
+import 'package:app/data/dto/tag.dart';
 import 'package:app/data/dto/user.dart';
 import 'package:app/data/dto/user_to_login.dart';
 import 'package:app/data/dto/user_to_sign_up.dart';
@@ -82,6 +83,8 @@ class ApiServices {
     try {
       final response = await _dio.post(url, data: data);
 
+      print(response.data);
+
       return Event.fromJson(response.data as Map<String, dynamic>);
     } on DioError catch (e) {
       final response = e.response;
@@ -151,6 +154,38 @@ class ApiServices {
       return events;
     } on DioError {
       return [];
+    }
+  }
+
+  static Future<List<Tag>> searchTags(String str) async {
+    final storage = await SharedPreferences.getInstance();
+    final token = storage.getString('token');
+    _dio.options.headers['authorization'] = token;
+    final url = ApiConstants.baseUrl + ApiConstants.searchTags(str);
+    try {
+      final response = await _dio.get(url);
+      final data = response.data as List;
+      final tags = data
+          .map((jsonEvent) => Tag.fromJson(jsonEvent as Map<String, dynamic>))
+          .toList();
+
+      return tags;
+    } on DioError {
+      return [];
+    }
+  }
+
+  static Future<Tag?> createTag(String name) async {
+    final storage = await SharedPreferences.getInstance();
+    final token = storage.getString('token');
+    _dio.options.headers['authorization'] = token;
+    const url = ApiConstants.baseUrl + ApiConstants.createTag;
+    try {
+      final response = await _dio.post(url, data: {'name': name});
+
+      return Tag.fromJson(response.data as Map<String, dynamic>);
+    } on DioError {
+      return null;
     }
   }
 
