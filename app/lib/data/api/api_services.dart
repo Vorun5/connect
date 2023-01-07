@@ -187,6 +187,29 @@ class ApiServices {
     }
   }
 
+  static Future<Tuple2<Event?, int?>> getEventById(String eventId) async {
+    final storage = await SharedPreferences.getInstance();
+    final token = storage.getString('token');
+    _dio.options.headers['authorization'] = token;
+    final url = ApiConstants.baseUrl + ApiConstants.getEventById(eventId);
+    try {
+      final response = await _dio.get(url);
+      print(response.data);
+
+      return Tuple2(
+          Event.fromJson(response.data as Map<String, dynamic>), null);
+    } on DioError catch (e) {
+      final response = e.response;
+      if (response != null) {
+        if (kDebugMode) {
+          return Tuple2(null, response.statusCode);
+        }
+      }
+
+      return const Tuple2(null, serverErrorStatus);
+    }
+  }
+
   // 200, 403, 404, 500
   static Future<int?> updateUserInformation(UserToUpdate user) async {
     final storage = await SharedPreferences.getInstance();

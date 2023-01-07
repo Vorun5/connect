@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'my_events.dart';
+part of 'selected_event.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,19 +29,22 @@ class _SystemHash {
   }
 }
 
-String _$MyEventsHash() => r'65ea2c68f461c6a29e5f4f501967d2a9af59e9e8';
+String _$SelectedEventHash() => r'bfcb129c3263a23ca40c2bee2689c3fa6cb87bc0';
 
-/// See also [MyEvents].
-final myEventsProvider =
-    AutoDisposeAsyncNotifierProvider<MyEvents, List<EventPreview>>(
-  MyEvents.new,
-  name: r'myEventsProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$MyEventsHash,
+/// See also [SelectedEvent].
+final selectedEventProvider =
+    AutoDisposeAsyncNotifierProvider<SelectedEvent, Tuple2<Event?, int?>>(
+  SelectedEvent.new,
+  name: r'selectedEventProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$SelectedEventHash,
 );
-typedef MyEventsRef = AutoDisposeAsyncNotifierProviderRef<List<EventPreview>>;
+typedef SelectedEventRef
+    = AutoDisposeAsyncNotifierProviderRef<Tuple2<Event?, int?>>;
 
-abstract class _$MyEvents extends AutoDisposeAsyncNotifier<List<EventPreview>> {
+abstract class _$SelectedEvent
+    extends AutoDisposeAsyncNotifier<Tuple2<Event?, int?>> {
   @override
-  FutureOr<List<EventPreview>> build();
+  FutureOr<Tuple2<Event?, int?>> build();
 }

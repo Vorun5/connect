@@ -1,6 +1,5 @@
 import {Event} from "../models/index.js";
 import {ObjectId} from "mongodb";
-import {removePasswordHashFromUsers} from "./shared.js";
 
 export const create = async (req, res) => {
     try {
@@ -83,7 +82,7 @@ export const getById = async (req, res) => {
     try {
         const id = req.params.id;
         const userId = req.userId;
-        const event = await Event.findById(id);
+        const event = await Event.findById(id).populate(['users.user', 'tags', 'teams']);
         if (!event) {
             return res.status(404).json({
                 message: 'event is not found'
@@ -91,10 +90,9 @@ export const getById = async (req, res) => {
         }
 
         if (isEventCreator(userId, event)) {
-            return res.json(event);
+            return res.json(eventInformationForCreator(event._doc));
         }
 
-        console.log(event);
 
         if (event.users.some(e => e.id.toString() === userId)) {
             return res.json(eventInformationForUser(event._doc));
@@ -129,7 +127,7 @@ export const getAllUserEvents = async (req, res) => {
             });
         }
 
-        return res.json(events.map(e => eventInformationForUser(e._doc)));
+        return res.json(events.map(e => previewEventInformation(e._doc)));
 
     } catch (e) {
         console.log('error getting event all user events', e);
@@ -297,7 +295,7 @@ export const joinToEvent = async (req, res) => {
             });
         }
 
-        return res.json(eventInformationForUser(newEvent._doc));
+        return res.json(previewEventInformation(newEvent._doc));
 
 
     } catch (e) {
@@ -355,11 +353,25 @@ export const leaveToEvent = async (req, res) => {
 }
 
 const eventInformationForUser = (event) => {
+    const { usersWhoWantToJoin, ...e} = event;
+    e.usersWhoWantToJoin = [];
+    e.unreadMessages = 39;
+
+    return e;
+}
+
+const eventInformationForCreator = (event) => {
+    let e = event;
+    e.unreadMessages = 39;
+    return e;
+}
+
+const previewEventInformation = (event) => {
     const {appearInSearch, showAllMessage, entryAfterAdminApproval, usersWhoWantToJoin, users, teams, idCreator, idPinnedMessages, ...e} = event;
     if (users.length < 3) {
-        e.users = removePasswordHashFromUsers(users);
+        e.users = users;
     } else {
-        e.users = removePasswordHashFromUsers(users.slice(2));
+        e.users = users.slice(2);
     }
 
     e.userCount = users.length;

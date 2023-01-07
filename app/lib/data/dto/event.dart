@@ -15,13 +15,13 @@ class Event with _$Event {
     required String? imageUrl,
     required String? description,
     required DateTime? date,
-    required bool? appearInSearch,
-    required bool? showAllMessage,
-    required bool? entryAfterAdminApproval,
+    required bool appearInSearch,
+    required bool showAllMessage,
+    required bool entryAfterAdminApproval,
     required List<String> idPinnedMessages,
-    required List<String>? usersWhoWantToJoin,
+    required List<String> usersWhoWantToJoin,
     required List<EventUser> users,
-    required List<String> teams,
+    // required List<Teams> teams,
     required List<Tag> tags,
   }) = _Event;
 

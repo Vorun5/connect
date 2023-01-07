@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 part 'create_event_form.g.dart';
@@ -91,6 +92,7 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
               textStyle: Theme.of(context).textTheme.labelLarge,
             ),
             onPressed: () async {
+              final goNamed = context.goNamed;
               final messenger = ScaffoldMessenger.of(context);
               final navigator = Navigator.of(context);
               final currentState = formKey.currentState;
@@ -107,11 +109,7 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
                       errorSnackBar('Не удалось создать мероприятие'),
                     );
                   } else {
-                    messenger.showSnackBar(
-                      successSnackBar(
-                        'Мероприятие ${response.name} успешно создано',
-                      ),
-                    );
+                    goNamed('event', params: {'id': response.id});
                   }
                 }
               } else {

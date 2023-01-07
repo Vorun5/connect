@@ -2,6 +2,7 @@ class ApiConstants {
   static const String baseUrl = 'http://localhost:4040';
   static const String usersEndpoint = '/users';
   static const String getAllEvents = '/get-all-user-events';
+  static String getEventById(String eventId) => '/events/$eventId';
   static String userByUsername(String username) => '/users/$username';
   static String searchTags(String str) => '/tags/$str';
   static const String createTag = '/tags';

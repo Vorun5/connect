@@ -2,7 +2,6 @@ import bcrypt from "bcrypt";
 import {User} from "../models/index.js";
 import jwt from "jsonwebtoken";
 import {secretKey} from "../config.js";
-import {removePasswordHashFromUser} from "./shared.js";
 
 export const singUp = async (req, res) => {
     try {
@@ -88,7 +87,7 @@ export const getMe = async (req, res) => {
             });
         }
 
-        return res.json(removePasswordHashFromUser(user._doc));
+        return res.json(user);
     } catch (e) {
         console.log('error getting personal information', e);
         return res.status(500).json({

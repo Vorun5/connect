@@ -1,13 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:app/pages/edit_profile_page/edit_profile_page.dart';
+import 'package:app/pages/event_page/event_page.dart';
 import 'package:app/pages/home_page/home_page.dart';
 import 'package:app/pages/login_page/login_page.dart';
 import 'package:app/pages/sign_up_page/sign_up_page.dart';
 import 'package:app/pages/user_profile_page/user_profile_page.dart';
 import 'package:app/providers/auth_provider.dart';
+import 'package:app/providers/selected_event.dart';
 import 'package:app/providers/selected_user_profile_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -49,6 +51,17 @@ final routerProvider = Provider<GoRouter>((ref) {
               });
 
               return const UserProfilePage();
+            },
+          ),
+          GoRoute(
+            path: 'e/:id',
+            name: 'event',
+            builder: (_, state) {
+              Future(() => ref
+                  .read(selectedEventProvider.notifier)
+                  .selectEvent(state.params['id']!));
+
+              return const EventPage();
             },
           ),
         ],

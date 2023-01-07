@@ -14,4 +14,9 @@ class MyEvents extends _$MyEvents {
     state =
         await AsyncValue.guard(() => Future(() => [...state.value!, event]));
   }
+
+  Future<void> refresh() async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() => ApiServices.getAllEvents());
+  }
 }
