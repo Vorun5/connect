@@ -8,4 +8,10 @@ part 'my_events.g.dart';
 class MyEvents extends _$MyEvents {
   @override
   Future<List<EventPreview>> build() => ApiServices.getAllEvents();
+
+  Future<void> addEvent(EventPreview event) async {
+    state = const AsyncLoading();
+    state =
+        await AsyncValue.guard(() => Future(() => [...state.value!, event]));
+  }
 }

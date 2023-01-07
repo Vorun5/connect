@@ -101,6 +101,7 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
                   final response = await ApiServices.createEvent(
                     EventToCreate.fromJson(value).copyWith(tags: tags),
                   );
+                  navigator.pop();
                   if (response == null) {
                     messenger.showSnackBar(
                       errorSnackBar('Не удалось создать мероприятие'),
@@ -111,7 +112,6 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
                         'Мероприятие ${response.name} успешно создано',
                       ),
                     );
-                    navigator.pop();
                   }
                 }
               } else {
@@ -182,8 +182,6 @@ Widget __addTagButton(
                               final response =
                                   await ApiServices.searchTags(search);
                               setState(() => searchTags.value = response);
-                              print(searchTags.value);
-                              print(search);
                             },
                           ),
                         ),

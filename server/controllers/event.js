@@ -5,11 +5,11 @@ import {removePasswordHashFromUsers} from "./shared.js";
 export const create = async (req, res) => {
     try {
         const idCreator = req.userId;
-        const doc = (await new Event({
+        const doc = await new Event({
             idCreator: idCreator, users: [{
                 user: idCreator, date: Date.now(),
             }], ...req.body,
-        }).populate('users.user')).populate('tags');
+        }).populate(['users.user', 'tags']);
 
         const event = await doc.save();
 
@@ -61,8 +61,7 @@ export const update = async (req, res) => {
             usersWhoWantToJoin: usersWhoWantToJoin,
         }, {
             returnDocument: "after",
-        }).populate('tags').exec();
-        // .populate('users.id')
+        }).populate(['users.user', 'tags']).exec();
 
         if (!updateEvent) {
             return res.status(404).json({
@@ -122,7 +121,7 @@ export const getAllUserEvents = async (req, res) => {
                     id: userId
                 }
             }
-        }).populate('users.user').populate('tags');
+        }).populate(['users.user', 'tags']);
 
         if (!events) {
             return res.status(404).json({

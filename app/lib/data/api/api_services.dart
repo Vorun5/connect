@@ -83,8 +83,6 @@ class ApiServices {
     try {
       final response = await _dio.post(url, data: data);
 
-      print(response.data);
-
       return Event.fromJson(response.data as Map<String, dynamic>);
     } on DioError catch (e) {
       final response = e.response;
