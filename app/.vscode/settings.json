@@ -6,13 +6,9 @@
   },
   "editor.renderLineHighlight": "all",
   "editor.renderWhitespace": "none",
-  "editor.renderFinalNewline": true,
-  "editor.rulers": [
-    120
-  ],
-  "cSpell.enableFiletypes": [
-    "dart"
-  ],
+  "editor.renderFinalNewline": "on",
+  "editor.rulers": [120],
+  "cSpell.enableFiletypes": ["dart"],
   "files.exclude": {
     ".vscode/**": true,
     "**/*.lock": true,
@@ -23,13 +19,12 @@
     "editor.defaultFormatter": "Dart-Code.dart-code",
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
-    "editor.rulers": [
-      80
-    ],
+    "editor.rulers": [80],
     "editor.selectionHighlight": false,
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": false
-  }
+  },
+  "cSpell.words": ["hcwidget", "riverpod"]
 }

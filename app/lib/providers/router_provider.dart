@@ -5,6 +5,7 @@ import 'package:app/pages/login_page/login_page.dart';
 import 'package:app/pages/sign_up_page/sign_up_page.dart';
 import 'package:app/pages/user_profile_page/user_profile_page.dart';
 import 'package:app/providers/auth_provider.dart';
+import 'package:app/providers/my_events.dart';
 import 'package:app/providers/selected_event.dart';
 import 'package:app/providers/selected_user_profile_provider.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,12 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/',
         name: 'home',
-        builder: (_, state) => const HomePage(),
+        builder: (_, state) {
+          Future(() {
+            ref.read(myEventsProvider.notifier).refresh();
+          });
+          return const HomePage();
+        },
         routes: [
           GoRoute(
             path: 'edit',

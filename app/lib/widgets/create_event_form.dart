@@ -196,10 +196,10 @@ Widget __addTagButton(
                       InputChip(
                         label: Text(search),
                         onPressed: () async {
-                          final messager = ScaffoldMessenger.of(context);
+                          final messenger = ScaffoldMessenger.of(context);
                           final tag = await ApiServices.createTag(search);
                           if (tag == null) {
-                            messager.showSnackBar(
+                            messenger.showSnackBar(
                               errorSnackBar('Не удалось создать тег $search'),
                             );
                           } else {
