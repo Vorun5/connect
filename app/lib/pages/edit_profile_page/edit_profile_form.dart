@@ -66,7 +66,7 @@ Widget _editProfileForm(
             Gaps.normal,
             OutlinedButton(
               onPressed: () async {
-                final messager = ScaffoldMessenger.of(context);
+                final messenger = ScaffoldMessenger.of(context);
                 final currentState = _formKey.currentState;
 
                 if (currentState?.saveAndValidate() ?? false) {
@@ -90,11 +90,11 @@ Widget _editProfileForm(
                         await ApiServices.updateUserInformation(updatedUser);
                     if (errorStatus.value == null) {
                       ref.refresh(myProfileProvider);
-                      messager.showSnackBar(
+                      messenger.showSnackBar(
                         successSnackBar('Профиль успещно обновлён!'),
                       );
                     } else {
-                      messager.showSnackBar(
+                      messenger.showSnackBar(
                         errorSnackBar(
                           'Не удалось обновить профиль. Попробуйте ещё раз',
                         ),

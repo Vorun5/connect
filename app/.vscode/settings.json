@@ -26,5 +26,5 @@
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": false
   },
-  "cSpell.words": ["hcwidget", "riverpod"]
+  "cSpell.words": ["hcwidget", "riverpod", "swidget"]
 }

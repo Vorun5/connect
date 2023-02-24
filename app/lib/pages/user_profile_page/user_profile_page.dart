@@ -75,7 +75,7 @@ Widget __header(User user) => Stack(
       children: [
         Image.network(
           user.backgroundImageUrl ?? Constants.noBackground,
-          height: Constants.backgroundheight,
+          height: Constants.backgroundHeight,
           width: double.infinity,
           fit: BoxFit.cover,
         ),
@@ -83,7 +83,7 @@ Widget __header(User user) => Stack(
           padding: const EdgeInsets.only(
             left: Paddings.normal,
             right: Paddings.normal,
-            top: Constants.backgroundheight - Constants.avatarRadius,
+            top: Constants.backgroundHeight - Constants.avatarRadius,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
