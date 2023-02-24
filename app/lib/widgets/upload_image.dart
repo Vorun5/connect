@@ -52,7 +52,8 @@ Widget _uploadImage(
                               onChangeUrl(newUrl);
                               debugPrint(url);
                               messenger.showSnackBar(
-                                successSnackBar('Фон успешно обновлён!'),
+                                successSnackBar(
+                                    'Фотография успешно обновлена!'),
                               );
                             } else {
                               messenger.showSnackBar(

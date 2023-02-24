@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:app/data/api/api_services.dart';
 import 'package:app/data/dto/event_to_create.dart';
 import 'package:app/data/dto/tag.dart';
@@ -7,6 +8,7 @@ import 'package:app/utils/font_size.dart';
 import 'package:app/utils/form_validators.dart';
 import 'package:app/utils/gaps.dart';
 import 'package:app/utils/paddings.dart';
+import 'package:app/utils/photo_link.dart';
 import 'package:app/utils/style_constants.dart';
 import 'package:app/widgets/basic_widgets/forms/form_text_area.dart';
 import 'package:app/widgets/basic_widgets/forms/form_text_field.dart';
@@ -27,6 +29,7 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
 
   return showDialog<void>(
     context: context,
+    useRootNavigator: false,
     builder: (BuildContext context) => StatefulBuilder(
       builder: (context, setState) => AlertDialog(
         title: Center(child: Text(i18n.drawer.createEvent)),
@@ -47,6 +50,11 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
                   FormTextArea(
                     label: i18n.form.labels.description,
                     validator: FormValidators.description,
+                  ),
+                  Gaps.normal,
+                  const FormTextField(
+                    name: 'imageUrl',
+                    label: 'Image url',
                   ),
                   Gaps.normal,
                   Row(
@@ -100,6 +108,19 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
               if (currentState?.saveAndValidate() ?? false) {
                 final value = currentState?.value;
                 if (value != null) {
+                  final imageUrl = value['imageUrl'] as String?;
+                  if (imageUrl != null) {
+                    final isValidUrl = await validateImage(imageUrl);
+                    if (!isValidUrl) {
+                      // ignore: use_build_context_synchronously
+                      Flushbar(
+                        backgroundColor: Colors.red,
+                        message: 'Не валидная ссылка на фото',
+                        duration: const Duration(seconds: 1),
+                      ).show(context);
+                      return;
+                    }
+                  }
                   final response = await ApiServices.createEvent(
                     EventToCreate.fromJson(value).copyWith(tags: tags),
                   );

@@ -21,6 +21,7 @@ EventToCreate _$EventToCreateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$EventToCreate {
   String get name => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
   List<Tag>? get tags => throw _privateConstructorUsedError;
@@ -38,7 +39,11 @@ abstract class $EventToCreateCopyWith<$Res> {
       _$EventToCreateCopyWithImpl<$Res, EventToCreate>;
   @useResult
   $Res call(
-      {String name, String? description, DateTime? date, List<Tag>? tags});
+      {String name,
+      String? imageUrl,
+      String? description,
+      DateTime? date,
+      List<Tag>? tags});
 }
 
 /// @nodoc
@@ -55,6 +60,7 @@ class _$EventToCreateCopyWithImpl<$Res, $Val extends EventToCreate>
   @override
   $Res call({
     Object? name = null,
+    Object? imageUrl = freezed,
     Object? description = freezed,
     Object? date = freezed,
     Object? tags = freezed,
@@ -64,6 +70,10 @@ class _$EventToCreateCopyWithImpl<$Res, $Val extends EventToCreate>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -89,7 +99,11 @@ abstract class _$$_EventToCreateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name, String? description, DateTime? date, List<Tag>? tags});
+      {String name,
+      String? imageUrl,
+      String? description,
+      DateTime? date,
+      List<Tag>? tags});
 }
 
 /// @nodoc
@@ -104,6 +118,7 @@ class __$$_EventToCreateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
+    Object? imageUrl = freezed,
     Object? description = freezed,
     Object? date = freezed,
     Object? tags = freezed,
@@ -113,6 +128,10 @@ class __$$_EventToCreateCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -134,6 +153,7 @@ class __$$_EventToCreateCopyWithImpl<$Res>
 class _$_EventToCreate implements _EventToCreate {
   _$_EventToCreate(
       {required this.name,
+      required this.imageUrl,
       required this.description,
       required this.date,
       required final List<Tag>? tags})
@@ -144,6 +164,8 @@ class _$_EventToCreate implements _EventToCreate {
 
   @override
   final String name;
+  @override
+  final String? imageUrl;
   @override
   final String? description;
   @override
@@ -159,7 +181,7 @@ class _$_EventToCreate implements _EventToCreate {
 
   @override
   String toString() {
-    return 'EventToCreate(name: $name, description: $description, date: $date, tags: $tags)';
+    return 'EventToCreate(name: $name, imageUrl: $imageUrl, description: $description, date: $date, tags: $tags)';
   }
 
   @override
@@ -168,6 +190,8 @@ class _$_EventToCreate implements _EventToCreate {
         (other.runtimeType == runtimeType &&
             other is _$_EventToCreate &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.date, date) || other.date == date) &&
@@ -176,8 +200,8 @@ class _$_EventToCreate implements _EventToCreate {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, description, date,
-      const DeepCollectionEquality().hash(_tags));
+  int get hashCode => Object.hash(runtimeType, name, imageUrl, description,
+      date, const DeepCollectionEquality().hash(_tags));
 
   @JsonKey(ignore: true)
   @override
@@ -196,6 +220,7 @@ class _$_EventToCreate implements _EventToCreate {
 abstract class _EventToCreate implements EventToCreate {
   factory _EventToCreate(
       {required final String name,
+      required final String? imageUrl,
       required final String? description,
       required final DateTime? date,
       required final List<Tag>? tags}) = _$_EventToCreate;
@@ -205,6 +230,8 @@ abstract class _EventToCreate implements EventToCreate {
 
   @override
   String get name;
+  @override
+  String? get imageUrl;
   @override
   String? get description;
   @override

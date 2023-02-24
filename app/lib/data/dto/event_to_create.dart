@@ -8,6 +8,7 @@ part 'event_to_create.g.dart';
 class EventToCreate with _$EventToCreate {
   factory EventToCreate({
     required String name,
+    required String? imageUrl,
     required String? description,
     required DateTime? date,
     required List<Tag>? tags,

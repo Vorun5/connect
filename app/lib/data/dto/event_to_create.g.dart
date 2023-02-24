@@ -9,6 +9,7 @@ part of 'event_to_create.dart';
 _$_EventToCreate _$$_EventToCreateFromJson(Map<String, dynamic> json) =>
     _$_EventToCreate(
       name: json['name'] as String,
+      imageUrl: json['imageUrl'] as String?,
       description: json['description'] as String?,
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
@@ -20,6 +21,7 @@ _$_EventToCreate _$$_EventToCreateFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_EventToCreateToJson(_$_EventToCreate instance) =>
     <String, dynamic>{
       'name': instance.name,
+      'imageUrl': instance.imageUrl,
       'description': instance.description,
       'date': instance.date?.toIso8601String(),
       'tags': instance.tags,

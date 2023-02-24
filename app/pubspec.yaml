@@ -1,13 +1,14 @@
 name: app
 description: connect app
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.0-406.0.dev <3.0.0'
+  sdk: ">=2.19.0-406.0.dev <3.0.0"
 
 dependencies:
   animated_theme_switcher: ^2.0.7
+  another_flushbar: ^1.12.29
   collection: ^1.16.0
   dio: ^4.0.6
   file_picker: ^5.2.2
