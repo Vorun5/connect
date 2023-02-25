@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:another_flushbar/flushbar.dart';
 import 'package:app/data/api/api_services.dart';
 import 'package:app/data/dto/event_preview.dart';
 import 'package:app/i18n/strings.g.dart';
@@ -15,6 +18,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 part 'home_page.g.dart';
@@ -72,7 +76,44 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
             if (searchEvents.value != null && searchEvents.value!.isEmpty)
               const Text('Ничего не найдено!'),
             if (searchEvents.value != null && searchEvents.value!.isNotEmpty)
-              ...searchEvents.value!.map((event) => EventCard(event)).toList(),
+              ...searchEvents.value!
+                  .map(
+                    (event) => Padding(
+                      padding:
+                          const EdgeInsets.symmetric(vertical: Paddings.tiny),
+                      child: EventCard(
+                        event,
+                        actionText: event.entryAfterAdminApproval
+                            ? "Подать заявку"
+                            : "Вступить",
+                        action: () async {
+                          final result =
+                              await ApiServices.joinToEvent(event.id);
+                          if (result == 202) {
+                            Flushbar(
+                              backgroundColor: Colors.green,
+                              message: 'Заявка на добавление отправлена',
+                              duration: const Duration(seconds: 3),
+                            ).show(context);
+                            return;
+                          }
+                          if (result == 200) {
+                            context.goNamed(
+                              'event',
+                              params: {'id': event.id},
+                            );
+                            return;
+                          }
+                          Flushbar(
+                            backgroundColor: Colors.red,
+                            message: result.toString(),
+                            duration: const Duration(seconds: 3),
+                          ).show(context);
+                        },
+                      ),
+                    ),
+                  )
+                  .toList(),
             Gaps.normal,
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: Paddings.tiny),
@@ -87,7 +128,15 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
                 child: Text('У вас нет мероприятий'),
               )
             else
-              ...data.map((event) => EventCard(event)).toList(),
+              ...data
+                  .map((event) => EventCard(
+                        event,
+                        onTap: () => context.goNamed(
+                          'event',
+                          params: {'id': event.id},
+                        ),
+                      ))
+                  .toList(),
           ],
         );
       },

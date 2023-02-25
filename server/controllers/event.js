@@ -318,19 +318,21 @@ export const joinToEvent = async (req, res) => {
     const userId = req.userId;
     const eventId = req.params.id;
     const event = await Event.findById(eventId);
-
     if (!event) {
       return res.status(404).json({
         message: "event not found",
       });
     }
 
-    if (userIsMemberEvent(userId, event)) {
+    console.log(userId);
+    console.log(event._doc);
+    if (event.idCreator == userId || userIsMemberEvent(userId, event)) {
       return res.status(400).json({
         message: "you are already a member of this event",
       });
     }
 
+    console.log('дожили');
     if (event.entryAfterAdminApproval) {
       const newEvent = await Event.findByIdAndUpdate(
         eventId,
@@ -447,7 +449,7 @@ const previewEventInformation = (event) => {
   const {
     appearInSearch,
     showAllMessage,
-    entryAfterAdminApproval,
+    // entryAfterAdminApproval,
     usersWhoWantToJoin,
     users,
     teams,
@@ -473,7 +475,7 @@ const isEventCreator = (userId, event) => {
 };
 
 const userIsMemberEvent = (userId, event) => {
-  return event.users.some((e) => e.id.toString() === userId);
+  return event.users.some((e) => e.id === userId);
 };
 
 const usersAreOnMemberEvent = (users, event) => {

@@ -2,17 +2,19 @@ import 'package:app/data/dto/event_preview.dart';
 import 'package:app/utils/paddings.dart';
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:go_router/go_router.dart';
 
 part 'event_card.g.dart';
 
 @swidget
-Widget _eventCard(BuildContext context, EventPreview event) {
+Widget _eventCard(
+  BuildContext context,
+  EventPreview event, {
+  void Function()? onTap,
+  String? actionText,
+  void Function()? action,
+}) {
   return GestureDetector(
-    onTap: () => context.goNamed(
-      'event',
-      params: {'id': event.id},
-    ),
+    onTap: onTap,
     child: Card(
       elevation: 0,
       child: Padding(
@@ -24,7 +26,7 @@ Widget _eventCard(BuildContext context, EventPreview event) {
             Text('Количество пользователей: ${event.userCount}'),
             Text('URL фото: ${event.imageUrl}'),
             Text('Время: ${event.date}'),
-            Text('Непрочитанных сообщений: ${event.unreadMessages}'),
+            Text('После одобрения админа: ${event.entryAfterAdminApproval}'),
             const Text('Теги:'),
             Row(
               children: event.tags
@@ -33,6 +35,8 @@ Widget _eventCard(BuildContext context, EventPreview event) {
                   )
                   .toList(),
             ),
+            if (actionText != null)
+              OutlinedButton(onPressed: action, child: Text(actionText)),
           ],
         ),
       ),

@@ -14,7 +14,7 @@ class EventPreview with _$EventPreview {
     required DateTime? date,
     required int userCount,
     required List<Tag> tags,
-    required int? unreadMessages,
+    required bool entryAfterAdminApproval,
   }) = _EventPreview;
 
   factory EventPreview.fromJson(Map<String, dynamic> json) =>

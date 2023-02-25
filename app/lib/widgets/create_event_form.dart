@@ -116,7 +116,7 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
                       Flushbar(
                         backgroundColor: Colors.red,
                         message: 'Не валидная ссылка на фото',
-                        duration: const Duration(seconds: 1),
+                        duration: const Duration(seconds: 3),
                       ).show(context);
                       return;
                     }

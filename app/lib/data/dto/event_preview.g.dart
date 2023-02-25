@@ -18,7 +18,7 @@ _$_EventPreview _$$_EventPreviewFromJson(Map<String, dynamic> json) =>
       tags: (json['tags'] as List<dynamic>)
           .map((e) => Tag.fromJson(e as Map<String, dynamic>))
           .toList(),
-      unreadMessages: json['unreadMessages'] as int?,
+      entryAfterAdminApproval: json['entryAfterAdminApproval'] as bool,
     );
 
 Map<String, dynamic> _$$_EventPreviewToJson(_$_EventPreview instance) =>
@@ -30,5 +30,5 @@ Map<String, dynamic> _$$_EventPreviewToJson(_$_EventPreview instance) =>
       'date': instance.date?.toIso8601String(),
       'userCount': instance.userCount,
       'tags': instance.tags,
-      'unreadMessages': instance.unreadMessages,
+      'entryAfterAdminApproval': instance.entryAfterAdminApproval,
     };

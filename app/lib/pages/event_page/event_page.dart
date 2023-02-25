@@ -53,7 +53,7 @@ Widget _eventPage(BuildContext context, WidgetRef ref) {
                     Flushbar(
                       backgroundColor: Colors.red,
                       message: 'Не удалось удалить мероприятие',
-                      duration: const Duration(seconds: 1),
+                      duration: const Duration(seconds: 3),
                     ).show(context);
                   }
                 },

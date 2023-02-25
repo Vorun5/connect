@@ -1,3 +1,4 @@
+
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -28,7 +29,7 @@ mixin _$EventPreview {
   DateTime? get date => throw _privateConstructorUsedError;
   int get userCount => throw _privateConstructorUsedError;
   List<Tag> get tags => throw _privateConstructorUsedError;
-  int? get unreadMessages => throw _privateConstructorUsedError;
+  bool get entryAfterAdminApproval => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,7 +51,7 @@ abstract class $EventPreviewCopyWith<$Res> {
       DateTime? date,
       int userCount,
       List<Tag> tags,
-      int? unreadMessages});
+      bool entryAfterAdminApproval});
 }
 
 /// @nodoc
@@ -73,7 +74,7 @@ class _$EventPreviewCopyWithImpl<$Res, $Val extends EventPreview>
     Object? date = freezed,
     Object? userCount = null,
     Object? tags = null,
-    Object? unreadMessages = freezed,
+    Object? entryAfterAdminApproval = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -104,10 +105,10 @@ class _$EventPreviewCopyWithImpl<$Res, $Val extends EventPreview>
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<Tag>,
-      unreadMessages: freezed == unreadMessages
-          ? _value.unreadMessages
-          : unreadMessages // ignore: cast_nullable_to_non_nullable
-              as int?,
+      entryAfterAdminApproval: null == entryAfterAdminApproval
+          ? _value.entryAfterAdminApproval
+          : entryAfterAdminApproval // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -128,7 +129,7 @@ abstract class _$$_EventPreviewCopyWith<$Res>
       DateTime? date,
       int userCount,
       List<Tag> tags,
-      int? unreadMessages});
+      bool entryAfterAdminApproval});
 }
 
 /// @nodoc
@@ -149,7 +150,7 @@ class __$$_EventPreviewCopyWithImpl<$Res>
     Object? date = freezed,
     Object? userCount = null,
     Object? tags = null,
-    Object? unreadMessages = freezed,
+    Object? entryAfterAdminApproval = null,
   }) {
     return _then(_$_EventPreview(
       id: null == id
@@ -180,10 +181,10 @@ class __$$_EventPreviewCopyWithImpl<$Res>
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<Tag>,
-      unreadMessages: freezed == unreadMessages
-          ? _value.unreadMessages
-          : unreadMessages // ignore: cast_nullable_to_non_nullable
-              as int?,
+      entryAfterAdminApproval: null == entryAfterAdminApproval
+          ? _value.entryAfterAdminApproval
+          : entryAfterAdminApproval // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -199,7 +200,7 @@ class _$_EventPreview implements _EventPreview {
       required this.date,
       required this.userCount,
       required final List<Tag> tags,
-      required this.unreadMessages})
+      required this.entryAfterAdminApproval})
       : _tags = tags;
 
   factory _$_EventPreview.fromJson(Map<String, dynamic> json) =>
@@ -226,11 +227,11 @@ class _$_EventPreview implements _EventPreview {
   }
 
   @override
-  final int? unreadMessages;
+  final bool entryAfterAdminApproval;
 
   @override
   String toString() {
-    return 'EventPreview(id: $id, name: $name, imageUrl: $imageUrl, description: $description, date: $date, userCount: $userCount, tags: $tags, unreadMessages: $unreadMessages)';
+    return 'EventPreview(id: $id, name: $name, imageUrl: $imageUrl, description: $description, date: $date, userCount: $userCount, tags: $tags, entryAfterAdminApproval: $entryAfterAdminApproval)';
   }
 
   @override
@@ -248,8 +249,9 @@ class _$_EventPreview implements _EventPreview {
             (identical(other.userCount, userCount) ||
                 other.userCount == userCount) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
-            (identical(other.unreadMessages, unreadMessages) ||
-                other.unreadMessages == unreadMessages));
+            (identical(
+                    other.entryAfterAdminApproval, entryAfterAdminApproval) ||
+                other.entryAfterAdminApproval == entryAfterAdminApproval));
   }
 
   @JsonKey(ignore: true)
@@ -263,7 +265,7 @@ class _$_EventPreview implements _EventPreview {
       date,
       userCount,
       const DeepCollectionEquality().hash(_tags),
-      unreadMessages);
+      entryAfterAdminApproval);
 
   @JsonKey(ignore: true)
   @override
@@ -288,7 +290,7 @@ abstract class _EventPreview implements EventPreview {
       required final DateTime? date,
       required final int userCount,
       required final List<Tag> tags,
-      required final int? unreadMessages}) = _$_EventPreview;
+      required final bool entryAfterAdminApproval}) = _$_EventPreview;
 
   factory _EventPreview.fromJson(Map<String, dynamic> json) =
       _$_EventPreview.fromJson;
@@ -309,7 +311,7 @@ abstract class _EventPreview implements EventPreview {
   @override
   List<Tag> get tags;
   @override
-  int? get unreadMessages;
+  bool get entryAfterAdminApproval;
   @override
   @JsonKey(ignore: true)
   _$$_EventPreviewCopyWith<_$_EventPreview> get copyWith =>

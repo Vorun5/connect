@@ -223,6 +223,24 @@ class ApiServices {
     }
   }
 
+  // 202 - попал в список ожидания
+  // 200 - вступил в мероприятие
+  // 400 - уже участник мероприятия
+  // 404 - мероприятие не найдено
+  static Future<int> joinToEvent(String eventId) async {
+    final storage = await SharedPreferences.getInstance();
+    final token = storage.getString('token');
+    _dio.options.headers['authorization'] = token;
+    final url = ApiConstants.baseUrl + ApiConstants.joinToEvent(eventId);
+    try {
+      final response = await _dio.post(url, data: null);
+
+      return response.statusCode ?? 500;
+    } on DioError {
+      return 500;
+    }
+  }
+
   static Future<Tuple2<Event?, int?>> getEventById(String eventId) async {
     final storage = await SharedPreferences.getInstance();
     final token = storage.getString('token');
