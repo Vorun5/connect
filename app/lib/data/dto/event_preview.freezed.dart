@@ -27,7 +27,6 @@ mixin _$EventPreview {
   String? get description => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
   int get userCount => throw _privateConstructorUsedError;
-  int get teamCount => throw _privateConstructorUsedError;
   List<Tag> get tags => throw _privateConstructorUsedError;
   int? get unreadMessages => throw _privateConstructorUsedError;
 
@@ -50,7 +49,6 @@ abstract class $EventPreviewCopyWith<$Res> {
       String? description,
       DateTime? date,
       int userCount,
-      int teamCount,
       List<Tag> tags,
       int? unreadMessages});
 }
@@ -74,7 +72,6 @@ class _$EventPreviewCopyWithImpl<$Res, $Val extends EventPreview>
     Object? description = freezed,
     Object? date = freezed,
     Object? userCount = null,
-    Object? teamCount = null,
     Object? tags = null,
     Object? unreadMessages = freezed,
   }) {
@@ -103,10 +100,6 @@ class _$EventPreviewCopyWithImpl<$Res, $Val extends EventPreview>
           ? _value.userCount
           : userCount // ignore: cast_nullable_to_non_nullable
               as int,
-      teamCount: null == teamCount
-          ? _value.teamCount
-          : teamCount // ignore: cast_nullable_to_non_nullable
-              as int,
       tags: null == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -134,7 +127,6 @@ abstract class _$$_EventPreviewCopyWith<$Res>
       String? description,
       DateTime? date,
       int userCount,
-      int teamCount,
       List<Tag> tags,
       int? unreadMessages});
 }
@@ -156,7 +148,6 @@ class __$$_EventPreviewCopyWithImpl<$Res>
     Object? description = freezed,
     Object? date = freezed,
     Object? userCount = null,
-    Object? teamCount = null,
     Object? tags = null,
     Object? unreadMessages = freezed,
   }) {
@@ -185,10 +176,6 @@ class __$$_EventPreviewCopyWithImpl<$Res>
           ? _value.userCount
           : userCount // ignore: cast_nullable_to_non_nullable
               as int,
-      teamCount: null == teamCount
-          ? _value.teamCount
-          : teamCount // ignore: cast_nullable_to_non_nullable
-              as int,
       tags: null == tags
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -211,7 +198,6 @@ class _$_EventPreview implements _EventPreview {
       required this.description,
       required this.date,
       required this.userCount,
-      required this.teamCount,
       required final List<Tag> tags,
       required this.unreadMessages})
       : _tags = tags;
@@ -232,8 +218,6 @@ class _$_EventPreview implements _EventPreview {
   final DateTime? date;
   @override
   final int userCount;
-  @override
-  final int teamCount;
   final List<Tag> _tags;
   @override
   List<Tag> get tags {
@@ -246,7 +230,7 @@ class _$_EventPreview implements _EventPreview {
 
   @override
   String toString() {
-    return 'EventPreview(id: $id, name: $name, imageUrl: $imageUrl, description: $description, date: $date, userCount: $userCount, teamCount: $teamCount, tags: $tags, unreadMessages: $unreadMessages)';
+    return 'EventPreview(id: $id, name: $name, imageUrl: $imageUrl, description: $description, date: $date, userCount: $userCount, tags: $tags, unreadMessages: $unreadMessages)';
   }
 
   @override
@@ -263,8 +247,6 @@ class _$_EventPreview implements _EventPreview {
             (identical(other.date, date) || other.date == date) &&
             (identical(other.userCount, userCount) ||
                 other.userCount == userCount) &&
-            (identical(other.teamCount, teamCount) ||
-                other.teamCount == teamCount) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             (identical(other.unreadMessages, unreadMessages) ||
                 other.unreadMessages == unreadMessages));
@@ -280,7 +262,6 @@ class _$_EventPreview implements _EventPreview {
       description,
       date,
       userCount,
-      teamCount,
       const DeepCollectionEquality().hash(_tags),
       unreadMessages);
 
@@ -306,7 +287,6 @@ abstract class _EventPreview implements EventPreview {
       required final String? description,
       required final DateTime? date,
       required final int userCount,
-      required final int teamCount,
       required final List<Tag> tags,
       required final int? unreadMessages}) = _$_EventPreview;
 
@@ -326,8 +306,6 @@ abstract class _EventPreview implements EventPreview {
   DateTime? get date;
   @override
   int get userCount;
-  @override
-  int get teamCount;
   @override
   List<Tag> get tags;
   @override

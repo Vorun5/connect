@@ -21,7 +21,6 @@ Widget _eventCard(BuildContext context, EventPreview event) {
           children: [
             Text('Название: ${event.name}'),
             Text('Описание: ${event.description}'),
-            Text('Количество команд: ${event.teamCount}'),
             Text('Количество пользователей: ${event.userCount}'),
             Text('URL фото: ${event.imageUrl}'),
             Text('Время: ${event.date}'),

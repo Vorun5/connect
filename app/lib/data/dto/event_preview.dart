@@ -13,7 +13,6 @@ class EventPreview with _$EventPreview {
     required String? description,
     required DateTime? date,
     required int userCount,
-    required int teamCount,
     required List<Tag> tags,
     required int? unreadMessages,
   }) = _EventPreview;

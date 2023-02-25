@@ -21,7 +21,6 @@ class Event with _$Event {
     required List<String> idPinnedMessages,
     required List<String> usersWhoWantToJoin,
     required List<EventUser> users,
-    // required List<Teams> teams,
     required List<Tag> tags,
   }) = _Event;
 

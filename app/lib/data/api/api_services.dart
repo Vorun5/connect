@@ -13,14 +13,6 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuple/tuple.dart';
 
-// final tokenProvider = FutureProvider(() {
-
-// });
-
-// final apiProvider = Provider(() {
-//   // TODO: тут вотчить токен провайдер
-// })
-
 class ApiServices {
   static final _dio = Dio();
   static const serverErrorStatus = 500;
@@ -93,6 +85,28 @@ class ApiServices {
       }
 
       return null;
+    }
+  }
+
+  static Future<int> removeEvent(String eventId) async {
+    final storage = await SharedPreferences.getInstance();
+    final token = storage.getString('token');
+    _dio.options.headers['authorization'] = token;
+    final url = ApiConstants.baseUrl + ApiConstants.getEventById(eventId);
+
+    try {
+      final response = await _dio.post(url, data: null);
+
+      return response.statusCode ?? 500;
+    } on DioError catch (e) {
+      final response = e.response;
+      if (response != null) {
+        if (kDebugMode) {
+          print(response.data);
+        }
+      }
+
+      return 500;
     }
   }
 

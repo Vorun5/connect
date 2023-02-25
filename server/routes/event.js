@@ -21,5 +21,7 @@ eventRouter.post('/events/remove-users', auth, addOrRemoveUsersToEvent, validati
 eventRouter.post('/events/join/:id', auth, EventController.joinToEvent);
 // работает
 eventRouter.post('/events/leave/:id', auth, EventController.leaveToEvent);
+// не проверено
+eventRouter.post('/events/:id', auth, EventController.remove);
 
 export default eventRouter;

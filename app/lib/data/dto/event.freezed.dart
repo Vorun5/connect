@@ -33,8 +33,7 @@ mixin _$Event {
   bool get entryAfterAdminApproval => throw _privateConstructorUsedError;
   List<String> get idPinnedMessages => throw _privateConstructorUsedError;
   List<String> get usersWhoWantToJoin => throw _privateConstructorUsedError;
-  List<EventUser> get users =>
-      throw _privateConstructorUsedError; // required List<Teams> teams,
+  List<EventUser> get users => throw _privateConstructorUsedError;
   List<Tag> get tags => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -329,9 +328,7 @@ class _$_Event implements _Event {
     return EqualUnmodifiableListView(_users);
   }
 
-// required List<Teams> teams,
   final List<Tag> _tags;
-// required List<Teams> teams,
   @override
   List<Tag> get tags {
     // ignore: implicit_dynamic_type
@@ -453,7 +450,7 @@ abstract class _Event implements Event {
   List<String> get usersWhoWantToJoin;
   @override
   List<EventUser> get users;
-  @override // required List<Teams> teams,
+  @override
   List<Tag> get tags;
   @override
   @JsonKey(ignore: true)
