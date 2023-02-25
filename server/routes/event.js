@@ -9,6 +9,8 @@ const eventRouter = express.Router();
 eventRouter.post('/events', auth, createEvent, validation, EventController.create);
 // работатет
 eventRouter.patch('/events', auth, updateEvent, validation, EventController.update);
+// не протестированно
+eventRouter.get('/events/search/:string', auth, EventController.find);
 // работает
 eventRouter.get('/events/:id', auth, EventController.getById);
 // работает
@@ -21,7 +23,7 @@ eventRouter.post('/events/remove-users', auth, addOrRemoveUsersToEvent, validati
 eventRouter.post('/events/join/:id', auth, EventController.joinToEvent);
 // работает
 eventRouter.post('/events/leave/:id', auth, EventController.leaveToEvent);
-// не проверено
+// работает
 eventRouter.post('/events/:id', auth, EventController.remove);
 
 export default eventRouter;

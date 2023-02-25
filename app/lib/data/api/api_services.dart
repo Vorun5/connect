@@ -187,6 +187,28 @@ class ApiServices {
     }
   }
 
+  static Future<List<EventPreview>> searchEvents(String str) async {
+    final storage = await SharedPreferences.getInstance();
+    final token = storage.getString('token');
+    _dio.options.headers['authorization'] = token;
+    final url = ApiConstants.baseUrl + ApiConstants.searchEvents(str);
+    try {
+      final response = await _dio.get(url);
+      final data = response.data as List;
+      print(data);
+      final events = data
+          .map(
+            (jsonEvent) =>
+                EventPreview.fromJson(jsonEvent as Map<String, dynamic>),
+          )
+          .toList();
+
+      return events;
+    } on DioError {
+      return [];
+    }
+  }
+
   static Future<Tag?> createTag(String name) async {
     final storage = await SharedPreferences.getInstance();
     final token = storage.getString('token');

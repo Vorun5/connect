@@ -26,6 +26,28 @@ export const create = async (req, res) => {
   }
 };
 
+export const find = async (req, res) => {
+  try {
+    const s = req.params.string;
+    const events = await Event.find({
+        name: new RegExp(s, 'i'),
+    }).populate(["users.user", "tags"]);
+
+    if (!events) {
+        return res.status(404).json({
+            message: 'events not found',
+        });
+    }
+    
+    return res.json(events.map((e) => previewEventInformation(e._doc)));
+} catch (e) {
+    console.log('failed to find events', e);
+    return res.status(500).json({
+        message: 'failed to find events',
+    });
+}
+};
+
 export const remove = async (req, res) => {
   try {
     const userId = req.userId;

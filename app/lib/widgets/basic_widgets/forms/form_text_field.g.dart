@@ -13,6 +13,8 @@ class FormTextField extends StatelessWidget {
     required this.label,
     this.initialValue,
     this.validator,
+    this.suffixIcon,
+    this.onPressed,
   }) : super(key: key);
 
   final String name;
@@ -23,6 +25,10 @@ class FormTextField extends StatelessWidget {
 
   final String? Function(String?)? validator;
 
+  final IconData? suffixIcon;
+
+  final void Function()? onPressed;
+
   @override
   Widget build(BuildContext _context) => _formTextField(
         _context,
@@ -30,5 +36,7 @@ class FormTextField extends StatelessWidget {
         label: label,
         initialValue: initialValue,
         validator: validator,
+        suffixIcon: suffixIcon,
+        onPressed: onPressed,
       );
 }

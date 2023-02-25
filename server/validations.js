@@ -58,8 +58,6 @@ export const createEvent = [
     body('description', 'description must be string').optional().isString().isLength({max: maxDescriptionChUsername}),
     body('date', 'date must be date string').optional().isDate(),
     body('tags', 'tags must be array tags id').optional().isArray(),
-    body('geotag.latitude', 'geotag.latitude must be a number').optional().isFloat(),
-    body('geotag.longitude', 'geotag.longitude must be a number').optional().isFloat(),
 ]
 
 // мы не можешь добавлять в мероприятие любых людей, а только тех кто был в списке желающих
@@ -73,6 +71,10 @@ export const updateEvent = [
     body('appearInSearch', 'appearInSearch must be bool').isBoolean(),
     body('showAllMessage', 'appearInSearch must be bool').isBoolean(),
     body('entryAfterAdminApproval', 'entryAfterAdminApproval must be bool').isBoolean(),
+]
+
+export const findEventsByName = [
+    body('name', 'name needed').isString().isLength({min: minNumChName, max: maxNumChName}),
 ]
 
 export const addOrRemoveUsersToEvent = [
