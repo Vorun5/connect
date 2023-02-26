@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:app/data/api/api_services.dart';
 import 'package:app/data/dto/event_preview.dart';
 import 'package:app/i18n/strings.g.dart';
@@ -82,33 +83,46 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
                           const EdgeInsets.symmetric(vertical: Paddings.tiny),
                       child: EventCard(
                         event,
-                        // actionText: event.entryAfterAdminApproval
-                        //     ? "Подать заявку"
-                        //     : "Вступить",
-                        // action: () async {
-                        //   final result =
-                        //       await ApiServices.joinToEvent(event.id);
-                        //   if (result == 202) {
-                        //     Flushbar(
-                        //       backgroundColor: Colors.green,
-                        //       message: 'Заявка на добавление отправлена',
-                        //       duration: const Duration(seconds: 3),
-                        //     ).show(context);
-                        //     return;
-                        //   }
-                        //   if (result == 200) {
-                        //     context.goNamed(
-                        //       'event',
-                        //       params: {'id': event.id},
-                        //     );
-                        //     return;
-                        //   }
-                        //   Flushbar(
-                        //     backgroundColor: Colors.red,
-                        //     message: result.toString(),
-                        //     duration: const Duration(seconds: 3),
-                        //   ).show(context);
-                        // },
+                        actionText: event.entryAfterAdminApproval
+                            ? "Подать заявку"
+                            : "Вступить",
+                        action: () async {
+                          final result =
+                              await ApiServices.joinToEvent(event.id);
+                          if (result == 200) {
+                            context.goNamed(
+                              'event',
+                              params: {'id': event.id},
+                            );
+                            return;
+                          }
+                          var color = Colors.black;
+                          var text = "не обработанный случай";
+                          if (result == 202) {
+                            color = Colors.greenAccent;
+                            text = "Заявка на добавление принята!";
+                          }
+                          if (result == 400) {
+                            color = Colors.orangeAccent;
+                            text = "Вы уже участник этого мероприятия!";
+                            if (event.entryAfterAdminApproval) {
+                              text = "Вы уже в списке ожидания!";
+                            }
+                          }
+                          if (result == 404) {
+                            color = Colors.redAccent;
+                            text = "Мероприятие не найдено!";
+                          }
+                          if (result == 500) {
+                            color = Colors.redAccent;
+                            text = "Ошибка сервера( sorry";
+                          }
+                          Flushbar(
+                            backgroundColor: color,
+                            message: text,
+                            duration: const Duration(seconds: 3),
+                          ).show(context);
+                        },
                       ),
                     ),
                   )

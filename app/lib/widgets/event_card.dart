@@ -12,6 +12,8 @@ Widget _eventCard(
   BuildContext context,
   EventPreview event, {
   void Function()? onTap,
+  String? actionText,
+  void Function()? action,
 }) {
   return GestureDetector(
     onTap: onTap,
@@ -20,69 +22,88 @@ Widget _eventCard(
       child: Padding(
         padding: const EdgeInsets.symmetric(
             vertical: Paddings.small, horizontal: Paddings.normal),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 150,
-              ),
-              child: Column(
-                children: [
-                  Image.network(
-                    event.imageUrl ??
-                        'https://i.pinimg.com/originals/19/44/81/194481621c0c7a82f726c1b4e2fbb6e3.jpg',
-                    // height: Constants.backgroundHeight,
-                    width: 150,
-                    fit: BoxFit.cover,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 150,
                   ),
-                  Gaps.small,
-                  Row(
+                  child: Column(
                     children: [
-                      const Icon(Icons.person),
-                      Text('${event.userCount}')
+                      Image.network(
+                        event.imageUrl ??
+                            'https://i.pinimg.com/originals/19/44/81/194481621c0c7a82f726c1b4e2fbb6e3.jpg',
+                        width: 150,
+                        fit: BoxFit.cover,
+                      ),
+                      Gaps.small,
+                      Row(
+                        children: [
+                          const Icon(Icons.person),
+                          Text(
+                            ' ${event.userCount}',
+                            style: const TextStyle(
+                              fontSize: FontSize.normal,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        ],
+                      ),
                     ],
                   ),
-                ],
-              ),
-            ),
-            Gaps.normal,
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    event.name,
-                    style: const TextStyle(fontSize: FontSize.big),
-                    maxLines: 30,
-                    overflow: TextOverflow.fade,
+                ),
+                Gaps.normal,
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        event.name,
+                        style: const TextStyle(fontSize: FontSize.big),
+                        maxLines: 30,
+                        overflow: TextOverflow.fade,
+                      ),
+                      Gaps.small,
+                      if (event.description != null)
+                        Text(
+                          event.description!,
+                          maxLines: 30,
+                          overflow: TextOverflow.fade,
+                        ),
+                      Gaps.normal,
+                      Wrap(
+                        spacing: Paddings.tiny,
+                        runSpacing: Paddings.tiny,
+                        children: event.tags.map(
+                          (tag) {
+                            return Chip(
+                              label: Text(tag.name),
+                              onDeleted: null,
+                            );
+                          },
+                        ).toList(),
+                      ),
+                    ],
                   ),
-                  Gaps.small,
-                  if (event.description != null)
-                    Text(
-                      event.description!,
-                      maxLines: 30,
-                      overflow: TextOverflow.fade,
-                    ),
-                  Gaps.normal,
-                  Wrap(
-                    spacing: Paddings.tiny,
-                    runSpacing: Paddings.tiny,
-                    children: event.tags.map(
-                      (tag) {
-                        return Chip(
-                          label: Text(tag.name),
-                          onDeleted: null,
-                        );
-                      },
-                    ).toList(),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
+            // Gaps.small,
+            if (actionText != null)
+              Padding(
+                padding: const EdgeInsets.only(top: Paddings.small),
+                child: OutlinedButton(
+                  onPressed: action,
+                  child: Text(actionText),
+                ),
+              ),
           ],
         ),
       ),
