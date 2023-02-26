@@ -56,6 +56,15 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
                     name: 'imageUrl',
                     label: 'Image url',
                   ),
+                  // Gaps.normal,
+                  // FormBuilderDateTimePicker(
+                  //   name: 'date',
+                  //   fieldLabelText: 'Date',
+                  //   initialDate: null,
+                  //   decoration: const InputDecoration(
+                  //     border: OutlineInputBorder(),
+                  //   ),
+                  // ),
                   Gaps.normal,
                   FormBuilderCheckbox(
                     name: 'entryAfterAdminApproval',
@@ -127,6 +136,7 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
                       return;
                     }
                   }
+                  print(value);
                   final response = await ApiServices.createEvent(
                     EventToCreate.fromJson(value).copyWith(tags: tags),
                   );
