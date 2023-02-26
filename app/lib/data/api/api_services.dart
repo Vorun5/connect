@@ -236,8 +236,14 @@ class ApiServices {
       final response = await _dio.post(url, data: null);
 
       return response.statusCode ?? 500;
-    } on DioError {
-      return 500;
+    } on DioError catch (e) {
+      final response = e.response;
+      if (response != null) {
+        if (kDebugMode) {
+          return response.statusCode ?? 500;
+        }
+      }
+      return serverErrorStatus;
     }
   }
 
