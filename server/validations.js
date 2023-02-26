@@ -58,6 +58,7 @@ export const createEvent = [
     body('description', 'description must be string').optional().isString().isLength({max: maxDescriptionChUsername}),
     body('date', 'date must be date string').optional().isDate(),
     body('tags', 'tags must be array tags id').optional().isArray(),
+    body('entryAfterAdminApproval', 'entryAfterAdminApproval must be bool').isBoolean(),
 ]
 
 // мы не можешь добавлять в мероприятие любых людей, а только тех кто был в списке желающих
@@ -70,7 +71,6 @@ export const updateEvent = [
     body('imageUrl', 'imageUrl must be url').optional().isString(),
     body('appearInSearch', 'appearInSearch must be bool').isBoolean(),
     body('showAllMessage', 'appearInSearch must be bool').isBoolean(),
-    body('entryAfterAdminApproval', 'entryAfterAdminApproval must be bool').isBoolean(),
 ]
 
 export const findEventsByName = [

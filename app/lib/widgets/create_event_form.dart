@@ -57,6 +57,12 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
                     label: 'Image url',
                   ),
                   Gaps.normal,
+                  FormBuilderCheckbox(
+                    name: 'entryAfterAdminApproval',
+                    title: const Text('После одобрения создателя'),
+                    initialValue: false,
+                  ),
+                  Gaps.normal,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

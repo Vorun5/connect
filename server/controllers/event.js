@@ -190,7 +190,7 @@ export const getAllUserEvents = async (req, res) => {
         const events = await Event.find({
             users: {
                 $elemMatch: {
-                    id: userId,
+                    user: userId,
                 },
             },
         }).populate(['users.user', 'tags'])
@@ -328,12 +328,19 @@ export const joinToEvent = async (req, res) => {
             })
         }
         if (event.idCreator == userId || userIsMemberEvent(userId, event)) {
-            console.log('yeeeeeeeeeeees')
             return res.status(400).json({
                 message: 'you are already a member of this event',
             })
         }
         if (event.entryAfterAdminApproval) {
+            if (
+                event.usersWhoWantToJoin.some((u) => u.toString() === userId.toString())
+            ) {
+                return res.status(400).json({
+                    message:
+                        'you are already a member in wait list of this event',
+                })
+            }
             const newEvent = await Event.findByIdAndUpdate(
                 eventId,
                 {
@@ -431,6 +438,7 @@ export const leaveToEvent = async (req, res) => {
     }
 }
 
+// UTILS
 const eventInformationForUser = (event) => {
     const { usersWhoWantToJoin, ...e } = event
     e.usersWhoWantToJoin = []

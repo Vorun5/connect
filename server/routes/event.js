@@ -9,7 +9,7 @@ const eventRouter = express.Router();
 eventRouter.post('/events', auth, createEvent, validation, EventController.create);
 // работатет
 eventRouter.patch('/events', auth, updateEvent, validation, EventController.update);
-// не протестированно
+// работате
 eventRouter.get('/events/search/:string', auth, EventController.find);
 // работает
 eventRouter.get('/events/:id', auth, EventController.getById);

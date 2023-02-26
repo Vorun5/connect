@@ -12,6 +12,7 @@ class EventToCreate with _$EventToCreate {
     required String? description,
     required DateTime? date,
     required List<Tag>? tags,
+    required bool entryAfterAdminApproval,
   }) = _EventToCreate;
 
   factory EventToCreate.fromJson(Map<String, dynamic> json) =>

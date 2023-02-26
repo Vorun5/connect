@@ -25,6 +25,7 @@ mixin _$EventToCreate {
   String? get description => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
   List<Tag>? get tags => throw _privateConstructorUsedError;
+  bool get entryAfterAdminApproval => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,8 @@ abstract class $EventToCreateCopyWith<$Res> {
       String? imageUrl,
       String? description,
       DateTime? date,
-      List<Tag>? tags});
+      List<Tag>? tags,
+      bool entryAfterAdminApproval});
 }
 
 /// @nodoc
@@ -64,6 +66,7 @@ class _$EventToCreateCopyWithImpl<$Res, $Val extends EventToCreate>
     Object? description = freezed,
     Object? date = freezed,
     Object? tags = freezed,
+    Object? entryAfterAdminApproval = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -86,6 +89,10 @@ class _$EventToCreateCopyWithImpl<$Res, $Val extends EventToCreate>
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<Tag>?,
+      entryAfterAdminApproval: null == entryAfterAdminApproval
+          ? _value.entryAfterAdminApproval
+          : entryAfterAdminApproval // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -103,7 +110,8 @@ abstract class _$$_EventToCreateCopyWith<$Res>
       String? imageUrl,
       String? description,
       DateTime? date,
-      List<Tag>? tags});
+      List<Tag>? tags,
+      bool entryAfterAdminApproval});
 }
 
 /// @nodoc
@@ -122,6 +130,7 @@ class __$$_EventToCreateCopyWithImpl<$Res>
     Object? description = freezed,
     Object? date = freezed,
     Object? tags = freezed,
+    Object? entryAfterAdminApproval = null,
   }) {
     return _then(_$_EventToCreate(
       name: null == name
@@ -144,6 +153,10 @@ class __$$_EventToCreateCopyWithImpl<$Res>
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<Tag>?,
+      entryAfterAdminApproval: null == entryAfterAdminApproval
+          ? _value.entryAfterAdminApproval
+          : entryAfterAdminApproval // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -156,7 +169,8 @@ class _$_EventToCreate implements _EventToCreate {
       required this.imageUrl,
       required this.description,
       required this.date,
-      required final List<Tag>? tags})
+      required final List<Tag>? tags,
+      required this.entryAfterAdminApproval})
       : _tags = tags;
 
   factory _$_EventToCreate.fromJson(Map<String, dynamic> json) =>
@@ -180,8 +194,11 @@ class _$_EventToCreate implements _EventToCreate {
   }
 
   @override
+  final bool entryAfterAdminApproval;
+
+  @override
   String toString() {
-    return 'EventToCreate(name: $name, imageUrl: $imageUrl, description: $description, date: $date, tags: $tags)';
+    return 'EventToCreate(name: $name, imageUrl: $imageUrl, description: $description, date: $date, tags: $tags, entryAfterAdminApproval: $entryAfterAdminApproval)';
   }
 
   @override
@@ -195,13 +212,22 @@ class _$_EventToCreate implements _EventToCreate {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.date, date) || other.date == date) &&
-            const DeepCollectionEquality().equals(other._tags, _tags));
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
+            (identical(
+                    other.entryAfterAdminApproval, entryAfterAdminApproval) ||
+                other.entryAfterAdminApproval == entryAfterAdminApproval));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, imageUrl, description,
-      date, const DeepCollectionEquality().hash(_tags));
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      imageUrl,
+      description,
+      date,
+      const DeepCollectionEquality().hash(_tags),
+      entryAfterAdminApproval);
 
   @JsonKey(ignore: true)
   @override
@@ -223,7 +249,8 @@ abstract class _EventToCreate implements EventToCreate {
       required final String? imageUrl,
       required final String? description,
       required final DateTime? date,
-      required final List<Tag>? tags}) = _$_EventToCreate;
+      required final List<Tag>? tags,
+      required final bool entryAfterAdminApproval}) = _$_EventToCreate;
 
   factory _EventToCreate.fromJson(Map<String, dynamic> json) =
       _$_EventToCreate.fromJson;
@@ -238,6 +265,8 @@ abstract class _EventToCreate implements EventToCreate {
   DateTime? get date;
   @override
   List<Tag>? get tags;
+  @override
+  bool get entryAfterAdminApproval;
   @override
   @JsonKey(ignore: true)
   _$$_EventToCreateCopyWith<_$_EventToCreate> get copyWith =>

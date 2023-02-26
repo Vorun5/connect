@@ -16,6 +16,7 @@ _$_EventToCreate _$$_EventToCreateFromJson(Map<String, dynamic> json) =>
       tags: (json['tags'] as List<dynamic>?)
           ?.map((e) => Tag.fromJson(e as Map<String, dynamic>))
           .toList(),
+      entryAfterAdminApproval: json['entryAfterAdminApproval'] as bool,
     );
 
 Map<String, dynamic> _$$_EventToCreateToJson(_$_EventToCreate instance) =>
@@ -25,4 +26,5 @@ Map<String, dynamic> _$$_EventToCreateToJson(_$_EventToCreate instance) =>
       'description': instance.description,
       'date': instance.date?.toIso8601String(),
       'tags': instance.tags,
+      'entryAfterAdminApproval': instance.entryAfterAdminApproval,
     };
