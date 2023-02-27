@@ -86,8 +86,8 @@ export const remove = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        const userId = req.userId
-        const eventId = req.body._id
+        const userId = new ObjectId(req.userId)
+        const eventId = req.body.id
         const event = await Event.findById(eventId)
 
         if (!event) {
@@ -96,13 +96,13 @@ export const update = async (req, res) => {
             })
         }
 
-        if (userId !== event.idCreator.toString()) {
+        if (!isEventCreator(userId, event)) {
             return res.status(403).json({
                 message: 'not access',
             })
         }
 
-        const { _id, ...options } = req.body
+        const { id, ...options } = req.body
 
         let usersWhoWantToJoin = []
         if (options.entryAfterAdminApproval) {
@@ -114,14 +114,9 @@ export const update = async (req, res) => {
             {
                 name: options.name,
                 description: options.description,
-                date: options.date,
-                appearInSearch: options.appearInSearch,
-                showAllMessage: options.showAllMessage,
                 entryAfterAdminApproval: options.entryAfterAdminApproval,
                 tags: options.tags,
                 imageUrl: options.imageUrl,
-                idPinnedMessages: options.idPinnedMessages,
-                geotag: options.geotag,
                 usersWhoWantToJoin: usersWhoWantToJoin,
             },
             {
@@ -333,7 +328,9 @@ export const joinToEvent = async (req, res) => {
         }
         if (event.entryAfterAdminApproval) {
             if (
-                event.usersWhoWantToJoin.some((u) => u.toString() === userId.toString())
+                event.usersWhoWantToJoin.some(
+                    (u) => u.toString() === userId.toString(),
+                )
             ) {
                 return res.status(400).json({
                     message:
@@ -478,7 +475,7 @@ const previewEventInformation = (event) => {
 }
 
 const isEventCreator = (userId, event) => {
-    return userId.toString() === event.idCreator.toString();
+    return userId.toString() === event.idCreator.toString()
 }
 
 const userIsMemberEvent = (userId, event) => {

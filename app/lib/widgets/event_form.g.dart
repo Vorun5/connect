@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'create_event_form.dart';
+part of 'event_form.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator

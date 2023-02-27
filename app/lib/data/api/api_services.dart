@@ -8,7 +8,6 @@ import 'package:app/data/dto/user_to_login.dart';
 import 'package:app/data/dto/user_to_sign_up.dart';
 import 'package:app/data/dto/user_to_update.dart';
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuple/tuple.dart';
@@ -327,31 +326,28 @@ class ApiServices {
     }
   }
 
-  //падает
-  static Future<String?> uploadImage(FilePickerResult? result) async {
-    final file = result?.files.first;
-    const url = ApiConstants.baseUrl + ApiConstants.uploadImageEndpoint;
+  // 404, 403, 500
+  static Future<int> updateEventInformation(
+      String eventId, EventToCreate event) async {
+    final storage = await SharedPreferences.getInstance();
+    final token = storage.getString('token');
+    _dio.options.headers['authorization'] = token;
+    const url = ApiConstants.baseUrl + ApiConstants.eventEndpoint;
 
-    if (file != null) {
-      try {
-        final formData = FormData.fromMap({
-          'image': MultipartFile.fromBytes(
-            file.bytes ?? [],
-            filename: file.name,
-            //contentType,: MediaType(),
-          ),
-        });
-        final response = await _dio.post(
-          url,
-          data: formData,
-        ) as Map<String, dynamic>;
-
-        return response['url'] as String;
-      } catch (_) {
-        return null;
+    final data = event.toJson()..removeWhere((key, value) => value == null);
+    data['id'] = eventId;
+    try {
+      final response = await _dio.patch(url, data: data);
+      return response.statusCode ?? 500;
+    } on DioError catch (e) {
+      final response = e.response;
+      if (response != null) {
+        if (kDebugMode) {
+          return response.statusCode ?? 500;
+        }
       }
-    }
 
-    return null;
+      return serverErrorStatus;
+    }
   }
 }

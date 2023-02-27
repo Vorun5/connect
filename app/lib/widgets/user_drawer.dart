@@ -8,7 +8,7 @@ import 'package:app/utils/paddings.dart';
 import 'package:app/utils/themes.dart';
 import 'package:app/widgets/basic_widgets/error_text.dart';
 import 'package:app/widgets/basic_widgets/hoverable.dart';
-import 'package:app/widgets/create_event_form.dart';
+import 'package:app/widgets/event_form.dart';
 import 'package:app/widgets/user_preview.dart';
 import 'package:flag/flag_widget.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +58,7 @@ Widget _userDrawer(BuildContext context, WidgetRef ref) {
                       ),
                       onTap: () {
                         Navigator.of(context).pop();
-                        createEventForm(context, ref);
+                        eventForm(context, ref);
                       },
                     ),
                     _DrawerButton(

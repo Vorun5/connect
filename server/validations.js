@@ -66,11 +66,11 @@ export const createEvent = [
 export const updateEvent = [
     // body('name', 'name needed').isString().replace(/\s+/g, ' ').trim().isLength({min: minNumChName, max: maxNumChName}),
     ...createEvent,
-    body('_id', '_id must be id').isMongoId(),
-    body('idPinnedMessages', 'idPinnedMessage must be id').optional().isArray(),
-    body('imageUrl', 'imageUrl must be url').optional().isString(),
-    body('appearInSearch', 'appearInSearch must be bool').isBoolean(),
-    body('showAllMessage', 'appearInSearch must be bool').isBoolean(),
+    body('id', 'id must be id').isMongoId(),
+    // body('idPinnedMessages', 'idPinnedMessage must be id').optional().isArray(),
+    // body('imageUrl', 'imageUrl must be url').optional().isString(),
+    // body('appearInSearch', 'appearInSearch must be bool').isBoolean(),
+    // body('showAllMessage', 'appearInSearch must be bool').isBoolean(),
 ]
 
 export const findEventsByName = [

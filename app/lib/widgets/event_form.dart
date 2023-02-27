@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:app/data/api/api_services.dart';
+import 'package:app/data/dto/event.dart';
 import 'package:app/data/dto/event_to_create.dart';
 import 'package:app/data/dto/tag.dart';
 import 'package:app/i18n/strings.g.dart';
@@ -20,19 +21,31 @@ import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-part 'create_event_form.g.dart';
+part 'event_form.g.dart';
 
-Future<void> createEventForm(BuildContext context, WidgetRef ref) {
+Future<void> eventForm(
+  BuildContext context,
+  WidgetRef ref, {
+  Event? initialValue,
+  bool isCreate = true,
+}) {
   final formKey = GlobalKey<FormBuilderState>();
   final i18n = Translations.of(context);
   final tags = <Tag>[];
+  if (initialValue != null) {
+    tags.addAll(initialValue.tags);
+  }
 
   return showDialog<void>(
     context: context,
     useRootNavigator: false,
     builder: (BuildContext context) => StatefulBuilder(
       builder: (context, setState) => AlertDialog(
-        title: Center(child: Text(i18n.drawer.createEvent)),
+        title: Center(
+          child: Text(
+            isCreate ? i18n.drawer.createEvent : "Редактировать мероприятие",
+          ),
+        ),
         content: SizedBox(
           width: StyleConstants.maxFormWidth,
           child: FormBuilder(
@@ -45,31 +58,26 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
                     name: 'name',
                     label: i18n.form.labels.name,
                     validator: FormValidators.name,
+                    initialValue: initialValue?.name,
                   ),
                   Gaps.normal,
                   FormTextArea(
                     label: i18n.form.labels.description,
                     validator: FormValidators.description,
+                    initialValue: initialValue?.description,
                   ),
                   Gaps.normal,
-                  const FormTextField(
+                  FormTextField(
                     name: 'imageUrl',
                     label: 'Image url',
+                    initialValue: initialValue?.imageUrl,
                   ),
-                  // Gaps.normal,
-                  // FormBuilderDateTimePicker(
-                  //   name: 'date',
-                  //   fieldLabelText: 'Date',
-                  //   initialDate: null,
-                  //   decoration: const InputDecoration(
-                  //     border: OutlineInputBorder(),
-                  //   ),
-                  // ),
                   Gaps.normal,
                   FormBuilderCheckbox(
                     name: 'entryAfterAdminApproval',
                     title: const Text('После одобрения создателя'),
-                    initialValue: false,
+                    initialValue:
+                        initialValue?.entryAfterAdminApproval ?? false,
                   ),
                   Gaps.normal,
                   Row(
@@ -136,17 +144,37 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
                       return;
                     }
                   }
-                  print(value);
-                  final response = await ApiServices.createEvent(
-                    EventToCreate.fromJson(value).copyWith(tags: tags),
-                  );
-                  navigator.pop();
-                  if (response == null) {
-                    messenger.showSnackBar(
-                      errorSnackBar('Не удалось создать мероприятие'),
+                  if (isCreate) {
+                    final response = await ApiServices.createEvent(
+                      EventToCreate.fromJson(value).copyWith(tags: tags),
                     );
+                    navigator.pop();
+                    if (response == null) {
+                      messenger.showSnackBar(
+                        errorSnackBar('Не удалось создать мероприятие'),
+                      );
+                    } else {
+                      goNamed('event', params: {'id': response.id});
+                    }
                   } else {
-                    goNamed('event', params: {'id': response.id});
+                    final response = await ApiServices.updateEventInformation(
+                      initialValue!.id,
+                      EventToCreate.fromJson(value).copyWith(tags: tags),
+                    );
+                    print(response);
+                    navigator.pop();
+                    if (response == 500 ||
+                        response == 403 ||
+                        response == 404 ||
+                        response == 400) {
+                      messenger.showSnackBar(
+                        errorSnackBar(
+                          'Не удалось изменить информацию об мероприятие $response',
+                        ),
+                      );
+                    } else {
+                      goNamed('event', params: {'id': initialValue.id});
+                    }
                   }
                 }
               } else {
@@ -154,7 +182,7 @@ Future<void> createEventForm(BuildContext context, WidgetRef ref) {
                 debugPrint('validation failed');
               }
             },
-            child: Text(i18n.buttons.create),
+            child: Text(isCreate ? i18n.buttons.create : 'Редактировать'),
           ),
           TextButton(
             style: TextButton.styleFrom(

@@ -28,10 +28,7 @@ mixin _$Event {
   String? get imageUrl => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
-  bool get appearInSearch => throw _privateConstructorUsedError;
-  bool get showAllMessage => throw _privateConstructorUsedError;
   bool get entryAfterAdminApproval => throw _privateConstructorUsedError;
-  List<String> get idPinnedMessages => throw _privateConstructorUsedError;
   List<String> get usersWhoWantToJoin => throw _privateConstructorUsedError;
   List<EventUser> get users => throw _privateConstructorUsedError;
   List<Tag> get tags => throw _privateConstructorUsedError;
@@ -54,10 +51,7 @@ abstract class $EventCopyWith<$Res> {
       String? imageUrl,
       String? description,
       DateTime? date,
-      bool appearInSearch,
-      bool showAllMessage,
       bool entryAfterAdminApproval,
-      List<String> idPinnedMessages,
       List<String> usersWhoWantToJoin,
       List<EventUser> users,
       List<Tag> tags});
@@ -83,10 +77,7 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
     Object? imageUrl = freezed,
     Object? description = freezed,
     Object? date = freezed,
-    Object? appearInSearch = null,
-    Object? showAllMessage = null,
     Object? entryAfterAdminApproval = null,
-    Object? idPinnedMessages = null,
     Object? usersWhoWantToJoin = null,
     Object? users = null,
     Object? tags = null,
@@ -120,22 +111,10 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      appearInSearch: null == appearInSearch
-          ? _value.appearInSearch
-          : appearInSearch // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showAllMessage: null == showAllMessage
-          ? _value.showAllMessage
-          : showAllMessage // ignore: cast_nullable_to_non_nullable
-              as bool,
       entryAfterAdminApproval: null == entryAfterAdminApproval
           ? _value.entryAfterAdminApproval
           : entryAfterAdminApproval // ignore: cast_nullable_to_non_nullable
               as bool,
-      idPinnedMessages: null == idPinnedMessages
-          ? _value.idPinnedMessages
-          : idPinnedMessages // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       usersWhoWantToJoin: null == usersWhoWantToJoin
           ? _value.usersWhoWantToJoin
           : usersWhoWantToJoin // ignore: cast_nullable_to_non_nullable
@@ -166,10 +145,7 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       String? imageUrl,
       String? description,
       DateTime? date,
-      bool appearInSearch,
-      bool showAllMessage,
       bool entryAfterAdminApproval,
-      List<String> idPinnedMessages,
       List<String> usersWhoWantToJoin,
       List<EventUser> users,
       List<Tag> tags});
@@ -191,10 +167,7 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
     Object? imageUrl = freezed,
     Object? description = freezed,
     Object? date = freezed,
-    Object? appearInSearch = null,
-    Object? showAllMessage = null,
     Object? entryAfterAdminApproval = null,
-    Object? idPinnedMessages = null,
     Object? usersWhoWantToJoin = null,
     Object? users = null,
     Object? tags = null,
@@ -228,22 +201,10 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      appearInSearch: null == appearInSearch
-          ? _value.appearInSearch
-          : appearInSearch // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showAllMessage: null == showAllMessage
-          ? _value.showAllMessage
-          : showAllMessage // ignore: cast_nullable_to_non_nullable
-              as bool,
       entryAfterAdminApproval: null == entryAfterAdminApproval
           ? _value.entryAfterAdminApproval
           : entryAfterAdminApproval // ignore: cast_nullable_to_non_nullable
               as bool,
-      idPinnedMessages: null == idPinnedMessages
-          ? _value._idPinnedMessages
-          : idPinnedMessages // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       usersWhoWantToJoin: null == usersWhoWantToJoin
           ? _value._usersWhoWantToJoin
           : usersWhoWantToJoin // ignore: cast_nullable_to_non_nullable
@@ -271,15 +232,11 @@ class _$_Event implements _Event {
       required this.imageUrl,
       required this.description,
       required this.date,
-      required this.appearInSearch,
-      required this.showAllMessage,
       required this.entryAfterAdminApproval,
-      required final List<String> idPinnedMessages,
       required final List<String> usersWhoWantToJoin,
       required final List<EventUser> users,
       required final List<Tag> tags})
-      : _idPinnedMessages = idPinnedMessages,
-        _usersWhoWantToJoin = usersWhoWantToJoin,
+      : _usersWhoWantToJoin = usersWhoWantToJoin,
         _users = users,
         _tags = tags;
 
@@ -302,18 +259,7 @@ class _$_Event implements _Event {
   @override
   final DateTime? date;
   @override
-  final bool appearInSearch;
-  @override
-  final bool showAllMessage;
-  @override
   final bool entryAfterAdminApproval;
-  final List<String> _idPinnedMessages;
-  @override
-  List<String> get idPinnedMessages {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_idPinnedMessages);
-  }
-
   final List<String> _usersWhoWantToJoin;
   @override
   List<String> get usersWhoWantToJoin {
@@ -337,7 +283,7 @@ class _$_Event implements _Event {
 
   @override
   String toString() {
-    return 'Event(id: $id, idCreator: $idCreator, name: $name, unreadMessages: $unreadMessages, imageUrl: $imageUrl, description: $description, date: $date, appearInSearch: $appearInSearch, showAllMessage: $showAllMessage, entryAfterAdminApproval: $entryAfterAdminApproval, idPinnedMessages: $idPinnedMessages, usersWhoWantToJoin: $usersWhoWantToJoin, users: $users, tags: $tags)';
+    return 'Event(id: $id, idCreator: $idCreator, name: $name, unreadMessages: $unreadMessages, imageUrl: $imageUrl, description: $description, date: $date, entryAfterAdminApproval: $entryAfterAdminApproval, usersWhoWantToJoin: $usersWhoWantToJoin, users: $users, tags: $tags)';
   }
 
   @override
@@ -356,15 +302,9 @@ class _$_Event implements _Event {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.appearInSearch, appearInSearch) ||
-                other.appearInSearch == appearInSearch) &&
-            (identical(other.showAllMessage, showAllMessage) ||
-                other.showAllMessage == showAllMessage) &&
             (identical(
                     other.entryAfterAdminApproval, entryAfterAdminApproval) ||
                 other.entryAfterAdminApproval == entryAfterAdminApproval) &&
-            const DeepCollectionEquality()
-                .equals(other._idPinnedMessages, _idPinnedMessages) &&
             const DeepCollectionEquality()
                 .equals(other._usersWhoWantToJoin, _usersWhoWantToJoin) &&
             const DeepCollectionEquality().equals(other._users, _users) &&
@@ -382,10 +322,7 @@ class _$_Event implements _Event {
       imageUrl,
       description,
       date,
-      appearInSearch,
-      showAllMessage,
       entryAfterAdminApproval,
-      const DeepCollectionEquality().hash(_idPinnedMessages),
       const DeepCollectionEquality().hash(_usersWhoWantToJoin),
       const DeepCollectionEquality().hash(_users),
       const DeepCollectionEquality().hash(_tags));
@@ -413,10 +350,7 @@ abstract class _Event implements Event {
       required final String? imageUrl,
       required final String? description,
       required final DateTime? date,
-      required final bool appearInSearch,
-      required final bool showAllMessage,
       required final bool entryAfterAdminApproval,
-      required final List<String> idPinnedMessages,
       required final List<String> usersWhoWantToJoin,
       required final List<EventUser> users,
       required final List<Tag> tags}) = _$_Event;
@@ -439,13 +373,7 @@ abstract class _Event implements Event {
   @override
   DateTime? get date;
   @override
-  bool get appearInSearch;
-  @override
-  bool get showAllMessage;
-  @override
   bool get entryAfterAdminApproval;
-  @override
-  List<String> get idPinnedMessages;
   @override
   List<String> get usersWhoWantToJoin;
   @override
