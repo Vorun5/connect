@@ -1,5 +1,6 @@
 import 'package:app/data/dto/event_user.dart';
 import 'package:app/data/dto/tag.dart';
+import 'package:app/data/dto/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'event.freezed.dart';
@@ -16,7 +17,7 @@ class Event with _$Event {
     required String? description,
     required DateTime? date,
     required bool entryAfterAdminApproval,
-    required List<String> usersWhoWantToJoin,
+    required List<User> usersWhoWantToJoin,
     required List<EventUser> users,
     required List<Tag> tags,
   }) = _Event;

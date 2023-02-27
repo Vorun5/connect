@@ -24,13 +24,22 @@ class _User extends HookConsumerWidget {
   const _User({
     Key? key,
     required this.user,
-    required this.isCreator,
+    this.isUser = false,
+    this.isCreator = false,
+    this.iAmCreator = false,
+    this.isWaiting = false,
     required this.event,
   }) : super(key: key);
 
   final User user;
 
+  final bool isUser;
+
   final bool isCreator;
+
+  final bool iAmCreator;
+
+  final bool isWaiting;
 
   final Event event;
 
@@ -43,7 +52,10 @@ class _User extends HookConsumerWidget {
         _context,
         _ref,
         user: user,
+        isUser: isUser,
         isCreator: isCreator,
+        iAmCreator: iAmCreator,
+        isWaiting: isWaiting,
         event: event,
       );
 }

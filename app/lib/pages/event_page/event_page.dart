@@ -44,7 +44,7 @@ Widget _eventPage(BuildContext context, WidgetRef ref) {
         }
 
         if (event != null) {
-          final isCreator = event.idCreator == myProfile.value!.id;
+          final iAmCreator = event.idCreator == myProfile.value!.id;
           return ListView(
             children: [
               Stack(
@@ -56,7 +56,7 @@ Widget _eventPage(BuildContext context, WidgetRef ref) {
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
-                  if (isCreator)
+                  if (iAmCreator)
                     Positioned(
                       top: Paddings.small,
                       right: Paddings.small,
@@ -128,17 +128,41 @@ Widget _eventPage(BuildContext context, WidgetRef ref) {
                       ),
                     ),
                     Gaps.small,
-                    ...event.users.map((user) {
-                      if (deletedUsers.value.contains(user.user.id)) {
-                        return Container();
-                      }
-
-                      return _User(
+                    ...event.users.map(
+                      (user) => _User(
                         user: user.user,
-                        isCreator: isCreator,
+                        isUser: event.idCreator != user.user.id,
+                        isCreator: event.idCreator == user.user.id,
+                        iAmCreator: iAmCreator,
                         event: event,
-                      );
-                    }),
+                      ),
+                    ),
+                    if (iAmCreator && event.usersWhoWantToJoin.isNotEmpty)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Gaps.small,
+                          const Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: Paddings.small - 2,
+                            ),
+                            child: Text(
+                              'Пользователи, желающие вступить:',
+                              style: TextStyle(fontSize: FontSize.big),
+                            ),
+                          ),
+                          Gaps.small,
+                          ...event.usersWhoWantToJoin
+                              .map(
+                                (user) => _User(
+                                  user: user,
+                                  isWaiting: true,
+                                  event: event,
+                                ),
+                              )
+                              .toList(),
+                        ],
+                      ),
                     Gaps.small,
                     OutlinedButton(
                       onPressed: () {
@@ -146,14 +170,14 @@ Widget _eventPage(BuildContext context, WidgetRef ref) {
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
                             title: Text(
-                              isCreator
+                              iAmCreator
                                   ? 'Вы точно хотите удалить мероприятие?'
                                   : 'Вы точно хотите покинуть мероприятие?',
                             ),
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () async {
-                                  if (isCreator) {
+                                  if (iAmCreator) {
                                     final result =
                                         await ApiServices.removeEvent(event.id);
                                     if (result == 200) {
@@ -188,7 +212,7 @@ Widget _eventPage(BuildContext context, WidgetRef ref) {
                                   }
                                 },
                                 child: Text(
-                                  isCreator ? 'Удалить' : 'Покинуть',
+                                  iAmCreator ? 'Удалить' : 'Покинуть',
                                 ),
                               ),
                               TextButton(
@@ -204,7 +228,7 @@ Widget _eventPage(BuildContext context, WidgetRef ref) {
                         );
                       },
                       child: Text(
-                        isCreator
+                        iAmCreator
                             ? 'Удалить мероприятие'
                             : 'Выйти из мероприятия',
                       ),
@@ -234,64 +258,90 @@ Widget __user(
   BuildContext context,
   WidgetRef ref, {
   required User user,
-  required bool isCreator,
+  bool isUser = false,
+  bool isCreator = false,
+  bool iAmCreator = false,
+  bool isWaiting = false,
   required Event event,
-}) =>
-    Card(
-      child: Padding(
-        padding: const EdgeInsets.all(Paddings.small),
-        child: Row(
-          children: [
-            Avatar(
-              user.profileImageUrl,
-              radius: 25,
-            ),
-            Gaps.small,
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    user.name,
-                    style: const TextStyle(
-                      fontSize: FontSize.normal,
-                    ),
+}) {
+  return Card(
+    child: Padding(
+      padding: const EdgeInsets.all(Paddings.small),
+      child: Row(
+        children: [
+          Avatar(
+            user.profileImageUrl,
+            radius: 25,
+          ),
+          Gaps.small,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  user.name,
+                  style: const TextStyle(
+                    fontSize: FontSize.normal,
                   ),
-                  const Gap(2),
-                  Username(user.displayUsername),
-                ],
+                ),
+                const Gap(2),
+                Username(user.displayUsername),
+              ],
+            ),
+          ),
+          if (isWaiting)
+            IconButton(
+              onPressed: () async {
+                final result = await ApiServices.removeUsersFromEvents(
+                  event.id,
+                  [user.id],
+                );
+                if (result == 200) {
+                  ref.read(selectedEventProvider.notifier).refresh(event.id);
+                  return;
+                }
+                // ignore: use_build_context_synchronously
+                Flushbar(
+                  backgroundColor: Colors.red,
+                  message: 'Что-то пошло не так. Статус ошибки $result',
+                  duration: const Duration(seconds: 3),
+                ).show(context);
+              },
+              icon: const Icon(
+                Icons.add_circle_sharp,
               ),
             ),
-            if (isCreator)
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.admin_panel_settings_sharp,
-                ),
-              )
-            else
-              IconButton(
-                onPressed: () async {
-                  final result = await ApiServices.removeUsersFromEvents(
-                    event.id,
-                    [user.id],
-                  );
-                  if (result == 200) {
-                    ref.read(selectedEventProvider.notifier).refresh(event.id);
-                    return;
-                  }
-                  // ignore: use_build_context_synchronously
-                  Flushbar(
-                    backgroundColor: Colors.red,
-                    message: 'Что-то пошло не так. Статус ошибки $result',
-                    duration: const Duration(seconds: 3),
-                  ).show(context);
-                },
-                icon: const Icon(
-                  Icons.remove_circle_sharp,
-                ),
+          if (isUser && iAmCreator)
+            IconButton(
+              onPressed: () async {
+                final result = await ApiServices.removeUsersFromEvents(
+                  event.id,
+                  [user.id],
+                );
+                if (result == 200) {
+                  ref.read(selectedEventProvider.notifier).refresh(event.id);
+                  return;
+                }
+                // ignore: use_build_context_synchronously
+                Flushbar(
+                  backgroundColor: Colors.red,
+                  message: 'Что-то пошло не так. Статус ошибки $result',
+                  duration: const Duration(seconds: 3),
+                ).show(context);
+              },
+              icon: const Icon(
+                Icons.remove_circle_sharp,
               ),
-          ],
-        ),
+            ),
+          if (isCreator)
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.admin_panel_settings_sharp,
+              ),
+            ),
+        ],
       ),
-    );
+    ),
+  );
+}

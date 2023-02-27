@@ -148,7 +148,7 @@ export const getById = async (req, res) => {
         const event = await Event.findById(id).populate([
             'users.user',
             'tags',
-            'teams',
+            'usersWhoWantToJoin'
         ])
         if (!event) {
             return res.status(404).json({
@@ -206,7 +206,7 @@ export const getAllUserEvents = async (req, res) => {
 
 export const addUsers = async (req, res) => {
     try {
-        const userId = req.userId
+        const userId = new ObjectId(req.userId)
         const eventId = req.body.id
         const users = req.body.users
         const event = await Event.findById(eventId)
@@ -230,7 +230,7 @@ export const addUsers = async (req, res) => {
                     $pullAll: { usersWhoWantToJoin: users },
                     $push: {
                         users: users.map((user) => ({
-                            id: user,
+                            user: user,
                         })),
                     },
                 },

@@ -17,7 +17,7 @@ _$_Event _$$_EventFromJson(Map<String, dynamic> json) => _$_Event(
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
       entryAfterAdminApproval: json['entryAfterAdminApproval'] as bool,
       usersWhoWantToJoin: (json['usersWhoWantToJoin'] as List<dynamic>)
-          .map((e) => e as String)
+          .map((e) => User.fromJson(e as Map<String, dynamic>))
           .toList(),
       users: (json['users'] as List<dynamic>)
           .map((e) => EventUser.fromJson(e as Map<String, dynamic>))

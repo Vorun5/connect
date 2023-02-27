@@ -29,7 +29,7 @@ mixin _$Event {
   String? get description => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
   bool get entryAfterAdminApproval => throw _privateConstructorUsedError;
-  List<String> get usersWhoWantToJoin => throw _privateConstructorUsedError;
+  List<User> get usersWhoWantToJoin => throw _privateConstructorUsedError;
   List<EventUser> get users => throw _privateConstructorUsedError;
   List<Tag> get tags => throw _privateConstructorUsedError;
 
@@ -52,7 +52,7 @@ abstract class $EventCopyWith<$Res> {
       String? description,
       DateTime? date,
       bool entryAfterAdminApproval,
-      List<String> usersWhoWantToJoin,
+      List<User> usersWhoWantToJoin,
       List<EventUser> users,
       List<Tag> tags});
 }
@@ -118,7 +118,7 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
       usersWhoWantToJoin: null == usersWhoWantToJoin
           ? _value.usersWhoWantToJoin
           : usersWhoWantToJoin // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<User>,
       users: null == users
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
@@ -146,7 +146,7 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       String? description,
       DateTime? date,
       bool entryAfterAdminApproval,
-      List<String> usersWhoWantToJoin,
+      List<User> usersWhoWantToJoin,
       List<EventUser> users,
       List<Tag> tags});
 }
@@ -208,7 +208,7 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
       usersWhoWantToJoin: null == usersWhoWantToJoin
           ? _value._usersWhoWantToJoin
           : usersWhoWantToJoin // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<User>,
       users: null == users
           ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
@@ -233,7 +233,7 @@ class _$_Event implements _Event {
       required this.description,
       required this.date,
       required this.entryAfterAdminApproval,
-      required final List<String> usersWhoWantToJoin,
+      required final List<User> usersWhoWantToJoin,
       required final List<EventUser> users,
       required final List<Tag> tags})
       : _usersWhoWantToJoin = usersWhoWantToJoin,
@@ -260,9 +260,9 @@ class _$_Event implements _Event {
   final DateTime? date;
   @override
   final bool entryAfterAdminApproval;
-  final List<String> _usersWhoWantToJoin;
+  final List<User> _usersWhoWantToJoin;
   @override
-  List<String> get usersWhoWantToJoin {
+  List<User> get usersWhoWantToJoin {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_usersWhoWantToJoin);
   }
@@ -351,7 +351,7 @@ abstract class _Event implements Event {
       required final String? description,
       required final DateTime? date,
       required final bool entryAfterAdminApproval,
-      required final List<String> usersWhoWantToJoin,
+      required final List<User> usersWhoWantToJoin,
       required final List<EventUser> users,
       required final List<Tag> tags}) = _$_Event;
 
@@ -375,7 +375,7 @@ abstract class _Event implements Event {
   @override
   bool get entryAfterAdminApproval;
   @override
-  List<String> get usersWhoWantToJoin;
+  List<User> get usersWhoWantToJoin;
   @override
   List<EventUser> get users;
   @override
