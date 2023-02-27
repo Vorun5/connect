@@ -9,6 +9,7 @@ class ApiConstants {
   static String joinToEvent(String eventId) => '/events/join/$eventId';
   static String leaveFromEvent(String eventId) => '/events/leave/$eventId';
   static const String removeUsersFromEvent = '/events/remove-users';
+  static const String addUsersToEvent = '/events/add-users';
   static const String createTag = '/tags';
   static const String login = '/auth/login';
   static const String singUp = '/auth/sing-up';

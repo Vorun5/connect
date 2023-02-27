@@ -292,7 +292,7 @@ Widget __user(
           if (isWaiting)
             IconButton(
               onPressed: () async {
-                final result = await ApiServices.removeUsersFromEvents(
+                final result = await ApiServices.addUsersToEvent(
                   event.id,
                   [user.id],
                 );
