@@ -7,6 +7,7 @@ class ApiConstants {
   static String searchTags(String str) => '/tags/$str';
   static String searchEvents(String str) => '/events/search/$str';
   static String joinToEvent(String eventId) => '/events/join/$eventId';
+  static String leaveFromEvent(String eventId) => '/events/leave/$eventId';
   static const String removeUsersFromEvent = '/events/remove-users';
   static const String createTag = '/tags';
   static const String login = '/auth/login';

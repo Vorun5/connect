@@ -17,6 +17,11 @@ class SelectedEvent extends _$SelectedEvent {
     state = await AsyncValue.guard(() => _getEvent(eventId));
   }
 
+  Future<void> refresh(String eventId) async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() => ApiServices.getEventById(eventId));
+  }
+
   Future<Tuple2<Event?, int?>> _getEvent(String eventId) =>
       ApiServices.getEventById(eventId);
 }

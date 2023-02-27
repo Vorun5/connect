@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$SelectedEventHash() => r'bfcb129c3263a23ca40c2bee2689c3fa6cb87bc0';
+String _$SelectedEventHash() => r'fb9bdb86e9887f8b824188467981b8555f8d0c73';
 
 /// See also [SelectedEvent].
 final selectedEventProvider =

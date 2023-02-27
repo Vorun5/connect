@@ -387,9 +387,9 @@ export const joinToEvent = async (req, res) => {
     }
 }
 
-export const leaveToEvent = async (req, res) => {
+export const leaveFromEvent = async (req, res) => {
     try {
-        const userId = req.userId
+        const userId = new ObjectId(req.userId)
         const eventId = req.params.id
         const event = await Event.findById(eventId)
 
@@ -410,7 +410,7 @@ export const leaveToEvent = async (req, res) => {
             {
                 $pull: {
                     users: {
-                        id: userId,
+                        user: userId,
                     },
                 },
             },

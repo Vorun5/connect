@@ -22,7 +22,7 @@ eventRouter.post('/events/remove-users', auth, addOrRemoveUsersToEvent, validati
 // работает
 eventRouter.post('/events/join/:id', auth, EventController.joinToEvent);
 // работает
-eventRouter.post('/events/leave/:id', auth, EventController.leaveToEvent);
+eventRouter.post('/events/leave/:id', auth, EventController.leaveFromEvent);
 // работает
 eventRouter.post('/events/:id', auth, EventController.remove);
 

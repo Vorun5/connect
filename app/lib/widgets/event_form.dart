@@ -4,6 +4,7 @@ import 'package:app/data/dto/event.dart';
 import 'package:app/data/dto/event_to_create.dart';
 import 'package:app/data/dto/tag.dart';
 import 'package:app/i18n/strings.g.dart';
+import 'package:app/providers/selected_event.dart';
 import 'package:app/utils/dto_constants.dart';
 import 'package:app/utils/font_size.dart';
 import 'package:app/utils/form_validators.dart';
@@ -161,7 +162,6 @@ Future<void> eventForm(
                       initialValue!.id,
                       EventToCreate.fromJson(value).copyWith(tags: tags),
                     );
-                    print(response);
                     navigator.pop();
                     if (response == 500 ||
                         response == 403 ||
@@ -173,7 +173,9 @@ Future<void> eventForm(
                         ),
                       );
                     } else {
-                      goNamed('event', params: {'id': initialValue.id});
+                      ref
+                          .read(selectedEventProvider.notifier)
+                          .refresh(initialValue.id);
                     }
                   }
                 }
