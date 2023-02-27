@@ -166,7 +166,6 @@ export const getById = async (req, res) => {
         }
         if (
             event.users.some((user) => {
-                console.log(user.user._id)
                 return user.user._id.toString() === userId.toString()
             })
         ) {
@@ -267,7 +266,7 @@ export const addUsers = async (req, res) => {
 
 export const removeUsers = async (req, res) => {
     try {
-        const userId = req.userId
+        const userId = ObjectId(req.userId)
         const eventId = req.body.id
         const users = req.body.users
         const event = await Event.findById(eventId)
@@ -307,7 +306,7 @@ export const removeUsers = async (req, res) => {
         }
 
         return res.status(400).json({
-            message: 'some users are not on the waiting list',
+            message: 'some users are not on events',
         })
     } catch (e) {
         console.log('server error', e)
@@ -479,7 +478,7 @@ const previewEventInformation = (event) => {
 }
 
 const isEventCreator = (userId, event) => {
-    return userId === event.idCreator.toString()
+    return userId.toString() === event.idCreator.toString();
 }
 
 const userIsMemberEvent = (userId, event) => {
@@ -500,7 +499,7 @@ const usersAreOnMemberEvent = (users, event) => {
 
 const getUserWithDateAndLastDateInChat = (userId, users) => {
     for (const user of users) {
-        if (userId === user.id.toString()) {
+        if (userId.toString() === user.user.toString()) {
             return user
         }
     }

@@ -1,4 +1,5 @@
 import 'package:app/data/dto/event_preview.dart';
+import 'package:app/utils/constants.dart';
 import 'package:app/utils/font_size.dart';
 import 'package:app/utils/gaps.dart';
 import 'package:app/utils/paddings.dart';
@@ -36,8 +37,7 @@ Widget _eventCard(
                   child: Column(
                     children: [
                       Image.network(
-                        event.imageUrl ??
-                            'https://i.pinimg.com/originals/19/44/81/194481621c0c7a82f726c1b4e2fbb6e3.jpg',
+                        event.imageUrl ?? Constants.noEventImage,
                         width: 150,
                         fit: BoxFit.cover,
                       ),

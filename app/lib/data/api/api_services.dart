@@ -247,6 +247,35 @@ class ApiServices {
     }
   }
 
+  // 200 - вступил в мероприятие
+  // 403 - нет доступа
+  // 404 - мероприятие не найдено
+  static Future<int> removeUsersFromEvents(
+    String eventId,
+    List<String> usersId,
+  ) async {
+    final storage = await SharedPreferences.getInstance();
+    final token = storage.getString('token');
+    _dio.options.headers['authorization'] = token;
+    const url = ApiConstants.baseUrl + ApiConstants.removeUsersFromEvent;
+    try {
+      final response = await _dio.post(url, data: {
+        'id': eventId,
+        'users': usersId,
+      });
+
+      return response.statusCode ?? 500;
+    } on DioError catch (e) {
+      final response = e.response;
+      if (response != null) {
+        if (kDebugMode) {
+          return response.statusCode ?? 500;
+        }
+      }
+      return serverErrorStatus;
+    }
+  }
+
   static Future<Tuple2<Event?, int?>> getEventById(String eventId) async {
     final storage = await SharedPreferences.getInstance();
     final token = storage.getString('token');
