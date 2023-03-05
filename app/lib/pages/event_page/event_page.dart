@@ -89,18 +89,20 @@ Widget _eventPage(BuildContext context, WidgetRef ref) {
                       child: Text(
                         event.name,
                         style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: FontSize.large,
-                        ),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            fontStyle: FontStyle.italic),
                       ),
                     ),
                     Gaps.small,
                     if (event.description != null &&
                         event.description!.isNotEmpty)
                       Card(
+                        color: const Color.fromARGB(71, 168, 65, 154),
                         elevation: 0,
                         child: Container(
-                          padding: const EdgeInsets.all(Paddings.normal),
+                          width: 500,
+                          padding: const EdgeInsets.all(15),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -108,7 +110,7 @@ Widget _eventPage(BuildContext context, WidgetRef ref) {
                                 'Описание',
                                 style: TextStyle(
                                   fontSize: FontSize.normal,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Gaps.tiny,
@@ -265,6 +267,7 @@ Widget __user(
   required Event event,
 }) {
   return Card(
+    //color: const Color.fromARGB(71, 168, 65, 154),
     child: Padding(
       padding: const EdgeInsets.all(Paddings.small),
       child: Row(
