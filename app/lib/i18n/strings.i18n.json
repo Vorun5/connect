@@ -4,7 +4,8 @@
       "username": "username",
       "name": "name",
       "password": "password",
-      "description": "description"
+      "description": "description",
+      "searchEventByName": "Search events by name"
     },
     "errorTexts": {
       "alphanumeric": "$field can only consist of latin letters and numbers"
@@ -55,6 +56,13 @@
   },
   "userProfile": {
     "aboutMe": "About me"
+  },
+  "homePage": {
+    "myEvents": "My events",
+    "noEvents": "You don't have any events",
+    "eventNotFound": "Nothing found!",
+    "join": "Join",
+    "application": "Submit an application"
   },
   "exit": "Exit"
 }

@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 2
-/// Strings: 72 (36 per locale)
+/// Strings: 84 (42 per locale)
 ///
-/// Built on 2023-02-25 at 18:33 UTC
+/// Built on 2023-03-05 at 17:57 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -161,6 +161,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 	late final _StringsDrawerEn drawer = _StringsDrawerEn._(_root);
 	late final _StringsScreenTitlesEn screenTitles = _StringsScreenTitlesEn._(_root);
 	late final _StringsUserProfileEn userProfile = _StringsUserProfileEn._(_root);
+	late final _StringsHomePageEn homePage = _StringsHomePageEn._(_root);
 	String get exit => 'Exit';
 }
 
@@ -249,6 +250,20 @@ class _StringsUserProfileEn {
 	String get aboutMe => 'About me';
 }
 
+// Path: homePage
+class _StringsHomePageEn {
+	_StringsHomePageEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get myEvents => 'My events';
+	String get noEvents => 'You don\'t have any events';
+	String get eventNotFound => 'Nothing found!';
+	String get join => 'Join';
+	String get application => 'Submit an application';
+}
+
 // Path: form.labels
 class _StringsFormLabelsEn {
 	_StringsFormLabelsEn._(this._root);
@@ -260,6 +275,7 @@ class _StringsFormLabelsEn {
 	String get name => 'name';
 	String get password => 'password';
 	String get description => 'description';
+	String get searchEventByName => 'Search events by name';
 }
 
 // Path: form.errorTexts
@@ -302,7 +318,7 @@ class _StringsRu implements _StringsEn {
 	@override String get unknownError => 'Неизвестная ошибка!';
 	@override late final _StringsAuthRu auth = _StringsAuthRu._(_root);
 	@override Map<String, String> get statusCode => {
-		'400': 'Request data failed server validation  (status code: 400)',
+		'400': 'Request data failed server validation (status code: 400)',
 		'403': 'No access (status code: 403)',
 		'404': 'Nothing found (status code: 404)',
 		'500': 'Server error. Sorry >_< (status code: 500)',
@@ -310,6 +326,7 @@ class _StringsRu implements _StringsEn {
 	@override late final _StringsDrawerRu drawer = _StringsDrawerRu._(_root);
 	@override late final _StringsScreenTitlesRu screenTitles = _StringsScreenTitlesRu._(_root);
 	@override late final _StringsUserProfileRu userProfile = _StringsUserProfileRu._(_root);
+	@override late final _StringsHomePageRu homePage = _StringsHomePageRu._(_root);
 	@override String get exit => 'Выйти';
 }
 
@@ -398,6 +415,20 @@ class _StringsUserProfileRu implements _StringsUserProfileEn {
 	@override String get aboutMe => 'Обо мне';
 }
 
+// Path: homePage
+class _StringsHomePageRu implements _StringsHomePageEn {
+	_StringsHomePageRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get myEvents => 'Мои мероприятия';
+	@override String get noEvents => 'У вас нет мероприятий';
+	@override String get eventNotFound => 'Ничего не найдено!';
+	@override String get join => 'Вступить';
+	@override String get application => 'Подать заявку';
+}
+
 // Path: form.labels
 class _StringsFormLabelsRu implements _StringsFormLabelsEn {
 	_StringsFormLabelsRu._(this._root);
@@ -409,6 +440,7 @@ class _StringsFormLabelsRu implements _StringsFormLabelsEn {
 	@override String get name => 'имя';
 	@override String get password => 'пароль';
 	@override String get description => 'описание';
+	@override String get searchEventByName => 'Найти мероприятия по названию';
 }
 
 // Path: form.errorTexts
@@ -431,6 +463,7 @@ extension on _StringsEn {
 			case 'form.labels.name': return 'name';
 			case 'form.labels.password': return 'password';
 			case 'form.labels.description': return 'description';
+			case 'form.labels.searchEventByName': return 'Search events by name';
 			case 'form.errorTexts.alphanumeric': return ({required Object field}) => '${field} can only consist of latin letters and numbers';
 			case 'buttons.update': return 'Update';
 			case 'buttons.create': return 'Create';
@@ -462,6 +495,11 @@ extension on _StringsEn {
 			case 'screenTitles.editProfile': return 'Edit profile';
 			case 'screenTitles.allEvents': return 'All events';
 			case 'userProfile.aboutMe': return 'About me';
+			case 'homePage.myEvents': return 'My events';
+			case 'homePage.noEvents': return 'You don\'t have any events';
+			case 'homePage.eventNotFound': return 'Nothing found!';
+			case 'homePage.join': return 'Join';
+			case 'homePage.application': return 'Submit an application';
 			case 'exit': return 'Exit';
 			default: return null;
 		}
@@ -475,6 +513,7 @@ extension on _StringsRu {
 			case 'form.labels.name': return 'имя';
 			case 'form.labels.password': return 'пароль';
 			case 'form.labels.description': return 'описание';
+			case 'form.labels.searchEventByName': return 'Найти мероприятия по названию';
 			case 'form.errorTexts.alphanumeric': return ({required Object field}) => '${field} может состоять только из латинских букв и цифр';
 			case 'buttons.update': return 'Обновить';
 			case 'buttons.create': return 'Создать';
@@ -492,7 +531,7 @@ extension on _StringsRu {
 			case 'auth.loginErrors.500': return 'Ошибка сервера. Извините💀';
 			case 'auth.signUpErrors.403': return 'Это имя пользователя уже занято🤔';
 			case 'auth.signUpErrors.500': return 'Ошибка сервера. Извините💀';
-			case 'statusCode.400': return 'Request data failed server validation  (status code: 400)';
+			case 'statusCode.400': return 'Request data failed server validation (status code: 400)';
 			case 'statusCode.403': return 'No access (status code: 403)';
 			case 'statusCode.404': return 'Nothing found (status code: 404)';
 			case 'statusCode.500': return 'Server error. Sorry >_< (status code: 500)';
@@ -506,6 +545,11 @@ extension on _StringsRu {
 			case 'screenTitles.editProfile': return 'Редактировать профиль';
 			case 'screenTitles.allEvents': return 'Все мероприятия';
 			case 'userProfile.aboutMe': return 'Обо мне';
+			case 'homePage.myEvents': return 'Мои мероприятия';
+			case 'homePage.noEvents': return 'У вас нет мероприятий';
+			case 'homePage.eventNotFound': return 'Ничего не найдено!';
+			case 'homePage.join': return 'Вступить';
+			case 'homePage.application': return 'Подать заявку';
 			case 'exit': return 'Выйти';
 			default: return null;
 		}

@@ -4,7 +4,8 @@
       "username": "имя пользователя",
       "name": "имя",
       "password": "пароль",
-      "description": "описание"
+      "description": "описание",
+      "searchEventByName": "Найти мероприятия по названию"
     },
     "errorTexts": {
       "alphanumeric": "$field может состоять только из латинских букв и цифр"
@@ -35,7 +36,7 @@
     }
   },
   "statusCode(map)": {
-    "400": "Request data failed server validation  (status code: 400)",
+    "400": "Request data failed server validation (status code: 400)",
     "403": "No access (status code: 403)",
     "404": "Nothing found (status code: 404)",
     "500": "Server error. Sorry >_< (status code: 500)"
@@ -55,6 +56,13 @@
   },
   "userProfile": {
     "aboutMe": "Обо мне"
+  },
+  "homePage": {
+    "myEvents": "Мои мероприятия",
+    "noEvents": "У вас нет мероприятий",
+    "eventNotFound": "Ничего не найдено!",
+    "join": "Вступить",
+    "application": "Подать заявку"
   },
   "exit": "Выйти"
 }

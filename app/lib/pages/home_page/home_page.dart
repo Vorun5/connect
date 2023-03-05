@@ -47,7 +47,7 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
                 key: formKey,
                 child: FormTextField(
                   name: 'search',
-                  label: 'Search event by name',
+                  label: i18n.form.labels.searchEventByName,
                   suffixIcon: Icons.search,
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(),
@@ -74,7 +74,14 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
               ),
             ),
             if (searchEvents.value != null && searchEvents.value!.isEmpty)
-              const Text('Ничего не найдено!'),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  i18n.homePage.eventNotFound,
+                  style: const TextStyle(
+                      fontSize: FontSize.big, fontWeight: FontWeight.bold),
+                ),
+              ),
             if (searchEvents.value != null && searchEvents.value!.isNotEmpty)
               ...searchEvents.value!
                   .map(
@@ -84,8 +91,8 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
                       child: EventCard(
                         event,
                         actionText: event.entryAfterAdminApproval
-                            ? "Подать заявку"
-                            : "Вступить",
+                            ? i18n.homePage.application
+                            : i18n.homePage.join,
                         action: () async {
                           final result =
                               await ApiServices.joinToEvent(event.id);
@@ -128,17 +135,17 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
                   )
                   .toList(),
             Gaps.normal,
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: Paddings.tiny),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: Paddings.tiny),
               child: Text(
-                'My events',
-                style: TextStyle(fontSize: FontSize.big),
+                i18n.homePage.myEvents,
+                style: const TextStyle(fontSize: FontSize.big),
               ),
             ),
             Gaps.small,
             if (data.isEmpty)
-              const Center(
-                child: Text('У вас нет мероприятий'),
+              Center(
+                child: Text(i18n.homePage.noEvents),
               )
             else
               ...data
