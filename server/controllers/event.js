@@ -29,6 +29,7 @@ export const create = async (req, res) => {
 export const find = async (req, res) => {
     try {
         const s = req.params.string
+        console.log(s);
         const events = await Event.find({
             name: new RegExp(s, 'i'),
         }).populate(['users.user', 'tags'])
@@ -74,8 +75,12 @@ export const remove = async (req, res) => {
         }
 
         const result = await Event.findByIdAndDelete(eventId)
-
-        return res.json(200)
+        if (result) {
+            return res.json(200)
+        }
+        return res.status(500).json({
+            message: 'failed to delete event',
+        })
     } catch (e) {
         console.log('server error', e)
         return res.status(500).json({
@@ -148,7 +153,7 @@ export const getById = async (req, res) => {
         const event = await Event.findById(id).populate([
             'users.user',
             'tags',
-            'usersWhoWantToJoin'
+            'usersWhoWantToJoin',
         ])
         if (!event) {
             return res.status(404).json({
@@ -157,7 +162,7 @@ export const getById = async (req, res) => {
         }
 
         if (isEventCreator(userId, event)) {
-            return res.json(eventInformationForCreator(event._doc))
+            return res.json(event._doc)
         }
         if (
             event.users.some((user) => {
@@ -443,22 +448,13 @@ const eventInformationForUser = (event) => {
     return e
 }
 
-const eventInformationForCreator = (event) => {
-    let e = event
-    e.unreadMessages = 39
-    return e
-}
-
 const previewEventInformation = (event) => {
     const {
         appearInSearch,
         showAllMessage,
-        // entryAfterAdminApproval,
         usersWhoWantToJoin,
         users,
-        teams,
         idCreator,
-        idPinnedMessages,
         ...e
     } = event
     if (users.length < 3) {
@@ -468,8 +464,6 @@ const previewEventInformation = (event) => {
     }
 
     e.userCount = users.length
-    e.teamCount = teams.length
-    e.unreadMessages = 39
 
     return e
 }

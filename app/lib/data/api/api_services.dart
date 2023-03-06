@@ -191,10 +191,10 @@ class ApiServices {
     final token = storage.getString('token');
     _dio.options.headers['authorization'] = token;
     final url = ApiConstants.baseUrl + ApiConstants.searchEvents(str);
+    debugPrint(url);
     try {
       final response = await _dio.get(url);
       final data = response.data as List;
-      print(data);
       final events = data
           .map(
             (jsonEvent) =>
@@ -357,20 +357,17 @@ class ApiServices {
     final data = user.toJson()..removeWhere((key, value) => value == null);
 
     try {
-      final response = await _dio.patch(url, data: data);
+      await _dio.patch(url, data: data);
 
-      //return Tuple2(User.fromJson(res.data as Map<String, dynamic>), null);
       return null;
     } on DioError catch (e) {
       final response = e.response;
       if (response != null) {
         if (kDebugMode) {
-          //return Tuple2(null, res.statusCode);
           return response.statusCode;
         }
       }
 
-      //return const Tuple2(null, 500);
       return serverErrorStatus;
     }
   }

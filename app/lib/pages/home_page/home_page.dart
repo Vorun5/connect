@@ -53,7 +53,6 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
                     FormBuilderValidators.required(),
                   ]),
                   onPressed: () async {
-                    final messenger = ScaffoldMessenger.of(context);
                     final currentState = formKey.currentState;
 
                     if (currentState?.saveAndValidate() ?? false) {
@@ -108,6 +107,7 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
                           if (result == 202) {
                             color = Colors.greenAccent;
                             text = "Заявка на добавление принята!";
+                            ref.read(myEventsProvider.notifier).refresh();
                           }
                           if (result == 400) {
                             color = Colors.orangeAccent;

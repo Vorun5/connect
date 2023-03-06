@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 
-const Event = new mongoose.Schema({
+const Event = new mongoose.Schema(
+    {
         idCreator: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
@@ -8,6 +9,7 @@ const Event = new mongoose.Schema({
         },
         name: {
             type: String,
+            index: true,
             required: true,
         },
         imageUrl: String,
@@ -21,11 +23,6 @@ const Event = new mongoose.Schema({
             type: Boolean,
             default: true,
         },
-        idPinnedMessages: {
-            type: Array,
-            of: mongoose.Schema.Types.ObjectId,
-            ref: 'EventMessage',
-        },
         entryAfterAdminApproval: {
             type: Boolean,
             default: false,
@@ -35,42 +32,36 @@ const Event = new mongoose.Schema({
             of: mongoose.Schema.Types.ObjectId,
             ref: 'User',
         },
+        numberOfParticipants: {
+            type: Number,
+            index: {
+                type: -1,
+            },
+        },
         users: {
             type: Array,
             of: {
-                _id: false,
                 user: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: 'User',
+                    unique: true,
                     required: true,
                 },
                 date: {
                     type: Date,
                     default: Date.now,
                 },
-                lastTimeInChat: {
-                    type: Date,
-                    default: Date.now,
-                },
             },
             required: true,
         },
-        teams: {
-            type: Array,
-            of: {type: mongoose.Schema.Types.ObjectId, ref: 'Team'},
-        },
         tags: {
             type: Array,
-            of: {type: mongoose.Schema.Types.ObjectId, ref: 'Tag'},
-        },
-        geotag: {
-            latitude: Number,
-            longitude: Number,
+            of: { type: mongoose.Schema.Types.ObjectId, ref: 'Tag' },
         },
     },
     {
         versionKey: false,
-    }
-);
+    },
+)
 
-export default mongoose.model('Event', Event);
+export default mongoose.model('Event', Event)

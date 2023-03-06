@@ -9,7 +9,6 @@ class EventUser with _$EventUser {
   factory EventUser({
     required User user,
     required DateTime date,
-    required DateTime lastTimeInChat,
   }) = _EventUser;
 
   factory EventUser.fromJson(Map<String, dynamic> json) =>

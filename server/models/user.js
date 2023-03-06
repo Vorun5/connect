@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema(
+    {
         username: {
             type: String,
             required: true,
@@ -9,6 +10,9 @@ const UserSchema = new mongoose.Schema({
         displayUsername: {
             type: String,
             required: true,
+            index: {
+                unique: true,
+            },
             unique: true,
         },
         name: {
@@ -25,7 +29,9 @@ const UserSchema = new mongoose.Schema({
     },
     {
         versionKey: false,
-    }
-);
+    },
+)
 
-export default mongoose.model('User', UserSchema);
+UserSchema.index({username: 1, displayUsername: 1 });
+
+export default mongoose.model('User', UserSchema)
