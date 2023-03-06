@@ -1,9 +1,8 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:another_flushbar/flushbar.dart';
 import 'package:app/data/api/api_services.dart';
 import 'package:app/data/dto/event_preview.dart';
 import 'package:app/i18n/strings.g.dart';
+import 'package:app/providers/event_statistic.dart';
 import 'package:app/providers/my_events.dart';
 import 'package:app/utils/font_size.dart';
 import 'package:app/utils/gaps.dart';
@@ -13,6 +12,7 @@ import 'package:app/widgets/basic_widgets/error_text.dart';
 import 'package:app/widgets/basic_widgets/forms/form_text_field.dart';
 import 'package:app/widgets/event_card.dart';
 import 'package:app/widgets/user_drawer.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -29,6 +29,7 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
   final events = ref.watch(myEventsProvider);
   final formKey = GlobalKey<FormBuilderState>();
   final searchEvents = useState<List<EventPreview>?>(null);
+  final statistic = ref.watch(eventStatisticProvider).value;
 
   return AppScaffold(
     drawer: const UserDrawer(),
@@ -41,6 +42,20 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
         return ListView(
           padding: const EdgeInsets.all(Paddings.small),
           children: [
+            if (statistic != null && statistic.isNotEmpty)
+              Column(
+                children: [
+                  Text(
+                    'Всего мероприятий ${statistic.map((e) => e.count).toList().reduce((value, e) => value + e)}',
+                  ),
+                  Text(
+                    'Открытых мероприятий ${statistic.firstWhereOrNull((e) => e.entryAfterAdminApproval)?.count}',
+                  ),
+                  Text(
+                    'Мероприятий после одобрения ${statistic.firstWhereOrNull((e) => !e.entryAfterAdminApproval)?.count}',
+                  ),
+                ],
+              ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: Paddings.tiny),
               child: FormBuilder(
@@ -96,6 +111,7 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
                           final result =
                               await ApiServices.joinToEvent(event.id);
                           if (result == 200) {
+                            // ignore: use_build_context_synchronously
                             context.goNamed(
                               'event',
                               params: {'id': event.id},

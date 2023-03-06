@@ -1,6 +1,7 @@
 import 'package:app/data/api/api_constants.dart';
 import 'package:app/data/dto/event.dart';
 import 'package:app/data/dto/event_preview.dart';
+import 'package:app/data/dto/event_statistic_item.dart';
 import 'package:app/data/dto/event_to_create.dart';
 import 'package:app/data/dto/tag.dart';
 import 'package:app/data/dto/user.dart';
@@ -163,6 +164,24 @@ class ApiServices {
           .toList();
 
       return events;
+    } on DioError {
+      return [];
+    }
+  }
+
+  static Future<List<EventStatisticItem>> getEventStatistic() async {
+    const url = ApiConstants.baseUrl + ApiConstants.getEventStatistic;
+    try {
+      final response = await _dio.get(url);
+      final data = response.data as List;
+      final statistic = data
+          .map(
+            (jsonEvent) =>
+                EventStatisticItem.fromJson(jsonEvent as Map<String, dynamic>),
+          )
+          .toList();
+
+      return statistic;
     } on DioError {
       return [];
     }

@@ -1,6 +1,26 @@
 import { Event } from '../models/index.js'
 import { ObjectId } from 'mongodb'
 
+export const getStatistic = async (req, res) => {
+    try {
+        let docs = await Event.aggregate().group({
+            _id: '$entryAfterAdminApproval',
+            count: { $sum: 1 },
+        })
+        const result = docs.map((el) => ({
+            entryAfterAdminApproval: el._id,
+            count: el.count,
+        }))
+
+        res.json(result)
+    } catch (e) {
+        console.log('failed to get statistic', e)
+        res.status(500).json({
+            message: 'failed to get statistic',
+        })
+    }
+}
+
 export const create = async (req, res) => {
     try {
         const idCreator = req.userId
@@ -29,7 +49,7 @@ export const create = async (req, res) => {
 export const find = async (req, res) => {
     try {
         const s = req.params.string
-        console.log(s);
+        console.log(s)
         const events = await Event.find({
             name: new RegExp(s, 'i'),
         }).populate(['users.user', 'tags'])

@@ -27,6 +27,8 @@ eventRouter.patch(
     EventController.update,
 )
 
+eventRouter.get('/events/statistic', EventController.getStatistic)
+
 // работает
 eventRouter.get('/events/search/:string', auth, EventController.find)
 
