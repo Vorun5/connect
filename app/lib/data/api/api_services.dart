@@ -169,6 +169,24 @@ class ApiServices {
     }
   }
 
+  static Future<List<EventPreview>> getTopEvents() async {
+    const url = ApiConstants.baseUrl + ApiConstants.getTopEvents;
+    try {
+      final response = await _dio.get(url);
+      final data = response.data as List;
+      final events = data
+          .map(
+            (jsonEvent) =>
+                EventPreview.fromJson(jsonEvent as Map<String, dynamic>),
+          )
+          .toList();
+
+      return events;
+    } on DioError {
+      return [];
+    }
+  }
+
   static Future<List<EventStatisticItem>> getEventStatistic() async {
     const url = ApiConstants.baseUrl + ApiConstants.getEventStatistic;
     try {

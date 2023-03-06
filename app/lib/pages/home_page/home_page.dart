@@ -4,6 +4,7 @@ import 'package:app/data/dto/event_preview.dart';
 import 'package:app/i18n/strings.g.dart';
 import 'package:app/providers/event_statistic.dart';
 import 'package:app/providers/my_events.dart';
+import 'package:app/providers/top_events.dart';
 import 'package:app/utils/font_size.dart';
 import 'package:app/utils/gaps.dart';
 import 'package:app/utils/paddings.dart';
@@ -23,6 +24,27 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 part 'home_page.g.dart';
 
+@swidget
+Widget __statisticLine({
+  required String text,
+  required int count,
+}) =>
+    Row(
+      children: [
+        Text(
+          text,
+          style: const TextStyle(fontSize: FontSize.normal),
+        ),
+        Text(
+          count.toString(),
+          style: const TextStyle(
+            fontSize: FontSize.normal,
+            fontWeight: FontWeight.bold,
+          ),
+        )
+      ],
+    );
+
 @hcwidget
 Widget _homePage(BuildContext context, WidgetRef ref) {
   final i18n = Translations.of(context);
@@ -30,6 +52,7 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
   final formKey = GlobalKey<FormBuilderState>();
   final searchEvents = useState<List<EventPreview>?>(null);
   final statistic = ref.watch(eventStatisticProvider).value;
+  final topEvents = ref.watch(topEventsProvider).value;
 
   return AppScaffold(
     drawer: const UserDrawer(),
@@ -44,16 +67,48 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
           children: [
             if (statistic != null && statistic.isNotEmpty)
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Всего мероприятий ${statistic.map((e) => e.count).toList().reduce((value, e) => value + e)}',
+                  _StatisticLine(
+                    text: "Всего мероприятий - ",
+                    count: statistic
+                        .map((e) => e.count)
+                        .toList()
+                        .reduce((value, e) => value + e),
                   ),
-                  Text(
-                    'Открытых мероприятий ${statistic.firstWhereOrNull((e) => e.entryAfterAdminApproval)?.count}',
+                  Gaps.small,
+                  _StatisticLine(
+                    text: 'Открытых мероприятий - ',
+                    count: statistic
+                            .firstWhereOrNull((e) => e.entryAfterAdminApproval)
+                            ?.count ??
+                        0,
                   ),
-                  Text(
-                    'Мероприятий после одобрения ${statistic.firstWhereOrNull((e) => !e.entryAfterAdminApproval)?.count}',
+                  Gaps.small,
+                  _StatisticLine(
+                    text: 'Мероприятий после одобрения - ',
+                    count: statistic
+                            .firstWhereOrNull((e) => !e.entryAfterAdminApproval)
+                            ?.count ??
+                        0,
                   ),
+                  Gaps.small,
+                ],
+              ),
+            if (topEvents != null && topEvents.isNotEmpty)
+              Column(
+                children: [
+                  Gaps.normal,
+                  Text(
+                    'Топ ${topEvents.length} мероприятий по количеству участников',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: FontSize.big,
+                    ),
+                  ),
+                  Gaps.normal,
+                  ...topEvents.map((e) => EventCard(e)).toList(),
+                  Gaps.big,
                 ],
               ),
             Padding(
@@ -93,6 +148,15 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
                 child: Text(
                   i18n.homePage.eventNotFound,
                   style: const TextStyle(
+                      fontSize: FontSize.big, fontWeight: FontWeight.bold),
+                ),
+              ),
+            if (searchEvents.value != null && searchEvents.value!.isNotEmpty)
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Найденные мероприятия по вашему запросу',
+                  style: TextStyle(
                       fontSize: FontSize.big, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -140,6 +204,7 @@ Widget _homePage(BuildContext context, WidgetRef ref) {
                             color = Colors.redAccent;
                             text = "Ошибка сервера( sorry";
                           }
+                          // ignore: inference_failure_on_instance_creation, use_build_context_synchronously
                           Flushbar(
                             backgroundColor: color,
                             message: text,

@@ -26,6 +26,7 @@ export const create = async (req, res) => {
         const idCreator = req.userId
         const doc = await new Event({
             idCreator: idCreator,
+            numberOfParticipants: 1,
             users: [
                 {
                     user: idCreator,
@@ -225,6 +226,42 @@ export const getAllUserEvents = async (req, res) => {
         console.log('error getting event all user events', e)
         return res.status(500).json({
             message: 'error getting event all user events',
+        })
+    }
+}
+
+export const getTopEvents = async (req, res) => {
+    try {
+        const top = await Event.aggregate([
+            {
+                $project: {
+                    count: {
+                        $cond: {
+                            if: { $isArray: '$users' },
+                            then: { $size: '$users' },
+                            else: '0',
+                        },
+                    },
+                },
+            },
+        ])
+            .sort({ count: -1 })
+            .limit(5)
+
+        let result = []
+        for (const topItem of top) {
+            const event = await Event.findById(topItem._id)
+            result.push({
+                ...event._doc,
+                userCount: topItem.count,
+            })
+        }
+
+        return res.json(result)
+    } catch (e) {
+        console.log('server error', e)
+        return res.status(500).json({
+            message: 'server error',
         })
     }
 }

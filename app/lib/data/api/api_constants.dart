@@ -11,6 +11,7 @@ class ApiConstants {
   static const String removeUsersFromEvent = '/events/remove-users';
   static const String addUsersToEvent = '/events/add-users';
   static const String getEventStatistic = '/events/statistic';
+  static const String getTopEvents = '/events/top';
   static const String createTag = '/tags';
   static const String login = '/auth/login';
   static const String singUp = '/auth/sing-up';

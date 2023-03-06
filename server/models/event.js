@@ -32,19 +32,12 @@ const Event = new mongoose.Schema(
             of: mongoose.Schema.Types.ObjectId,
             ref: 'User',
         },
-        numberOfParticipants: {
-            type: Number,
-            index: {
-                type: -1,
-            },
-        },
         users: {
             type: Array,
             of: {
                 user: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: 'User',
-                    unique: true,
                     required: true,
                 },
                 date: {
