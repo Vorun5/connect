@@ -250,7 +250,7 @@ export const getTopEvents = async (req, res) => {
 
         let result = []
         for (const topItem of top) {
-            const event = await Event.findById(topItem._id)
+            const event = await Event.findById(topItem._id).populate(['tags'])
             result.push({
                 ...event._doc,
                 userCount: topItem.count,
